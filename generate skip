@@ -1,0 +1,16 @@
+php artisan infyom:scaffold Room --fromTable --tableName=room --primary=id
+
+php artisan infyom:scaffold Role --fromTable --tableName=roles --primary=id
+
+php artisan make:middleware LoginMiddleware
+
+php artisan infyom:scaffold Menu --fromTable --tableName=menus --primary=id
+
+php artisan infyom:scaffold Permission --fromTable --tableName=permissions --primary=id
+
+
+php artisan infyom:scaffold Sequence --fromTable --tableName=sequence --primary=id
+
+php artisan infyom:scaffold Present --fromTable --tableName=present --primary=id
+
+php artisan infyom:scaffold RoomUser --fromTable --tableName=room_users --primary=id

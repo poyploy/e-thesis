@@ -1,0 +1,53 @@
+<!-- Year Field -->
+@if(empty($sequence))
+<div class="form-group col-sm-6">
+    {!! Form::label('year', 'Year:') !!}
+    {!! Form::select('year', $years, null , ['class' => 'form-control select2']) !!}
+</div>
+@else
+<div class="form-group col-sm-6">
+        {!! Form::label('year', 'Year:') !!}
+        {!! Form::select('year', $years, $sequence->year , ['class' => 'form-control select2']) !!}
+    </div>
+@endif
+
+<!-- Year Field -->
+<div class="form-group col-sm-6">
+    {!! Form::label('description', 'Description:') !!}
+    {!! Form::text('description', null , ['class' => 'form-control']) !!}
+</div>
+
+<!-- Date Time Field -->
+<div class="form-group col-sm-6">
+    {!! Form::label('date_time', 'Date Time:') !!}
+    {!! Form::text('date_time', null, ['class' => 'form-control date-picker']) !!}
+</div>
+
+<!-- Submit Field -->
+<div class="form-group col-sm-12">
+    {!! Form::submit('Save', ['class' => 'btn btn-primary']) !!}
+    <a href="{!! route('sequences.index') !!}" class="btn btn-default">Cancel</a>
+</div>
+
+
+
+@section('scripts')
+    <script>
+    // In your Javascript (external .js resource or <script> tag)
+    // $(document).ready(function() {
+    //     $('#robots').select2();
+    // });
+
+    $(function () {
+        $('.date-picker').datetimepicker({
+           format: 'YYYY-MM-DD HH:mm:ss'
+            // format: 'YYYY-MM-DD'
+        });
+
+        $('.select2').select2({
+            placeholder: 'Select an option'
+        });
+
+    });
+    </script>
+@endsection
