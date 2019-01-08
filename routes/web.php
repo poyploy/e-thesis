@@ -55,3 +55,6 @@ Route::group(['middleware' => ['login']], function () {
 
 
 
+
+
+Route::resource('uploadFiles', 'UploadFileController');

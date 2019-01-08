@@ -6,11 +6,28 @@
 </div>
 @else
 <div class="form-group col-sm-6">
-        {!! Form::label('year', 'Year:') !!}
-        {!! Form::select('year', $years, $sequence->year , ['class' => 'form-control select2']) !!}
-    </div>
+    {!! Form::label('year', 'Year:') !!}
+    {!! Form::select('year', $years, $sequence->year , ['class' => 'form-control select2']) !!}
+</div>
 @endif
 
+@if(empty($sequence))
+<div class="form-group col-sm-6">
+    {!! Form::label('uploadfile_status', 'Year:') !!}
+    {!! Form::select('uploadfile_status', [
+    '0' => 'close',
+    '1'=>'open'
+    ], null, ['class' => 'form-control select2']) !!}
+</div>
+@else
+<div class="form-group col-sm-6">
+    {!! Form::label('uploadfile_status', 'Year:') !!}
+    {!! Form::select('uploadfile_status', [
+    '0' => 'close',
+    '1'=>'open'
+    ], $sequence->uploadfile_status , ['class' => 'form-control select2']) !!}
+</div>
+@endif
 <!-- Year Field -->
 <div class="form-group col-sm-6">
     {!! Form::label('description', 'Description:') !!}
@@ -32,7 +49,7 @@
 
 
 @section('scripts')
-    <script>
+<script>
     // In your Javascript (external .js resource or <script> tag)
     // $(document).ready(function() {
     //     $('#robots').select2();
@@ -40,7 +57,7 @@
 
     $(function () {
         $('.date-picker').datetimepicker({
-           format: 'YYYY-MM-DD HH:mm:ss'
+            format: 'YYYY-MM-DD HH:mm:ss'
             // format: 'YYYY-MM-DD'
         });
 
@@ -49,5 +66,5 @@
         });
 
     });
-    </script>
+</script>
 @endsection

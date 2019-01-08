@@ -10,11 +10,3 @@
 @endif
 @endforeach
 
-{{-- <li class="{{ Request::is('rooms*') ? 'active' : '' }}">
-    <a href="{!! route('rooms.index') !!}"><i class="fa fa-edit"></i><span>Rooms</span></a>
-</li>
- --}}
-<li class="{{ Request::is('basicInformations*') ? 'active' : '' }}">
-    <a href="{!! route('basicInformations.index') !!}"><i class="fa fa-edit"></i><span>BasicInformations</span></a>
-</li>
-

@@ -1,8 +1,15 @@
 <!-- Thesis Title (Th) Field -->
 {{-- {{ dd($basicInformation) }} --}}
+@if($role->name == "STUDENT")
+<!-- Student Id Field -->
+<div class="form-group col-sm-6">
+    {!! Form::label('student_id', 'Student Id:') !!}
+    {!! Form::text('student_id', $user->student_id, ['class' => 'form-control' , 'readonly'=>true]) !!}
+</div>
+
 <div class="form-group col-sm-6">
     {!! Form::label('thesistitle_TH', 'Thesis Title (Th):') !!}
-    {!! Form::text('thesistitle_TH',  $basicInformation->thesistitle_TH, ['class' => 'form-control']) !!}
+    {!! Form::text('thesistitle_TH', $basicInformation->thesistitle_TH, ['class' => 'form-control']) !!}
 </div>
 
 <!-- Thesis Title (En) Field -->
@@ -10,6 +17,7 @@
     {!! Form::label('thesistitle_EN', 'Thesis Title (En):') !!}
     {!! Form::text('thesistitle_EN', $basicInformation->thesistitle_EN, ['class' => 'form-control']) !!}
 </div>
+@endif
 
 <!-- Name Field -->
 <div class="form-group col-sm-6">
@@ -23,24 +31,20 @@
     {!! Form::text('surname', $user->surname, ['class' => 'form-control']) !!}
 </div>
 
+
+
 <!-- Student Id Field -->
 <div class="form-group col-sm-6">
-    {!! Form::label('student_id', 'Student Id:') !!}
-    {!! Form::text('student_id', $user->student_id, ['class' => 'form-control' , 'readonly'=>true]) !!}
+    {!! Form::label('tel', 'Tel:') !!}
+    {!! Form::text('tel', $basicInformation->tel, ['class' => 'form-control', 'maxlength' => 10]) !!}
 </div>
 
-<!-- Student Id Field -->
-<div class="form-group col-sm-6">
-        {!! Form::label('tel', 'Tel:') !!}
-        {!! Form::text('tel', $basicInformation->tel, ['class' => 'form-control', 'maxlength' => 10]) !!}
-    </div>
-    
 
-    {!! Form::hidden('user_id', $user->id, ['class' => 'form-control']) !!}
+{!! Form::hidden('user_id', $user->id, ['class' => 'form-control']) !!}
 
 
 <!-- Submit Field -->
 <div class="form-group col-sm-12">
     {!! Form::submit('Save', ['class' => 'btn btn-primary']) !!}
-   
+
 </div>

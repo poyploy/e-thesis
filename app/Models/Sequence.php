@@ -34,7 +34,8 @@ class Sequence extends Model
     public $fillable = [
         'year',
         'date_time',
-        'description'
+        'description',
+        'uploadfile_status'
     ];
 
     /**
@@ -44,6 +45,7 @@ class Sequence extends Model
      */
     protected $casts = [
         'id' => 'integer',
+        'uploadfile_status' => 'integer',
         'year' => 'string',
         'description'=>'string'
     ];
@@ -54,7 +56,9 @@ class Sequence extends Model
      * @var array
      */
     public static $rules = [
-        
+        'uploadfile_status' => 'required',
+        'year' => 'required',
+        'description'=>'required'
     ];
 
     

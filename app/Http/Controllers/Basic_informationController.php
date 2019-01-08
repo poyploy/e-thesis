@@ -6,6 +6,7 @@ use App\Http\Controllers\AppBaseController;
 use App\Http\Requests\UpdateBasic_informationRequest;
 use App\Models\Basic_information as BasicInformation;
 use App\Repositories\Basic_informationRepository;
+use App\Repositories\RoleRepository;
 use App\Repositories\UserRepository;
 use Flash;
 use Illuminate\Http\Request;
@@ -22,10 +23,13 @@ class Basic_informationController extends AppBaseController
     /** @var  Basic_informationRepository */
     private $basicInformationRepository;
 
-    public function __construct(Basic_informationRepository $basicInformationRepo, UserRepository $userRepo)
+    private $roleRepository;
+
+    public function __construct(Basic_informationRepository $basicInformationRepo, UserRepository $userRepo, RoleRepository $roleRepo)
     {
         $this->basicInformationRepository = $basicInformationRepo;
         $this->usersRepository = $userRepo;
+        $this->roleRepository = $roleRepo;
     }
 
     /**
@@ -56,8 +60,14 @@ class Basic_informationController extends AppBaseController
         if (empty($basicInformation)) {
             $basicInformation = new BasicInformation();
         }
-    
-        return view('basic_informations.show')->with('basicInformation', $basicInformation)->with('user', $auth);
+
+        $roleId = Auth::user()->usersRoles()->first()->role_id;
+        $role = $this->roleRepository->findWithoutFail($roleId);
+
+        return view('basic_informations.show')
+            ->with('basicInformation', $basicInformation)
+            ->with('user', $auth)
+            ->with('role', $role);
     }
 
     /**

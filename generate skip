@@ -17,3 +17,5 @@ php artisan infyom:scaffold RoomUser --fromTable --tableName=room_users --primar
 
 
 php artisan infyom:scaffold Basic_information --fromTable --tableName=basic_information --primary=id
+
+php artisan infyom:scaffold UploadFile --fromTable --tableName=uploadfile --primary=id

@@ -46,7 +46,7 @@ class SequenceController extends AppBaseController
     {
         //
         $Year = Carbon::now()->format('Y');
-        $Year = (int) $Year;
+        $Year = (int) $Year-2;
        // dd(  $Year );
         $years = ['' => ''];
         for ($i = $Year; $i < $Year + 10; $i++) {
@@ -114,7 +114,7 @@ class SequenceController extends AppBaseController
         }
 
         $Year = Carbon::now()->format('Y');
-        $Year = (int) $Year;
+        $Year = (int) $Year-2;
         $years = ['' => ''];
         for ($i = $Year; $i < $Year + 10; $i++) {
             $years['' . $i] = $i;
