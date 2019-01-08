@@ -59,7 +59,7 @@ class UserRoleController extends AppBaseController
 
         $userRole = $this->userRoleRepository->create($input);
 
-        Flash::success('User Role saved successfully.');
+        Flash::success('User Role saved successfully.'); 
 
         return redirect(route('userRoles.index'));
     }

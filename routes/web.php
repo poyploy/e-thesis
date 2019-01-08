@@ -18,8 +18,11 @@ Route::get('/', function () {
     'home'
 );
 
+Route::get('/register', 'HomeController@register')->name('register');
+Route::post('/register', 'HomeController@registerStore')->name('register.store');
+Route::get('/', 'HomeController@index')->name('index');
 Route::get('/login', 'HomeController@login')->name('login');
-Route::post('/login', 'HomeController@store');
+Route::post('/login', 'HomeController@store')->name('login');
 Route::get('/logout', 'HomeController@destroy')->name('logout');
 
 Route::get('/home', 'HomeController@index');
@@ -42,5 +45,13 @@ Route::group(['middleware' => ['login']], function () {
 
     Route::resource('presents', 'PresentController');
     Route::resource('roomUsers', 'RoomUserController');
+
+    Route::get('/basicInformations', 'Basic_informationController@index')->name('basicInformations.index');
+    Route::get('/basicInformations/show', 'Basic_informationController@show')->name('basicInformations.show');
+    Route::put('/basicInformations/update', 'Basic_informationController@update')->name('basicInformations.update');
+    // Route::patch('/basicInformations/{basicInformation}', 'Basic_informationController@update')->name('basicInformations.update');
+    // Route::resource('basicInformations', 'Basic_informationController');
 });
+
+
 

@@ -38,6 +38,9 @@ class User extends Authenticatable {
 		'email_verified_at',
 		'password',
 		'remember_token',
+		'updated_at',
+		'surname',
+		'student_id'
 	];
 
 	/**
@@ -66,6 +69,6 @@ class User extends Authenticatable {
 	 * @return \Illuminate\Database\Eloquent\Relations\HasMany
 	 **/
 	public function usersRoles() {
-		return $this->hasMany(\App\Models\UsersRole::class);
+		return $this->hasMany(\App\Models\UserRole::class);
 	}
 }
