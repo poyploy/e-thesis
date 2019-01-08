@@ -52,6 +52,7 @@ class UploadFileController extends AppBaseController
     public function create()
     {
         $sequences = $this->sequenceRepository->findWhere(['uploadfile_status' => '1']);
+
         $sequences = $sequences->mapWithKeys(function ($item) {
             return [$item['id'] => $item['description']];
         });
@@ -66,10 +67,15 @@ class UploadFileController extends AppBaseController
      *
      * @return Response
      */
-    public function store(CreateUploadFileRequest $request)
+    public function store(Request $request)
     {
         $input = $request->all();
 
+        $user = Auth::user();
+        $path = $request->file('file')->store('public/'.$user->student_id);
+        $input['file'] = str_replace("public", "",$path);
+        $input['user_id'] = $user->id;
+        $input['student_id'] = $user->student_id;
         $uploadFile = $this->uploadFileRepository->create($input);
 
         Flash::success('Upload File saved successfully.');

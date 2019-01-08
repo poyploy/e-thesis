@@ -12,7 +12,7 @@
 
             <div class="box-body">
                 <div class="row">
-                    {!! Form::open(['route' => 'uploadFiles.store']) !!}
+                    {!! Form::open(['route' => 'uploadFiles.store', 'enctype' => 'multipart/form-data']) !!}
 
                         @include('upload_files.fields')
 
