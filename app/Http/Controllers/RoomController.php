@@ -265,6 +265,9 @@ class RoomController extends AppBaseController
             return redirect(route('rooms.index'));
         }
 
+      //  $advisers = $this->userRoleRepository->with('user')->findWhere(['role_id' => '2']);
+
+
         return view('rooms.show')->with('room', $room);
     }
 

@@ -19,3 +19,7 @@ php artisan infyom:scaffold RoomUser --fromTable --tableName=room_users --primar
 php artisan infyom:scaffold Basic_information --fromTable --tableName=basic_information --primary=id
 
 php artisan infyom:scaffold UploadFile --fromTable --tableName=uploadfile --primary=id
+
+php artisan infyom:scaffold Setting --fromTable --tableName=setting --primary=id --relations
+
+php artisan infyom:scaffold UserAdvisor --fromTable --tableName=room_advisors --primary=id --relations

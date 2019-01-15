@@ -43,7 +43,8 @@ class Basic_information extends Model
         'thesistitle_TH',
         'thesistitle_EN',
         'user_id',
-        'tel'
+        'tel',
+        'adviser_id'
     ];
 
     /**

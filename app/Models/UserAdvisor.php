@@ -6,21 +6,27 @@ use Eloquent as Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
- * Class UserRole
+ * Class UserAdvisor
  * @package App\Models
- * @version December 9, 2018, 6:58 am UTC
+ * @version January 15, 2019, 1:04 pm UTC
  *
- * @property \App\Models\Role role
+ * @property \App\Models\Room room
  * @property \App\Models\User user
+ * @property \Illuminate\Database\Eloquent\Collection basicInformation
+ * @property \Illuminate\Database\Eloquent\Collection permissions
+ * @property \Illuminate\Database\Eloquent\Collection roomUsers
+ * @property \Illuminate\Database\Eloquent\Collection thesis
+ * @property \Illuminate\Database\Eloquent\Collection uploadfile
+ * @property \Illuminate\Database\Eloquent\Collection users
+ * @property \Illuminate\Database\Eloquent\Collection usersRoles
  * @property integer user_id
- * @property integer role_id
- * @property boolean status
+ * @property integer room_id
  */
-class UserRole extends Model
+class UserAdvisor extends Model
 {
     use SoftDeletes;
 
-    public $table = 'users_roles';
+    public $table = 'room_advisors';
     
     const CREATED_AT = 'created_at';
     const UPDATED_AT = 'updated_at';
@@ -32,8 +38,8 @@ class UserRole extends Model
 
     public $fillable = [
         'user_id',
-        'role_id',
-        'status'
+        'room_id',
+        'leader'
     ];
 
     /**
@@ -44,8 +50,7 @@ class UserRole extends Model
     protected $casts = [
         'id' => 'integer',
         'user_id' => 'integer',
-        'role_id' => 'integer',
-        'status' => 'boolean'
+        'room_id' => 'integer'
     ];
 
     /**
@@ -60,9 +65,9 @@ class UserRole extends Model
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      **/
-    public function role()
+    public function room()
     {
-        return $this->belongsTo(\App\Models\Role::class, 'role_id');
+        return $this->belongsTo(\App\Models\Room::class);
     }
 
     /**

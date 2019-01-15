@@ -38,7 +38,7 @@ class UploadFileController extends AppBaseController
         $this->uploadFileRepository->pushCriteria(new RequestCriteria($request));
 
         $user = Auth::user();
-        $uploadFiles = $this->uploadFileRepository->findWhere(['user_id' => $user->id]);
+        $uploadFiles = $this->uploadFileRepository->findWhere(['user_id' => $user->id])->sortByDesc('updated_at');
 
         return view('upload_files.index')
             ->with('uploadFiles', $uploadFiles);

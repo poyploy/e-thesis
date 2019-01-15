@@ -49,12 +49,15 @@ Route::group(['middleware' => ['login']], function () {
     Route::get('/basicInformations', 'Basic_informationController@index')->name('basicInformations.index');
     Route::get('/basicInformations/show', 'Basic_informationController@show')->name('basicInformations.show');
     Route::put('/basicInformations/update', 'Basic_informationController@update')->name('basicInformations.update');
+
+    Route::post('/basicInformations/updateAdviser', 'Basic_informationController@updateAdviser')->name('basicInformations.updateAdviser');
+    //updateAdviser
     // Route::patch('/basicInformations/{basicInformation}', 'Basic_informationController@update')->name('basicInformations.update');
     // Route::resource('basicInformations', 'Basic_informationController');
+    Route::resource('userAdvisors', 'UserAdvisorController');
+    Route::get('/userAdvisors/rooms/{id}', 'UserAdvisorController@main')->name('userAdvisors.main');
+
+    Route::resource('settings', 'SettingController');
 });
-
-
-
-
 
 Route::resource('uploadFiles', 'UploadFileController');

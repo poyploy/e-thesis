@@ -47,6 +47,7 @@
         
 </head>
 
+
 <body class="skin-blue sidebar-mini">
 @if (!Auth::guest())
     <div class="wrapper">
@@ -54,12 +55,12 @@
         <header class="main-header">
 
             <!-- Logo -->
-            <a href="#" class="logo">
-                <b> E-THESIS</b>
+            <a href="#" class="logo" style="background-color:#19be88;">
+                <b> E-THESIS </b>
             </a>
 
             <!-- Header Navbar -->
-            <nav class="navbar navbar-static-top" role="navigation">
+            <nav class="navbar navbar-static-top" role="navigation" style="background-color:#14ad7b;">
                 <!-- Sidebar toggle button-->
                 {{-- <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
                     <span class="sr-only">Toggle navigation</span>
@@ -93,7 +94,7 @@
                                         <a href="#" class="btn btn-default btn-flat">Profile</a>
                                     </div>
                                     <div class="pull-right">
-                                        <a href="{!! url('/logout') !!}" class="btn btn-default btn-flat"
+                                        <a href="{!! url('/home') !!}" class="btn btn-default btn-flat"
                                            >
                                             Sign out
                                         </a>

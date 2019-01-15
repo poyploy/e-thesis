@@ -12,10 +12,10 @@
             {!! Form::close() !!}
         </div>
         @if(!empty($filter_year))
-        <div class="form-group"  style="margin-left: 25px;">
+        <div class="form-group" style="margin-left: 25px;">
             <label for="exampleInputName2">Group by : </label>
             <button type="button" class="form-control" onclick="GroupByRandom('{{$filter_year}}')">Random</button>
-        <button type="button" class="btn btn-default" onclick="GroupByOrder('{{$filter_year}}')">Order</button>
+            <button type="button" class="btn btn-default" onclick="GroupByOrder('{{$filter_year}}')">Order</button>
         </div>
         @endif
     </div>
@@ -43,9 +43,10 @@
             <td>
                 {!! Form::open(['route' => ['rooms.destroy', $room->id], 'method' => 'delete']) !!}
                 <div class='btn-group'>
-                    @if(count($room->roomUsers) < 1) <a href="{!! route('rooms.manual', [$room->id]) !!}" class='btn btn-info btn-xs'><i
+                        @if(count($room->roomUsers) < 1) <a href="{!! route('rooms.manual', [$room->id]) !!}" class='btn btn-info btn-xs'><i
                             class="glyphicon glyphicon-user"></i></a>
                         @endif
+                        <a href="{!! route('userAdvisors.main', [$room->id]) !!}" class='btn btn-info btn-xs'><i class="glyphicon glyphicon-user"></i></a>
                         <a href="{!! route('rooms.show', [$room->id]) !!}" class='btn btn-default btn-xs'><i class="glyphicon glyphicon-eye-open"></i></a>
                         <a href="{!! route('rooms.edit', [$room->id]) !!}" class='btn btn-default btn-xs'><i class="glyphicon glyphicon-edit"></i></a>
                         {!! Form::button('<i class="glyphicon glyphicon-trash"></i>', ['type' => 'submit', 'class'
@@ -64,11 +65,11 @@
         $('#rooms-table').DataTable();
     });
 
-    @if(!empty($filter_year))
-    var GroupByRandom = function () {
-        window.location.href = "{{ route('rooms.groupByRandom' , ['year' => $filter_year]) }}";
-        // alert('Group by random -> room : ' + room_id)
-    }
+    @if (!empty($filter_year))
+        var GroupByRandom = function () {
+            window.location.href = "{{ route('rooms.groupByRandom' , ['year' => $filter_year]) }}";
+            // alert('Group by random -> room : ' + room_id)
+        }
 
     var GroupByOrder = function (room_id) {
         window.location.href = "{{ route('rooms.groupByOrder' , ['year' => $filter_year]) }}";
