@@ -12,9 +12,9 @@
     @foreach($roomUsers as $roomUser)
         <tr>
             <td>{!! $roomUser->user_id !!}</td>
-            <td>{!! $roomUser->user->name !!}</td>
+            <td>{!! $roomUser->user->name_TH !!}</td>
             <td>{!! $roomUser->room_id !!}</td>
-            <td>{!! $roomUser->room->name !!}</td>
+            <td>{!! $roomUser->room->name_TH !!}</td>
             <td>
                 {!! Form::open(['route' => ['roomUsers.destroy', $roomUser->id], 'method' => 'delete']) !!}
                 <div class='btn-group'>

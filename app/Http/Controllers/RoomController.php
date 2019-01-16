@@ -73,9 +73,10 @@ class RoomController extends AppBaseController
         $users = $users->shuffle();
 
         $splited = $users->split(count($rooms));
-
+       
         foreach ($rooms as $key => $room) {
-            $index = (int) $key - 1;
+            // dd($key, $splited);
+            $index = (int) $key;
             foreach ($splited[$index] as $user) {
                 $this->roomUserRepository->create([
                     'user_id' => $user->id,

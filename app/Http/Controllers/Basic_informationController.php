@@ -78,9 +78,9 @@ class Basic_informationController extends AppBaseController
         // Get Advisor with UserRole table
         $advisers = $this->userRoleRepository->with('user')->findWhere(['role_id' => '2']);
         $advisers = $advisers->mapWithKeys(function ($item) {
-            $name = $item->user->name;
+            $name_TH = $item->user->name_TH;
             $id = $item->user->id;
-            return [$id => $name];
+            return [$id => $name_TH];
         });
 
         return view('basic_informations.show')
@@ -115,8 +115,10 @@ class Basic_informationController extends AppBaseController
 
         // Get default data with User table
         $user = $this->usersRepository->findWithoutFail($auth->id);
-        $user->name = $request->input('name');
-        $user->surname = $request->input('surname');
+        $user->name_TH = $request->input('name_TH');
+        $user->surname_TH = $request->input('surname_TH');
+        $user->name_EN = $request->input('name_EN');
+        $user->surname_EN = $request->input('surname_EN');
 
         $user = $user->toArray();
         // Update new data to User table

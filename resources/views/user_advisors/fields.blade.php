@@ -20,7 +20,7 @@
 <!-- Room Id Field -->
 <div class="form-group col-sm-6">
     {!! Form::label('room_name', 'Room Name:') !!}
-    {!! Form::text('room_name', $room->name, ['class' => 'form-control', 'disabled' => true]) !!}
+    {!! Form::text('room_name', $room->name_TH, ['class' => 'form-control', 'disabled' => true]) !!}
 </div>
 
 <!-- Room Id Field -->

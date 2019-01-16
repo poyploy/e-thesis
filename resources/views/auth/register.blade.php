@@ -255,7 +255,9 @@
       font: 16px/1.5em "Overpass", "Open Sans", Helvetica, sans-serif;
       color: #333;
       font-weight: 300;
-      text-align: center
+      text-align: center;
+      background-color: #00adff4d;
+      
     }
     .card{
         width: 80%;
@@ -294,15 +296,23 @@
     }
     
     .tabset > input:checked + label {
-      border-color: #ccc;
+      border-color: #fff;
       border-bottom: 1px solid #fff;
       margin-bottom: -1px;
     }
     
     .tab-panel {
       padding: 30px 0;
-      border-top: 1px solid #ccc;
+      border-top: 1px solid #fff;
     }
+
+    #STUDENT.form-english{
+            font:600 14px/1 'Roboto',sans-serif; 
+            color:#ff0000;  
+            float: left;;
+            margin:0 0 25px 0; 
+        }
+
     
     /*
      Demo purposes only
@@ -322,10 +332,10 @@
     }
     
     .tabset > label:hover::after, .tabset > input:focus + label::after, .tabset > input:checked + label::after {
-        background: #bd2130;
+        background: #06c;
     }
     .tabset > label:hover::after, .tabset > input:focus + label::after, .tabset > input:checked + label::after {
-        background: #bd2130;
+        background: #06c;
     }
     .tabset > label:hover, .tabset > input:focus + label {
         color: black;
@@ -358,8 +368,20 @@
                             {!! csrf_field() !!}
                 
                             <input type="hidden" name="role" value="3">
-                            <div class="form-group has-feedback{{ $errors->has('name') ? ' has-error' : '' }}">
-                                <input type="text" class="form-control" name="name" value="{{ old('name') }}" placeholder="Full Name">
+                            <p class="form-english">*กรุณากรอกข้อมูลชื่อจริง-นามสกุลเป็นภาษาอังกฤษเท่านั้น</p>
+                            <div class="form-group has-feedback{{ $errors->has('name_TH') ? ' has-error' : '' }}">
+                                <input type="text" class="form-control" name="name_TH" value="{{ old('name') }}" placeholder="ThaiName">
+                                <span class="glyphicon glyphicon-user form-control-feedback"></span>
+                
+                                @if ($errors->has('name_TH'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('name_TH') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+
+                            <div class="form-group has-feedback{{ $errors->has('surname_TH') ? ' has-error' : '' }}">
+                                <input type="text" class="form-control" name="surname_TH" value="{{ old('name') }}" placeholder="SurName">
                                 <span class="glyphicon glyphicon-user form-control-feedback"></span>
                 
                                 @if ($errors->has('name'))
@@ -433,6 +455,7 @@
                 </div>    
                     <!-- /.form-box -->
             </section>
+            
 
 
             {{-- teacher form --}}

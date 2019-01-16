@@ -15,7 +15,7 @@
                 @if (Auth::guest())
                 <p>InfyOm</p>
                 @else
-                    <p>{{ Auth::user()->name}}</p>
+                    <p>{{ Auth::user()->name_TH}}</p>
                 @endif
                 <!-- Status -->
                 <a href="#"><i class="fa fa-circle text-success"></i> Online</a>

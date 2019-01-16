@@ -55,6 +55,10 @@ class Basic_information extends Model
     protected $casts = [
         'thesistitle_TH' => 'string',
         'thesistitle_EN' => 'string',
+        'name_TH' => 'string',
+        'surname_TH' => 'string',
+        'name_EN' => 'string',
+        'surname_EN' => 'string',
         'student_id' => 'string',
         'user_id' => 'integer',
         'tel' => 'string'

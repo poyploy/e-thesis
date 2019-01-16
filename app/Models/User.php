@@ -33,13 +33,15 @@ class User extends Authenticatable {
 	protected $primaryKey = 'id';
 
 	public $fillable = [
-		'name',
+		'name_TH',
+		'surname_TH',
+		'name_EN',
+		'surname_EN',
 		'email',
 		'email_verified_at',
 		'password',
 		'remember_token',
 		'updated_at',
-		'surname',
 		'student_id'
 	];
 
@@ -50,7 +52,11 @@ class User extends Authenticatable {
 	 */
 	protected $casts = [
 		'id' => 'integer',
-		'name' => 'string',
+		'name_TH' => 'string',
+        'surname_TH' => 'string',
+        'name_EN' => 'string',
+        'surname_EN' => 'string',
+		// 'name' => 'string',
 		'email' => 'string',
 		'password' => 'string',
 		'remember_token' => 'string',

@@ -6,8 +6,8 @@
 
 <!-- Name Field -->
 <div class="form-group">
-    {!! Form::label('name', 'Name:') !!}
-    <p>{!! $user->name !!}</p>
+    {!! Form::label('name_TH', 'Name:') !!}
+    <p>{!! $user->name_TH !!}</p>
 </div>
 
 <!-- Email Field -->

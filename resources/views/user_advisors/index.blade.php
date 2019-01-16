@@ -18,7 +18,7 @@
     <div class="box box-primary">
         @if(!empty($room))
         <section class="content-header">
-            <h5 class="pull-left">room name : <b>{{ $room->name }}</b></h5>
+            <h5 class="pull-left">room name : <b>{{ $room->name_TH }}</b></h5>
         </section>
         @endif
         <div class="box-body">

@@ -137,9 +137,9 @@ class HomeController extends Controller
             $role = $this->roleRepository->findWithoutFail($roleId);
             if ($role->name == "ADMIN") {
                 return redirect()->route('rooms.index');
-            } else if ($role->name == "TEACHER") {
+            } else if ($role->name_TH == "TEACHER") {
                 return redirect()->route('basicInformations.index');
-            } else if ($role->name == "STUDENT") {
+            } else if ($role->name_TH == "STUDENT") {
                 return redirect()->route('basicInformations.index');
             }
 

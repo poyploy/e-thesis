@@ -85,7 +85,7 @@ class UserAdvisorController extends AppBaseController
 
         $advisors = $this->userRoleRepository->with('user')->findWhere(['role_id' => '2']);
         $advisors = $advisors->mapWithKeys(function ($item) {
-            $name = $item->user->name;
+            $name = $item->user->name_TH;
             $id = $item->user->id;
             return [$id => $name];
         });
@@ -166,7 +166,7 @@ class UserAdvisorController extends AppBaseController
 
         $advisors = $this->userRoleRepository->with('user')->findWhere(['role_id' => '2']);
         $advisors = $advisors->mapWithKeys(function ($item) {
-            $name = $item->user->name;
+            $name = $item->user->name_TH;
             $id = $item->user->id;
             return [$id => $name];
         });
