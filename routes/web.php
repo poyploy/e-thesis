@@ -58,6 +58,6 @@ Route::group(['middleware' => ['login']], function () {
     Route::get('/userAdvisors/rooms/{id}', 'UserAdvisorController@main')->name('userAdvisors.main');
 
     Route::resource('settings', 'SettingController');
+    Route::resource('uploadFiles', 'UploadFileController');
+    Route::resource('advisorsApproves', 'AdvisorsApproveController');
 });
-
-Route::resource('uploadFiles', 'UploadFileController');

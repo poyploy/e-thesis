@@ -23,3 +23,5 @@ php artisan infyom:scaffold UploadFile --fromTable --tableName=uploadfile --prim
 php artisan infyom:scaffold Setting --fromTable --tableName=setting --primary=id --relations
 
 php artisan infyom:scaffold UserAdvisor --fromTable --tableName=room_advisors --primary=id --relations
+
+php artisan infyom:scaffold AdvisorsApprove --fromTable --tableName=advisors_approve --primary=id --relations

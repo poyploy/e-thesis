@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Repositories\RoleRepository;
+use App\Repositories\SettingRepository;
 use App\Repositories\UserRepository;
 use App\Repositories\UserRoleRepository;
 use Carbon\Carbon;
@@ -15,6 +16,8 @@ use Validator;
 
 class HomeController extends Controller
 {
+    /** @var  SettingRepository */
+    private $settingRepository;
 
     /** @var  UsersRepository */
     private $usersRepository;
@@ -28,12 +31,13 @@ class HomeController extends Controller
      *
      * @return void
      */
-    public function __construct(UserRepository $userRepo, UserRoleRepository $userRoleRepo, RoleRepository $roleRepo)
+    public function __construct(SettingRepository $settingRepo, UserRepository $userRepo, UserRoleRepository $userRoleRepo, RoleRepository $roleRepo)
     {
         //$this->middleware('auth');
         $this->usersRepository = $userRepo;
         $this->roleRepository = $roleRepo;
         $this->userRoleRepository = $userRoleRepo;
+        $this->settingRepository = $settingRepo;
     }
 
     /**
@@ -61,14 +65,21 @@ class HomeController extends Controller
 
     public function register()
     {
-        return view('auth.register');
+        $configStudentForm = $this->settingRepository->findWhere(['option' => 'REGISTER_STUDENT'])->first();
+        $configStudentYear = $this->settingRepository->findWhere(['option' => 'REGISTER_STUDENT_YEAR'])->first();
+
+        return view('auth.register')->with('configStudentForm', $configStudentForm)
+        ->with('configStudentYear', $configStudentYear);
     }
 
     public function registerStore(Request $request)
     {
         $validator = Validator::make($request->all(), [
             'email' => 'required|unique:users|max:255|email',
-            'name' => 'required',
+            'name_TH' => 'required',
+            'surname_TH' => 'required',
+            'surname_EN' => 'required',
+            'name_EN' => 'required',
             'role' => 'required',
             'password' => 'required|min:6|max:18',
             'password_confirmation' => 'required|same:password|min:6|max:18',
@@ -84,6 +95,13 @@ class HomeController extends Controller
 
         // dd($request->all());
         $input = $request->all();
+
+        //REGISTER_STUDENT_YEAR
+        $configStudentYear = $this->settingRepository->findWhere(['option' => 'REGISTER_STUDENT_YEAR'])->first();
+        if ($input['role'] == '3' && $configStudentYear->value != 'true') {
+            $input['year'] = Carbon::now()->format('Y');
+        }
+
         $input['password'] = bcrypt($input['password']);
         $input['updated_at'] = Carbon::now()->toDateTimeString();
 
@@ -137,9 +155,9 @@ class HomeController extends Controller
             $role = $this->roleRepository->findWithoutFail($roleId);
             if ($role->name == "ADMIN") {
                 return redirect()->route('rooms.index');
-            } else if ($role->name_TH == "TEACHER") {
+            } else if ($role->name == "TEACHER") {
                 return redirect()->route('basicInformations.index');
-            } else if ($role->name_TH == "STUDENT") {
+            } else if ($role->name == "STUDENT") {
                 return redirect()->route('basicInformations.index');
             }
 

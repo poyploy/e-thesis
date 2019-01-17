@@ -225,6 +225,9 @@
         <link href="https://fonts.googleapis.com/css?family=Kanit|Open+Sans" rel="stylesheet">
     
         <title>E-THESIS</title>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
       </head>
       <style>
           /*
@@ -306,12 +309,12 @@
       border-top: 1px solid #fff;
     }
 
-    #STUDENT.form-english{
+    /* #STUDENT.form-english{
             font:600 14px/1 'Roboto',sans-serif; 
             color:#ff0000;  
             float: left;;
             margin:0 0 25px 0; 
-        }
+        } */
 
     
     /*
@@ -350,188 +353,36 @@
             <h1><b>E-THESIS REGISTER</b></h1>
         <div class="tabset">
             <!-- Tab 1 -->
+            @if($configStudentForm->value == "true")
             <input type="radio" name="tabset" id="tab1" aria-controls="customer" checked>
             <label for="tab1">STUDENT</label>
+            @endif
             <!-- Tab 2 -->
-            <input type="radio" name="tabset" id="tab2" aria-controls="seller">
+            @if($configStudentForm->value != "true")
+            <input type="radio" name="tabset" id="tab2" aria-controls="seller" checked>
+            @else
+            <input type="radio" name="tabset" id="tab2" aria-controls="seller" >
+            @endif
             <label for="tab2">TEACHER</label>
            
             
             <div class="tab-panels">
+            @if($configStudentForm->value == "true")
             <section id="STUDENT" class="tab-panel">
-                {{-- <h2>สมัครสมาชิก</h2> --}}
-                <p><strong>STUDENT: </strong> Register a student new membership</p>
                
-                <div class="col-xs-12 card " >
-                    <form method="post" action="{{ url('/register') }}">
-                
-                            {!! csrf_field() !!}
-                
-                            <input type="hidden" name="role" value="3">
-                            <p class="form-english">*กรุณากรอกข้อมูลชื่อจริง-นามสกุลเป็นภาษาอังกฤษเท่านั้น</p>
-                            <div class="form-group has-feedback{{ $errors->has('name_TH') ? ' has-error' : '' }}">
-                                <input type="text" class="form-control" name="name_TH" value="{{ old('name') }}" placeholder="ThaiName">
-                                <span class="glyphicon glyphicon-user form-control-feedback"></span>
-                
-                                @if ($errors->has('name_TH'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('name_TH') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
 
-                            <div class="form-group has-feedback{{ $errors->has('surname_TH') ? ' has-error' : '' }}">
-                                <input type="text" class="form-control" name="surname_TH" value="{{ old('name') }}" placeholder="SurName">
-                                <span class="glyphicon glyphicon-user form-control-feedback"></span>
-                
-                                @if ($errors->has('name'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('name') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                
-                            <div class="form-group has-feedback{{ $errors->has('email') ? ' has-error' : '' }}">
-                                <input type="email" class="form-control" name="email" value="{{ old('email') }}" placeholder="Email">
-                                <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
-                
-                                @if ($errors->has('email'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('email') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
 
-                            <div class="form-group has-feedback{{ $errors->has('student_id') ? ' has-error' : '' }}">
-                                <input type="text" class="form-control" name="student_id" value="{{ old('student_id') }}" placeholder="Student Id">
-                                <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+                @include('auth.register-student')
                 
-                                @if ($errors->has('student_id'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('student_id') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                
-                            <div class="form-group has-feedback{{ $errors->has('password') ? ' has-error' : '' }}">
-                                <input type="password" class="form-control" name="password" placeholder="Password">
-                                <span class="glyphicon glyphicon-lock form-control-feedback"></span>
-                
-                                @if ($errors->has('password'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('password') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                
-                            <div class="form-group has-feedback{{ $errors->has('password_confirmation') ? ' has-error' : '' }}">
-                                <input type="password" name="password_confirmation" class="form-control" placeholder="Confirm password">
-                                <span class="glyphicon glyphicon-lock form-control-feedback"></span>
-                
-                                @if ($errors->has('password_confirmation'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('password_confirmation') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                
-                            <div class="row">
-                                {{-- <div class="col-xs-8">
-                                    <div class="checkbox icheck">
-                                        <label>
-                                            <input type="checkbox"> I agree to the <a href="#">terms</a>
-                                        </label>
-                                    </div>
-                                </div> --}}
-                                <!-- /.col -->
-                                <div class="col-xs-4">
-                                    <button type="submit" class="btn btn-primary btn-block btn-flat">Register</button>
-                                </div>
-                                <!-- /.col -->
-                            </div>
-                    </form>
-                
-                    <a href="{{ url('/login') }}" class="text-center">I already have a membership</a>
-                </div>    
-                    <!-- /.form-box -->
+               
+              <!-- /.form-box -->
             </section>
-            
+            @endif
 
 
             {{-- teacher form --}}
             <section id="TEACHER" class="tab-panel">
-                    {{-- <h2>สมัครสมาชิก</h2> --}}
-                    <p><strong>TEACHER: </strong> Register a student new membership</p>
-                   
-                    <div class="col-xs-12 card " >
-                        <form method="post" action="{{ url('/register') }}">
-                    
-                                {!! csrf_field() !!}
-                    
-                                <input type="hidden" name="role" value="2">
-                                <div class="form-group has-feedback{{ $errors->has('name') ? ' has-error' : '' }}">
-                                    <input type="text" class="form-control" name="name" value="{{ old('name') }}" placeholder="Full Name">
-                                    <span class="glyphicon glyphicon-user form-control-feedback"></span>
-                    
-                                    @if ($errors->has('name'))
-                                        <span class="help-block">
-                                            <strong>{{ $errors->first('name') }}</strong>
-                                        </span>
-                                    @endif
-                                </div>
-                    
-                                <div class="form-group has-feedback{{ $errors->has('email') ? ' has-error' : '' }}">
-                                    <input type="email" class="form-control" name="email" value="{{ old('email') }}" placeholder="Email">
-                                    <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
-                    
-                                    @if ($errors->has('email'))
-                                        <span class="help-block">
-                                            <strong>{{ $errors->first('email') }}</strong>
-                                        </span>
-                                    @endif
-                                </div>
-                    
-                                <div class="form-group has-feedback{{ $errors->has('password') ? ' has-error' : '' }}">
-                                    <input type="password" class="form-control" name="password" placeholder="Password">
-                                    <span class="glyphicon glyphicon-lock form-control-feedback"></span>
-                    
-                                    @if ($errors->has('password'))
-                                        <span class="help-block">
-                                            <strong>{{ $errors->first('password') }}</strong>
-                                        </span>
-                                    @endif
-                                </div>
-                    
-                                <div class="form-group has-feedback{{ $errors->has('password_confirmation') ? ' has-error' : '' }}">
-                                    <input type="password" name="password_confirmation" class="form-control" placeholder="Confirm password">
-                                    <span class="glyphicon glyphicon-lock form-control-feedback"></span>
-                    
-                                    @if ($errors->has('password_confirmation'))
-                                        <span class="help-block">
-                                            <strong>{{ $errors->first('password_confirmation') }}</strong>
-                                        </span>
-                                    @endif
-                                </div>
-                    
-                                <div class="row">
-                                    {{-- <div class="col-xs-8">
-                                        <div class="checkbox icheck">
-                                            <label>
-                                                <input type="checkbox"> I agree to the <a href="#">terms</a>
-                                            </label>
-                                        </div>
-                                    </div> --}}
-                                    <!-- /.col -->
-                                    <div class="col-xs-4">
-                                        <button type="submit" class="btn btn-primary btn-block btn-flat">Register</button>
-                                    </div>
-                                    <!-- /.col -->
-                                </div>
-                        </form>
-                    
-                        <a href="{{ url('/login') }}" class="text-center">I already have a membership</a>
-                    </div>    
-                        <!-- /.form-box -->
+                @include('auth.register-teacher')
                 </section>
 
             </div>
@@ -546,17 +397,16 @@
 
         <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+    {{-- <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script> --}}
+  
 <script>
-    $(function () {
-        $('input').iCheck({
-            checkboxClass: 'icheckbox_square-blue',
-            radioClass: 'iradio_square-blue',
-            increaseArea: '20%' // optional
-        });
-    });
+    // $(function () {
+    //     $('input').iCheck({
+    //         checkboxClass: 'icheckbox_square-blue',
+    //         radioClass: 'iradio_square-blue',
+    //         increaseArea: '20%' // optional
+    //     });
+    // });
 </script>  
     
             
