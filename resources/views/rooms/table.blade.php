@@ -2,20 +2,20 @@
     <div class="form-inline">
         <div class="form-group">
             {!! Form::open(['route' => 'rooms.index', 'method' => 'get']) !!}
-            <label for="exampleInputName2">Years :</label>
+            <label for="exampleInputName2">ปีการศึกษา :</label>
             @if(empty($filter_year))
             {!! Form::select('year', $years,null , ['class' => 'form-control select2']) !!}
             @else
             {!! Form::select('year', $years,$filter_year , ['class' => 'form-control select2']) !!}
             @endif
-            <button type="submit" class="btn btn-default">Filter</button>
+            <button type="submit" class="btn btn-default">Submit</button>
             {!! Form::close() !!}
         </div>
         @if(!empty($filter_year))
         <div class="form-group" style="margin-left: 25px;">
             <label for="exampleInputName2">Group by : </label>
             <button type="button" class="form-control" onclick="GroupByRandom('{{$filter_year}}')">Random</button>
-            <button type="button" class="btn btn-default" onclick="GroupByOrder('{{$filter_year}}')">Order</button>
+            {{-- <button type="button" class="btn btn-default" onclick="GroupByOrder('{{$filter_year}}')">Order</button> --}}
         </div>
         @endif
     </div>

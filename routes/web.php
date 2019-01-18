@@ -60,4 +60,13 @@ Route::group(['middleware' => ['login']], function () {
     Route::resource('settings', 'SettingController');
     Route::resource('uploadFiles', 'UploadFileController');
     Route::resource('advisorsApproves', 'AdvisorsApproveController');
+
+    Route::resource('qrcode', 'QRcodeController');
+    Route::get('/qrcode/qr', 'QRcodeController@index');
+
+    Route::resource('assessment', 'AssessmentController');
+    Route::get('/assessment/index', 'AssessmentController@index');
+    
+
 });
+ 

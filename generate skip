@@ -25,3 +25,7 @@ php artisan infyom:scaffold Setting --fromTable --tableName=setting --primary=id
 php artisan infyom:scaffold UserAdvisor --fromTable --tableName=room_advisors --primary=id --relations
 
 php artisan infyom:scaffold AdvisorsApprove --fromTable --tableName=advisors_approve --primary=id --relations
+
+php artisan make:controller QRcodeController
+
+php artisan make:controller AssessmentController

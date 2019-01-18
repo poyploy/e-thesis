@@ -55,26 +55,44 @@
     @if(!empty($roomInfo))
     <section class="content-header">
         <h1>
-            Room Infomation
+            Room Information
         </h1>
     </section>
     <div class="box box-primary">
-        <div class="box-body">
-            <div class="row">
-                RoomID {{ $roomInfo->id }}
+        <div class="box-body" style="padding-left: 2%">
+
+            <!-- room id -->
+            <div class="form-group">
+                {!! Form::label('id', 'Room Id:') !!}
+                <p>{!! $roomInfo->id !!}</p>
             </div>
-            <div class="row">
-                Room Description {{ $roomInfo->description }}
+
+            <!-- Room Description -->
+            <div class="form-group">
+                    {!! Form::label('description', 'Room Description:') !!}
+                    <p>{!! $roomInfo->description !!}</p>
             </div>
-            <div class="row">
-                Room Education year {{ $roomInfo->year }}
+            
+            <!-- Room Education year -->
+            <div class="form-group">
+                    {!! Form::label('year', 'Room Education year:') !!}
+                    <p>{!! $roomInfo->year !!}</p>
             </div>
-            <div class="row">
+
+            <!-- Teacher -->
+            <div class="form-group">
+                    {!! Form::label('Teacher:') !!}
+                    @foreach($userAdvisors as $ad)
+                    <p>{!! $ad->user->name_TH.' '.$ad->user->surname_TH !!}</p>
+                    @endforeach
+            </div>
+
+            {{-- <div class="row">
                 Advisor
                 @foreach($userAdvisors as $ad)
                     <p>{{  $ad->user->name_TH.' '.$ad->user->surname_TH }}</p>
                 @endforeach
-            </div>
+            </div> --}}
 
         </div>
     </div>
