@@ -9,7 +9,7 @@
              <input type="hidden" name="role" value="3">
              {{-- <p class="form-english">*กรุณากรอกข้อมูลชื่อจริง-นามสกุลเป็นภาษาอังกฤษเท่านั้น</p> --}}
              <div class="form-group has-feedback{{ $errors->has('name_TH') ? ' has-error' : '' }}">
-                 <input type="text" class="form-control" name="name_TH" value="{{ old('name_TH') }}" placeholder="ThaiName">
+                 <input type="text" class="form-control" name="name_TH" value="{{ old('name_TH') }}" placeholder="ชื่อ (ภาษาไทย)*">
                  <span class="glyphicon glyphicon-user form-control-feedback"></span>
  
                  @if ($errors->has('name_TH'))
@@ -20,7 +20,7 @@
              </div>
 
              <div class="form-group has-feedback{{ $errors->has('surname_TH') ? ' has-error' : '' }}">
-                 <input type="text" class="form-control" name="surname_TH" value="{{ old('surname_TH') }}" placeholder="ThaiSurName">
+                 <input type="text" class="form-control" name="surname_TH" value="{{ old('surname_TH') }}" placeholder="นามสกุล (ภาษาไทย)*">
                  <span class="glyphicon glyphicon-user form-control-feedback"></span>
  
                  @if ($errors->has('surname_TH'))
@@ -31,7 +31,7 @@
              </div>
 
              <div class="form-group has-feedback{{ $errors->has('name_EN') ? ' has-error' : '' }}">
-                 <input type="text" class="form-control" name="name_EN" value="{{ old('name_EN') }}" placeholder="EngName">
+                 <input type="text" class="form-control" name="name_EN" value="{{ old('name_EN') }}" placeholder="ชื่อ (ภาษาอังกฤษ)*">
                  <span class="glyphicon glyphicon-user form-control-feedback"></span>
  
                  @if ($errors->has('name_EN'))
@@ -42,7 +42,7 @@
              </div>
 
              <div class="form-group has-feedback{{ $errors->has('surname_EN') ? ' has-error' : '' }}">
-                 <input type="text" class="form-control" name="surname_EN" value="{{ old('surname_EN') }}" placeholder="EngSurName">
+                 <input type="text" class="form-control" name="surname_EN" value="{{ old('surname_EN') }}" placeholder="นามสกุล (ภาษาอังกฤษ)*">
                  <span class="glyphicon glyphicon-user form-control-feedback"></span>
  
                  @if ($errors->has('surname_EN'))
@@ -53,7 +53,7 @@
              </div>
  
              <div class="form-group has-feedback{{ $errors->has('email') ? ' has-error' : '' }}">
-                 <input type="email" class="form-control" name="email" value="{{ old('email') }}" placeholder="Email">
+                 <input type="email" class="form-control" name="email" value="{{ old('email') }}" placeholder="อีเมล์*">
                  <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
  
                  @if ($errors->has('email'))
@@ -64,7 +64,7 @@
              </div>
 
              <div class="form-group has-feedback{{ $errors->has('student_id') ? ' has-error' : '' }}">
-                 <input type="text" class="form-control" name="student_id" value="{{ old('student_id') }}" placeholder="Student Id">
+                 <input type="text" class="form-control" name="student_id" value="{{ old('student_id') }}" placeholder="รหัสประจำตัวนักศึกษา*">
                  <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
  
                  @if ($errors->has('student_id'))
@@ -75,7 +75,7 @@
              </div>
  
              <div class="form-group has-feedback{{ $errors->has('password') ? ' has-error' : '' }}">
-                 <input type="password" class="form-control" name="password" placeholder="Password">
+                 <input type="password" class="form-control" name="password" placeholder="รหัสผ่าน*">
                  <span class="glyphicon glyphicon-lock form-control-feedback"></span>
  
                  @if ($errors->has('password'))
@@ -86,7 +86,7 @@
              </div>
  
              <div class="form-group has-feedback{{ $errors->has('password_confirmation') ? ' has-error' : '' }}">
-                 <input type="password" name="password_confirmation" class="form-control" placeholder="Confirm password">
+                 <input type="password" name="password_confirmation" class="form-control" placeholder="ยืนยันรหัสผ่าน*">
                  <span class="glyphicon glyphicon-lock form-control-feedback"></span>
  
                  @if ($errors->has('password_confirmation'))
@@ -99,7 +99,7 @@
              @if($configStudentYear->value =='true')
 
              <div class="form-group has-feedback{{ $errors->has('year') ? ' has-error' : '' }}">
-                <input type="input" name="password_confirmation" class="form-control" placeholder="year">
+                <input type="input" name="password_confirmation" class="form-control" placeholder="ปีการศึกษา*">
                 <span class="glyphicon glyphicon-lock form-control-feedback"></span>
 
                 @if ($errors->has('year'))
