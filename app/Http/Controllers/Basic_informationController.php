@@ -7,7 +7,9 @@ use App\Http\Requests\UpdateBasic_informationRequest;
 use App\Models\Basic_information as BasicInformation;
 use App\Repositories\Basic_informationRepository;
 use App\Repositories\RoleRepository;
+use App\Repositories\RoomUserRepository;
 use App\Repositories\SettingRepository;
+use App\Repositories\UserAdvisorRepository;
 use App\Repositories\UserRepository;
 use App\Repositories\UserRoleRepository;
 use Flash;
@@ -18,6 +20,9 @@ use Response;
 
 class Basic_informationController extends AppBaseController
 {
+
+    /** @var  RoomUserRepository */
+    private $roomUserRepository;
 
     /** @var  UsersRepository */
     private $usersRepository;
@@ -31,15 +36,21 @@ class Basic_informationController extends AppBaseController
     /** @var  UserRoleRepository */
     private $userRoleRepository;
 
+    /** @var  UserAdvisorRepository */
+    private $userAdvisorRepository;
+
     private $roleRepository;
 
-    public function __construct(UserRoleRepository $userRoleRepo, Basic_informationRepository $basicInformationRepo, UserRepository $userRepo, RoleRepository $roleRepo, SettingRepository $settingRepo)
-    {
+    public function __construct(UserAdvisorRepository $userAdvisorRepo, RoomUserRepository $roomUserRepo, UserRoleRepository $userRoleRepo
+        , Basic_informationRepository $basicInformationRepo, UserRepository $userRepo, RoleRepository $roleRepo
+        , SettingRepository $settingRepo) {
         $this->settingRepository = $settingRepo;
         $this->basicInformationRepository = $basicInformationRepo;
         $this->usersRepository = $userRepo;
         $this->userRoleRepository = $userRoleRepo;
         $this->roleRepository = $roleRepo;
+        $this->roomUserRepository = $roomUserRepo;
+        $this->userAdvisorRepository = $userAdvisorRepo;
     }
 
     /**
@@ -83,6 +94,24 @@ class Basic_informationController extends AppBaseController
             return [$id => $name_TH];
         });
 
+        //if student then get room information and all advisor in room
+        $roleName = $auth->usersRoles->first()->role->name;
+        if ($roleName == "STUDENT") {
+            $roomUser = $this->roomUserRepository->findWhere(['user_id' => $auth->id])->first();
+            $roomInfo = $roomUser->room;
+            $userAdvisors = $this->userAdvisorRepository->findWhere(['room_id' => $roomInfo->id]);
+            // dd( $userAdvisors);
+            return view('basic_informations.show')
+            ->with('roomInfo', $roomInfo)
+            ->with('userAdvisors', $userAdvisors)
+            //
+            ->with('basicInformation', $basicInformation)
+            ->with('user', $auth)
+            ->with('role', $role)
+            ->with('advisers', $advisers)
+            ->with('add_adviser', $add_adviser);
+        }
+
         return view('basic_informations.show')
             ->with('basicInformation', $basicInformation)
             ->with('user', $auth)
@@ -109,7 +138,7 @@ class Basic_informationController extends AppBaseController
             // Create case
             $basicInformation = $this->basicInformationRepository->create($request->all());
         } else {
-            // Update case 
+            // Update case
             $basicInformation = $this->basicInformationRepository->update($request->all(), $basicInformation->id);
         }
 

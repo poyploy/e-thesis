@@ -16,7 +16,7 @@
             <td>{!! $userAdvisor->user_id !!}</td>
             <td>{!! $userAdvisor->user->name_TH !!}</td>
             <td>{!! $userAdvisor->room_id !!}</td>
-            <td>{!! $userAdvisor->room->name_TH !!}</td>
+            <td>{!! $userAdvisor->room->name !!}</td>
             <td>{!! $userAdvisor->room->year !!}</td>
             <td class="text-center">{!! $userAdvisor->leader == 1 ? "<span class='label label-success'>Yes</span>" : "<span class='label label-info'>No</span>" !!}</td>
             <td>
