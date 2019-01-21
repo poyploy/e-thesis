@@ -72,4 +72,9 @@ Route::group(['middleware' => ['login']], function () {
 
     Route::resource('advisorUserPresents', 'AdvisorUserPresentController');
     Route::get('/advisorUserPresents/showDetail/{id}/room/{room_id}', 'AdvisorUserPresentController@showDetail')->name('advisorUserPresents.showDetail');
+
+
+    Route::get('/advisorFileUploads', 'AdvisorFileUploadController@index')->name('advisorFileUploads.index');
+    Route::get('/advisorFileUploads/{id}','AdvisorFileUploadController@show')->name('advisorFileUploads.show');
+    Route::get('/advisorFileUploads/showDetail/{id}/room/{room_id}','AdvisorFileUploadController@showDetail')->name('advisorFileUploads.showDetail');
 });
