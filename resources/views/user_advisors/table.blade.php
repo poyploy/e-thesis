@@ -3,11 +3,12 @@
         <tr>
             <th>Advisor Id</th>
             <th>Advisor Name</th>
+            <th>Advisor Email</th>
         <th>Room Id</th>
         <th>Room Name</th>
         <th>Room Year</th>
         <th class="text-center">Room Leader</th>
-            <th colspan="3">Action</th>
+            <th>Action</th>
         </tr>
     </thead>
     <tbody>
@@ -15,6 +16,7 @@
         <tr>
             <td>{!! $userAdvisor->user_id !!}</td>
             <td>{!! $userAdvisor->user->name_TH !!}</td>
+            <td>{!! $userAdvisor->user->email !!}</td>
             <td>{!! $userAdvisor->room_id !!}</td>
             <td>{!! $userAdvisor->room->name !!}</td>
             <td>{!! $userAdvisor->room->year !!}</td>
@@ -32,3 +34,14 @@
     @endforeach
     </tbody>
 </table>
+
+
+
+@section('scripts')
+<script>
+$(document).ready( function () {
+    $('#userAdvisors-table').DataTable();
+} );
+
+</script>
+@endsection

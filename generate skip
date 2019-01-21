@@ -29,3 +29,7 @@ php artisan infyom:scaffold AdvisorsApprove --fromTable --tableName=advisors_app
 php artisan make:controller QRcodeController
 
 php artisan make:controller AssessmentController
+
+php artisan infyom:scaffold UserPresent --fromTable --tableName=user_present --primary=id --relations
+
+php artisan infyom:scaffold AdvisorUserPresent --fromTable --tableName=user_present --primary=id --relations

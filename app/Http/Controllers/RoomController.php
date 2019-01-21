@@ -5,8 +5,10 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\AppBaseController;
 use App\Http\Requests\CreateRoomRequest;
 use App\Http\Requests\UpdateRoomRequest;
+use App\Repositories\PresentRepository;
 use App\Repositories\RoomRepository;
 use App\Repositories\RoomUserRepository;
+use App\Repositories\UserPresentRepository;
 use App\Repositories\UserRepository;
 use Carbon\Carbon;
 use Flash;
@@ -16,8 +18,14 @@ use Response;
 
 class RoomController extends AppBaseController
 {
+    /** @var  PresentRepository */
+    private $presentRepository;
+
     /** @var  RoomRepository */
     private $roomRepository;
+
+    /** @var  UserPresentRepository */
+    private $userPresentRepository;
 
     /** @var  UserRepository */
     private $userRepository;
@@ -25,14 +33,17 @@ class RoomController extends AppBaseController
     /** @var  RoomUserRepository */
     private $roomUserRepository;
 
-    public function __construct(RoomRepository $roomRepo, UserRepository $userRepo, RoomUserRepository $roomUserRepo)
+    public function __construct(UserPresentRepository $userPresentRepo, PresentRepository $presentRepo, RoomRepository $roomRepo, UserRepository $userRepo, RoomUserRepository $roomUserRepo)
     {
         $this->roomRepository = $roomRepo;
         $this->userRepository = $userRepo;
+        $this->presentRepository = $presentRepo;
         $this->roomUserRepository = $roomUserRepo;
+        $this->userPresentRepository = $userPresentRepo;
     }
 
-    public function groupByOrder($year){
+    public function groupByOrder($year)
+    {
         // get ห้องที่ยังไม่ได้จัด
         $rooms = $this->getRoomsUnJoinByYear($year);
         // get นร.ที่ยังไม่โดนจัดเข้าห้อง
@@ -73,7 +84,7 @@ class RoomController extends AppBaseController
         $users = $users->shuffle();
 
         $splited = $users->split(count($rooms));
-       
+
         foreach ($rooms as $key => $room) {
             // dd($key, $splited);
             $index = (int) $key;
@@ -85,6 +96,40 @@ class RoomController extends AppBaseController
             }
         }
         return redirect()->route('rooms.index');
+    }
+
+    public function randomPresentNumber($roomId, Request $request)
+    {
+        $year = $request->input('year');
+        $userInRoom = $this->roomUserRepository->findWhere(['room_id' => $roomId]);
+        if (count($userInRoom) < 1) {
+            Flash::error('Cannot Random Present Number because room is empty.');
+
+            return redirect(route('rooms.index'));
+        }
+
+        $presents = $this->presentRepository->findWhere(['room_id' => $roomId]);
+        foreach ($presents as $present) {
+            $userInRoom = $userInRoom->shuffle();
+            $userInRoom = $userInRoom->shuffle();
+
+            foreach ($userInRoom as $key => $item) {
+                $this->userPresentRepository->create([
+                    'present_id' => $present->id,
+                    'user_id' => $item->user_id,
+                    'room_id' => $item->room_id,
+                    'no' => $key + 1,
+                ]);
+            }
+
+        }
+
+        Flash::success('Random Present Number Successfully.');
+        if ($year != '') {
+            return redirect(route('rooms.index', ['year' => $year]));
+        }
+
+        return redirect(route('rooms.index'));
     }
 
     private function getStudentUnJoinByYear($year)
@@ -196,13 +241,13 @@ class RoomController extends AppBaseController
         $filter_year = $request->input('year');
 
         if (!empty($filter_year)) {
-            $rooms = $this->roomRepository->with(['roomUsers'])->findWhere(['year' => $filter_year]);
+            $rooms = $this->roomRepository->with(['roomUsers', 'userPresent'])->findWhere(['year' => $filter_year]);
         } else {
-            $rooms = $this->roomRepository->with(['roomUsers'])->all();
+            $rooms = $this->roomRepository->with(['roomUsers', 'userPresent'])->all();
         }
 
         $Year = Carbon::now()->format('Y');
-        $Year = (int) $Year-2;
+        $Year = (int) $Year - 2;
         $years = ['' => ''];
         for ($i = $Year; $i < $Year + 10; $i++) {
             $years['' . $i] = $i;
@@ -266,8 +311,7 @@ class RoomController extends AppBaseController
             return redirect(route('rooms.index'));
         }
 
-      //  $advisers = $this->userRoleRepository->with('user')->findWhere(['role_id' => '2']);
-
+        //  $advisers = $this->userRoleRepository->with('user')->findWhere(['role_id' => '2']);
 
         return view('rooms.show')->with('room', $room);
     }

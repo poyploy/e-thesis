@@ -99,7 +99,7 @@
              @if($configStudentYear->value =='true')
 
              <div class="form-group has-feedback{{ $errors->has('year') ? ' has-error' : '' }}">
-                <input type="input" name="password_confirmation" class="form-control" placeholder="ปีการศึกษา*">
+                <input type="input" name="year" class="form-control" placeholder="ปีการศึกษา*">
                 <span class="glyphicon glyphicon-lock form-control-feedback"></span>
 
                 @if ($errors->has('year'))

@@ -42,6 +42,7 @@ Route::group(['middleware' => ['login']], function () {
     Route::get('rooms/{year}/groupByRandom', 'RoomController@groupByRandom')->name('rooms.groupByRandom');
     Route::get('rooms/{year}/groupByOrder', 'RoomController@groupByOrder')->name('rooms.groupByOrder');
     Route::put('rooms/{room}/saveManual', 'RoomController@saveManual')->name('rooms.saveManual');
+    Route::get('rooms/{room}/randomPresentNumber', 'RoomController@randomPresentNumber')->name('rooms.randomPresentNumber');
 
     Route::resource('presents', 'PresentController');
     Route::resource('roomUsers', 'RoomUserController');
@@ -66,7 +67,9 @@ Route::group(['middleware' => ['login']], function () {
 
     Route::resource('assessment', 'AssessmentController');
     Route::get('/assessment/index', 'AssessmentController@index');
-    
 
+    Route::resource('userPresents', 'UserPresentController');
+
+    Route::resource('advisorUserPresents', 'AdvisorUserPresentController');
+    Route::get('/advisorUserPresents/showDetail/{id}/room/{room_id}', 'AdvisorUserPresentController@showDetail')->name('advisorUserPresents.showDetail');
 });
- 

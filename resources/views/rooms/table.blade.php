@@ -26,9 +26,10 @@
         <tr>
             <th>Name</th>
             <th>Num</th>
-            <th>Max Student</th>
-            <th>Year</th>
+            <th width="10%">Max Student</th>
+            <th  width="10%">Year</th>
             <th>Status</th>
+            {{-- <th>UserPresents</th> --}}
             <th>Action</th>
         </tr>
     </thead>
@@ -40,9 +41,13 @@
             <td>{!! $room->max_student !!}</td>
             <td>{!! $room->year !!}</td>
             <td>{!! $room->status === 1 ? 'ACTIVE' : 'INACTIVE' !!}</td>
+        {{-- <td>{{ $room->userPresent->count() }}</td> --}}
             <td>
                 {!! Form::open(['route' => ['rooms.destroy', $room->id], 'method' => 'delete']) !!}
                 <div class='btn-group'>
+                        @if($room->userPresent->count() < 1)
+                            <a href="{!! route('rooms.randomPresentNumber', [$room->id , 'year' => $filter_year?$filter_year : '']) !!}" class='btn btn-success btn-xs' title="random present"><i class="glyphicon glyphicon-align-justify"></i></a>
+                        @endif
                         @if(count($room->roomUsers) < 1) <a href="{!! route('rooms.manual', [$room->id]) !!}" class='btn btn-info btn-xs'><i
                             class="glyphicon glyphicon-user"></i></a>
                         @endif

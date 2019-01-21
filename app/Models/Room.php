@@ -65,4 +65,12 @@ class Room extends Model
     {
         return $this->hasMany(\App\Models\RoomUser::class);
     }
+
+     /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     **/
+    public function userPresent()
+    {
+        return $this->hasMany(\App\Models\UserPresent::class);
+    }
 }
