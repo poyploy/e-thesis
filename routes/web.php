@@ -65,8 +65,10 @@ Route::group(['middleware' => ['login']], function () {
     Route::resource('qrcode', 'QRcodeController');
     Route::get('/qrcode/qr', 'QRcodeController@index');
 
-    Route::resource('assessment', 'AssessmentController');
-    Route::get('/assessment/index', 'AssessmentController@index');
+    Route::resource('assessments', 'AssessmentController');
+    // Route::resource('assessment', 'AssessmentController');
+    Route::get('/assessments/users/{users}/presents/{present}', 'AssessmentController@score')->name('assessments.score');
+    Route::post('/assessments/users/storeScore', 'AssessmentController@storeScore')->name('assessments.storeScore');
 
     Route::resource('userPresents', 'UserPresentController');
 
@@ -78,3 +80,5 @@ Route::group(['middleware' => ['login']], function () {
     Route::get('/advisorFileUploads/{id}','AdvisorFileUploadController@show')->name('advisorFileUploads.show');
     Route::get('/advisorFileUploads/showDetail/{id}/room/{room_id}','AdvisorFileUploadController@showDetail')->name('advisorFileUploads.showDetail');
 });
+
+

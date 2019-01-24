@@ -1,28 +1,235 @@
 <?php
 
 namespace App\Http\Controllers;
-use Illuminate\Http\Request;
+
+use App\Http\Controllers\AppBaseController;
+use App\Http\Requests\CreateAssessmentRequest;
+use App\Http\Requests\UpdateAssessmentRequest;
+use App\Repositories\AssessmentRepository;
+use App\Repositories\Basic_informationRepository;
+use App\Repositories\PresentRepository;
 use Flash;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Prettus\Repository\Criteria\RequestCriteria;
+use Response;
 
-
-class AssessmentController extends Controller
+class AssessmentController extends AppBaseController
 {
-    // 
-    public function index(){
+    /** @var  PresentRepository */
+    private $presentRepository;
 
-        return view('assessment');
+    /** @var  Basic_informationRepository */
+    private $basicInformationRepository;
+
+    /** @var  AssessmentRepository */
+    private $assessmentRepository;
+
+    public function __construct(PresentRepository $presentRepo, Basic_informationRepository $basicInformationRepo, AssessmentRepository $assessmentRepo)
+    {
+        $this->assessmentRepository = $assessmentRepo;
+        $this->basicInformationRepository = $basicInformationRepo;
+        $this->presentRepository = $presentRepo;
     }
 
-   /**
-     * Display the specified Menu.
+    /**
+     * Display a listing of the Assessment.
+     *
+     * @param Request $request
+     * @return Response
+     */
+    public function storeScore(Request $request)
+    {
+        $input = $request->all();
+        $present = $this->presentRepository->findWithoutFail($input['present_id']);
+        if (empty($present)) {
+            Flash::error('Present not found.');
+            return back();
+        }
+        $input['room_id'] = $present->room_id;
+
+        //เช็คว่าประเมินแล้ว
+        $auth = Auth::user();
+        $count = $this->assessmentRepository
+            ->findWhere([
+                'user_id' => $input['user_id'],
+                'present_id' => $input['present_id'],
+                'teacher_id' => $auth->id,
+            ])->count();
+
+        if ($count > 0) {
+            Flash::error('Present is already in assessment.');
+            return back();
+        }
+
+        $input['teacher_id'] = $auth->id;
+        $assessment = $this->assessmentRepository->create($input);
+
+        Flash::success('Assessment saved successfully.');
+        return redirect()->route('advisorUserPresents.showDetail',[ $present->id, $present->room_id]);
+
+    }
+
+    /**
+     * Display a listing of the Assessment.
+     *
+     * @param Request $request
+     * @return Response
+     */
+    public function score($userId, $presentId, Request $request)
+    {
+        $auth = Auth::user();
+
+        $count = $this->assessmentRepository
+            ->findWhere([
+                'user_id' => $userId,
+                'present_id' => $presentId,
+                'teacher_id' => $auth->id,
+            ])->count();
+
+        if ($count > 0) {
+            Flash::error('Present is already in assessment.');
+            return back();
+        }
+
+        $present = $this->presentRepository->findWithoutFail($presentId);
+
+        $user = $this->basicInformationRepository->findWhere(['user_id' => $userId])->first();
+
+        return view('assessments.score')
+            ->with('present', $present)
+            ->with('user', $user);
+    }
+
+    /**
+     * Display a listing of the Assessment.
+     *
+     * @param Request $request
+     * @return Response
+     */
+    public function index(Request $request)
+    {
+        $this->assessmentRepository->pushCriteria(new RequestCriteria($request));
+        $assessments = $this->assessmentRepository->all();
+
+        return view('assessments.index')
+            ->with('assessments', $assessments);
+    }
+
+    /**
+     * Show the form for creating a new Assessment.
+     *
+     * @return Response
+     */
+    public function create()
+    {
+        return view('assessments.create');
+    }
+
+    /**
+     * Store a newly created Assessment in storage.
+     *
+     * @param CreateAssessmentRequest $request
+     *
+     * @return Response
+     */
+    public function store(CreateAssessmentRequest $request)
+    {
+        $input = $request->all();
+
+        $assessment = $this->assessmentRepository->create($input);
+
+        Flash::success('Assessment saved successfully.');
+
+        return redirect(route('assessments.index'));
+    }
+
+    /**
+     * Display the specified Assessment.
      *
      * @param  int $id
      *
      * @return Response
      */
-    public function show()
+    public function show($id)
     {
-        return view('assessment');
+        $assessment = $this->assessmentRepository->findWithoutFail($id);
+
+        if (empty($assessment)) {
+            Flash::error('Assessment not found');
+
+            return redirect(route('assessments.index'));
+        }
+
+        return view('assessments.show')->with('assessment', $assessment);
+    }
+
+    /**
+     * Show the form for editing the specified Assessment.
+     *
+     * @param  int $id
+     *
+     * @return Response
+     */
+    public function edit($id)
+    {
+        $assessment = $this->assessmentRepository->findWithoutFail($id);
+
+        if (empty($assessment)) {
+            Flash::error('Assessment not found');
+
+            return redirect(route('assessments.index'));
+        }
+
+        return view('assessments.edit')->with('assessment', $assessment);
+    }
+
+    /**
+     * Update the specified Assessment in storage.
+     *
+     * @param  int              $id
+     * @param UpdateAssessmentRequest $request
+     *
+     * @return Response
+     */
+    public function update($id, UpdateAssessmentRequest $request)
+    {
+        $assessment = $this->assessmentRepository->findWithoutFail($id);
+
+        if (empty($assessment)) {
+            Flash::error('Assessment not found');
+
+            return redirect(route('assessments.index'));
+        }
+
+        $assessment = $this->assessmentRepository->update($request->all(), $id);
+
+        Flash::success('Assessment updated successfully.');
+
+        return redirect(route('assessments.index'));
+    }
+
+    /**
+     * Remove the specified Assessment from storage.
+     *
+     * @param  int $id
+     *
+     * @return Response
+     */
+    public function destroy($id)
+    {
+        $assessment = $this->assessmentRepository->findWithoutFail($id);
+
+        if (empty($assessment)) {
+            Flash::error('Assessment not found');
+
+            return redirect(route('assessments.index'));
+        }
+
+        $this->assessmentRepository->delete($id);
+
+        Flash::success('Assessment deleted successfully.');
+
+        return redirect(route('assessments.index'));
     }
 }
-

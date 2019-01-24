@@ -5,8 +5,11 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\AppBaseController;
 use App\Http\Requests\CreateAdvisorUserPresentRequest;
 use App\Http\Requests\UpdateAdvisorUserPresentRequest;
+use App\Repositories\AdvisorsApproveRepository;
 use App\Repositories\AdvisorUserPresentRepository;
+use App\Repositories\AssessmentRepository;
 use App\Repositories\PresentRepository;
+use App\Repositories\SettingRepository;
 use App\Repositories\UserAdvisorRepository;
 use Flash;
 use Illuminate\Http\Request;
@@ -16,6 +19,15 @@ use Response;
 
 class AdvisorUserPresentController extends AppBaseController
 {
+    /** @var  AssessmentRepository */
+    private $assessmentRepository;
+
+    /** @var  SettingRepository */
+    private $settingRepository;
+
+    /** @var  AdvisorsApproveRepository */
+    private $advisorsApproveRepository;
+
     /** @var  PresentRepository */
     private $presentRepository;
 
@@ -25,11 +37,59 @@ class AdvisorUserPresentController extends AppBaseController
     /** @var  UserAdvisorRepository */
     private $userAdvisorRepository;
 
-    public function __construct(PresentRepository $presentRepo, AdvisorUserPresentRepository $advisorUserPresentRepo, UserAdvisorRepository $userAdvisorRepo)
+    public function __construct(AssessmentRepository $assessmentRepo,SettingRepository $settingRepo, AdvisorsApproveRepository $advisorsApproveRepo, PresentRepository $presentRepo, AdvisorUserPresentRepository $advisorUserPresentRepo, UserAdvisorRepository $userAdvisorRepo)
     {
+
+        $this->advisorsApproveRepository = $advisorsApproveRepo;
         $this->presentRepository = $presentRepo;
+        $this->settingRepository = $settingRepo;
         $this->advisorUserPresentRepository = $advisorUserPresentRepo;
         $this->userAdvisorRepository = $userAdvisorRepo;
+        $this->assessmentRepository = $assessmentRepo;
+    }
+
+    /**
+     * Display the specified UserPresent.
+     *
+     * @param  int $id
+     *
+     * @return Response
+     */
+    public function showDetail($id, $roomId)
+    {
+        $userPresents = $this->advisorUserPresentRepository->findWhere(['present_id' => $id])->SortBy('no');
+        if (empty($userPresents)) {
+            Flash::error('User Present not found');
+
+            return redirect(route('userPresents.index'));
+        }
+
+        $auth = Auth::user();
+        $setting = $this->settingRepository->findWhere(['option' => 'ADVISOR_APPROVE_MIN'])->first();
+        $value = (int) $setting->value;
+        foreach ($userPresents as $userPresent) {
+            $approved = $this->advisorsApproveRepository->findWhere(['student_id' => $userPresent->user_id, 'present_id' => $id])->count();
+            if ($approved >= $value) {
+                $userPresent->assessment = true;
+            } else {
+                $userPresent->assessment = false;
+            }
+
+            $assessmented = $this->assessmentRepository->findWhere([
+                'user_id' =>  $userPresent->user_id,
+                'present_id' =>  $id,
+                'teacher_id' => $auth->id,
+            ])->count();
+            if ($assessmented >0) {
+                $userPresent->assessmented = true;
+            } else {
+                $userPresent->assessmented = false;
+            }
+        }
+
+        return view('advisor_user_presents.show_detail')
+            ->with('userPresents', $userPresents)
+            ->with('roomId', $roomId);
     }
 
     /**
@@ -100,27 +160,6 @@ class AdvisorUserPresentController extends AppBaseController
         // dd($presents);
 
         return view('advisor_user_presents.show')->with('presents', $presents);
-    }
-
-    /**
-     * Display the specified UserPresent.
-     *
-     * @param  int $id
-     *
-     * @return Response
-     */
-    public function showDetail($id, $roomId)
-    {
-        $userPresents = $this->advisorUserPresentRepository->findWhere(['present_id' => $id])->SortBy('no');
-        if (empty($userPresents)) {
-            Flash::error('User Present not found');
-
-            return redirect(route('userPresents.index'));
-        }
-
-        return view('advisor_user_presents.show_detail')
-            ->with('userPresents', $userPresents)
-            ->with('roomId', $roomId);
     }
 
     /**

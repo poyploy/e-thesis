@@ -30,6 +30,8 @@ php artisan make:controller QRcodeController
 
 php artisan make:controller AssessmentController
 
+php artisan infyom:scaffold Assessment --fromTable --tableName=assessment --primary=id --relations
+
 php artisan infyom:scaffold UserPresent --fromTable --tableName=user_present --primary=id --relations
 
 php artisan infyom:scaffold AdvisorUserPresent --fromTable --tableName=user_present --primary=id --relations

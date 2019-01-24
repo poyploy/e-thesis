@@ -7,6 +7,8 @@
     </h1>
 </section>
 <div class="content">
+
+    @include('flash::message')
     <div class="box box-primary">
         <div class="box-body">
             <div class="row" style="padding-left: 20px">
@@ -22,6 +24,7 @@
                             <th>Room name</th>
                             <th>Student id</th>
                             <th>Student name</th>
+                            <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -34,6 +37,16 @@
                             <td>{!! $userPresent->room->name !!}</td>
                             <td>{!! $userPresent->user->student_id !!}</td>
                             <td>{!! $userPresent->user->name_TH.' '.$userPresent->user->surname_TH !!}</td>
+                            <td>
+                                @if($userPresent->assessment && !$userPresent->assessmented)
+                                <a href=" {{ route('assessments.score', [$userPresent->user_id, $userPresent->present_id])  }}"
+                                    class='btn btn-success btn-xs'><i class="glyphicon glyphicon-ok"></i></a>
+                                @elseif($userPresent->assessment && $userPresent->assessmented)  
+                                <a href="#"
+                                        class='btn btn-default btn-xs disabled'><i class="glyphicon glyphicon-ok"></i></a>  
+                                @endif
+
+                            </td>
                         </tr>
                         @endforeach
                     </tbody>
