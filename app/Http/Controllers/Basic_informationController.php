@@ -94,6 +94,8 @@ class Basic_informationController extends AppBaseController
             return [$id => $name_TH];
         });
 
+        $enable = $this->settingRepository->findWhere(['option' => 'ENABLE_BASIC_INFO'])->first();
+        $readonly = $enable->value === "true" ? false : true;
         //if student then get room information and all advisor in room
         $roleName = $auth->usersRoles->first()->role->name;
         if ($roleName == "STUDENT") {
@@ -102,18 +104,20 @@ class Basic_informationController extends AppBaseController
             $userAdvisors = $this->userAdvisorRepository->findWhere(['room_id' => $roomInfo->id]);
             // dd( $userAdvisors);
             return view('basic_informations.show')
-            ->with('roomInfo', $roomInfo)
-            ->with('userAdvisors', $userAdvisors)
-            //
-            ->with('basicInformation', $basicInformation)
-            ->with('user', $auth)
-            ->with('role', $role)
-            ->with('advisers', $advisers)
-            ->with('add_adviser', $add_adviser);
+                ->with('roomInfo', $roomInfo)
+                ->with('userAdvisors', $userAdvisors)
+                //
+                ->with('basicInformation', $basicInformation)
+                ->with('user', $auth)
+                ->with('readonly', $readonly)
+                ->with('role', $role)
+                ->with('advisers', $advisers)
+                ->with('add_adviser', $add_adviser);
         }
 
         return view('basic_informations.show')
             ->with('basicInformation', $basicInformation)
+            ->with('readonly', $readonly)
             ->with('user', $auth)
             ->with('role', $role)
             ->with('advisers', $advisers)

@@ -37,13 +37,13 @@
                 <!-- Student Id Field -->
                 <div class="form-group col-sm-6">
                     {!! Form::label('adviser_id', 'Advisor Id:') !!}
-                    {!! Form::select('adviser_id', $advisers , $advisor , ['class' => 'form-control select2']) !!}
+                    {!! Form::select('adviser_id', $advisers , $advisor , ['class' => 'form-control select2' , 'disabled'=> $readonly]) !!}
                 </div>
 
 
                 <!-- Submit Field -->
                 <div class="form-group col-sm-12">
-                    {!! Form::submit('Save', ['class' => 'btn btn-primary']) !!}
+                    {!! Form::submit('Save', ['class' => 'btn btn-primary', 'disabled'=> $readonly ]) !!}
 
                 </div>
                 {!! Form::close() !!}
