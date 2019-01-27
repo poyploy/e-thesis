@@ -11,7 +11,7 @@
                     <b><span class="heading-primary-main">E-THESIS</span></b>
                     <span class="heading-primary-sub">IT BUSINESS SILPAKORN UNIVERSITY</span>
                 </h1>
-                <b><a href="{{ url('/register') }}" class="btn btn-white btn-animated">Register</a></b>
+                {{-- <b><a href="{{ url('/register') }}" class="btn btn-white btn-animated">Register</a></b> --}}
                 <b><a href="{{ url('/login') }}" class="btn btn-white btn-animated">Login</a></b>
             </div>
     </body>
