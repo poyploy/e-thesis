@@ -35,3 +35,5 @@ php artisan infyom:scaffold Assessment --fromTable --tableName=assessment --prim
 php artisan infyom:scaffold UserPresent --fromTable --tableName=user_present --primary=id --relations
 
 php artisan infyom:scaffold AdvisorUserPresent --fromTable --tableName=user_present --primary=id --relations
+
+php artisan infyom:scaffold CheckPresent --fromTable --tableName=check --primary=id --relations

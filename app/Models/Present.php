@@ -45,7 +45,8 @@ class Present extends Model
         'sequence_id',
         'user_id',
         'room_id',
-        'thesis_id'
+        'thesis_id',
+        'code'
     ];
 
     /**

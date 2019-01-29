@@ -31,6 +31,19 @@ class PresentController extends AppBaseController
         $this->roomRepository = $roomRepo;
     }
 
+    public function qrcode($id,Request $request){
+        
+        $present = $this->presentRepository->findWithoutFail($id);
+
+        if (empty($present)) {
+            Flash::error('Present not found');
+
+            return redirect(route('presents.index'));
+        }
+
+        return view('presents.qrcode')->with('present', $present);
+    }
+
     /**
      * Display a listing of the Present.
      *
@@ -85,6 +98,7 @@ class PresentController extends AppBaseController
                     'date' =>  $sequence->date_time,
                     'sequence_id' => $sequence->id,
                     'room_id' => $room->id,
+                    "code" => $this->generateRandomString(64)
                 ]);
             }
         }
@@ -92,6 +106,16 @@ class PresentController extends AppBaseController
         Flash::success('Present saved successfully.');
 
         return redirect(route('presents.index'));
+    }
+
+    private function generateRandomString($length = 10) {
+        $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        $charactersLength = strlen($characters);
+        $randomString = '';
+        for ($i = 0; $i < $length; $i++) {
+            $randomString .= $characters[rand(0, $charactersLength - 1)];
+        }
+        return $randomString;
     }
 
     /**

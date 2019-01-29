@@ -38,6 +38,7 @@
 @section('scripts')
 <script src="{{asset('lib/jsQR/jsQR.js')}}"></script>
 <script>
+    var scaned = false 
     var video = document.createElement("video");
     var canvasElement = document.getElementById("canvas");
     var canvas = canvasElement.getContext("2d");
@@ -81,8 +82,10 @@
           outputMessage.hidden = true;
           outputData.parentElement.hidden = false;
           //window.location.href = code.data
-          if(code.data.length>10){
-            window.location.href = '{{ route('qrcode.index') }}/'+code.data
+          if(code.data.length>10 && !scaned){
+            scaned = true
+
+            window.location.href = '{{ route('qrcode.scan') }}/'+code.data
           }
           outputData.innerText = code.data;
         } else {

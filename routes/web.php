@@ -45,6 +45,8 @@ Route::group(['middleware' => ['login']], function () {
     Route::get('rooms/{room}/randomPresentNumber', 'RoomController@randomPresentNumber')->name('rooms.randomPresentNumber');
 
     Route::resource('presents', 'PresentController');
+    Route::get('/presents/{id}/qrcode', 'PresentController@qrcode')->name('presents.qrcode');
+
     Route::resource('roomUsers', 'RoomUserController');
 
     Route::get('/basicInformations', 'Basic_informationController@index')->name('basicInformations.index');
@@ -62,8 +64,10 @@ Route::group(['middleware' => ['login']], function () {
     Route::resource('uploadFiles', 'UploadFileController');
     Route::resource('advisorsApproves', 'AdvisorsApproveController');
 
-    Route::resource('qrcode', 'QRcodeController');
-    Route::get('/qrcode/qr', 'QRcodeController@index');
+   // Route::resource('qrcode', 'QRcodeController');
+     Route::get('/qrcode', 'QRcodeController@index')->name('qrcode.index');
+     Route::get('/qrcode/scan', 'QRcodeController@scan')->name('qrcode.scan');
+     Route::get('/qrcode/scan/{code}', 'QRcodeController@store');
 
     Route::resource('assessments', 'AssessmentController');
     // Route::resource('assessment', 'AssessmentController');
@@ -75,10 +79,10 @@ Route::group(['middleware' => ['login']], function () {
     Route::resource('advisorUserPresents', 'AdvisorUserPresentController');
     Route::get('/advisorUserPresents/showDetail/{id}/room/{room_id}', 'AdvisorUserPresentController@showDetail')->name('advisorUserPresents.showDetail');
 
-
     Route::get('/advisorFileUploads', 'AdvisorFileUploadController@index')->name('advisorFileUploads.index');
-    Route::get('/advisorFileUploads/{id}','AdvisorFileUploadController@show')->name('advisorFileUploads.show');
-    Route::get('/advisorFileUploads/showDetail/{id}/room/{room_id}','AdvisorFileUploadController@showDetail')->name('advisorFileUploads.showDetail');
+    Route::get('/advisorFileUploads/{id}', 'AdvisorFileUploadController@show')->name('advisorFileUploads.show');
+    Route::get('/advisorFileUploads/showDetail/{id}/room/{room_id}', 'AdvisorFileUploadController@showDetail')->name('advisorFileUploads.showDetail');
 });
 
 
+Route::resource('checkPresents', 'CheckPresentController');
