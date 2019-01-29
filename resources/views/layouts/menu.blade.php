@@ -9,7 +9,3 @@
 </li>
 @endif
 @endforeach
-<li class="{{ Request::is('checkPresents*') ? 'active' : '' }}">
-    <a href="{!! route('checkPresents.index') !!}"><i class="fa fa-edit"></i><span>Check Presents</span></a>
-</li>
-

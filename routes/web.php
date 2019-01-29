@@ -66,7 +66,7 @@ Route::group(['middleware' => ['login']], function () {
 
    // Route::resource('qrcode', 'QRcodeController');
      Route::get('/qrcode', 'QRcodeController@index')->name('qrcode.index');
-     Route::get('/qrcode/scan', 'QRcodeController@scan')->name('qrcode.scan');
+     Route::get('/qrcode/scan/', 'QRcodeController@scan')->name('qrcode.scan');
      Route::get('/qrcode/scan/{code}', 'QRcodeController@store');
 
     Route::resource('assessments', 'AssessmentController');
