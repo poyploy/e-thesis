@@ -44,7 +44,8 @@
     <script src="{{ asset('lib/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js') }}"></script>
     <script src="https://cdn.datatables.net/1.10.18/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.18/js/dataTables.bootstrap.min.js"></script>
-        
+    
+    @yield('scriptsHeader')    
 </head>
 
 
@@ -62,9 +63,9 @@
             <!-- Header Navbar -->
             <nav class="navbar navbar-static-top" role="navigation" style="background-color:#14ad7b;">
                 <!-- Sidebar toggle button-->
-                {{-- <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
+                <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
                     <span class="sr-only">Toggle navigation</span>
-                </a> --}}
+                </a>
                 <!-- Navbar Right Menu -->
                 <div class="navbar-custom-menu">
                     <ul class="nav navbar-nav">
