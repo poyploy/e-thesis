@@ -51,8 +51,7 @@
 <section class="content-header">
   <h1 class="pull-left">Scan QRcode</h1>
   <h1 class="pull-right">
-    <a class="btn btn-primary pull-right" style="margin-top: -10px;margin-bottom: 5px" href="{!! route('roles.create') !!}">Add
-      New</a>
+    <input type="file" accept="image/*" capture="camera" />
   </h1>
 </section>
 <div class="content">
