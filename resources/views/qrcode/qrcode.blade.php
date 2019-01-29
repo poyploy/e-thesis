@@ -80,7 +80,7 @@
 
   </div>
 </div>
-<script>
+<script type="text/javascript">
   var scaned = false
   var video = document.createElement("video");
   var canvasElement = document.getElementById("canvas");
