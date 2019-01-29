@@ -80,12 +80,6 @@
 
   </div>
 </div>
-@endsection
-@section('scriptsHeader')
-<script src="{{asset('lib/jsQR/jsQR.js')}}"></script>
-@endsection
-@section('scripts')
-
 <script>
   var scaned = false
   var video = document.createElement("video");
@@ -145,5 +139,12 @@
     requestAnimationFrame(tick);
   }
 </script>
+@endsection
+@section('scriptsHeader')
+<script src="{{asset('lib/jsQR/jsQR.js')}}"></script>
+@endsection
+@section('scripts')
+
+
 
 @endsection
