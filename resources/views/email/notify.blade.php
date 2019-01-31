@@ -9,9 +9,8 @@
 </head>
 
 <body>
-    <h1>This is notify email for presentation</h1>
-    <p>present date at {{ $present->date }}</p>
-    <p>present descripton {{ $present->sequence->description }}</p>
+    <h1>{{ $content->title }}</h1>
+    {!! $content->body !!}
 </body>
 
 </html>

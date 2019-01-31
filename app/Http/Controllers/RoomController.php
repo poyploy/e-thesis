@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\AppBaseController;
 use App\Http\Requests\CreateRoomRequest;
 use App\Http\Requests\UpdateRoomRequest;
+use App\Mail\NotifyShipped;
+use App\Repositories\ContentRepository;
 use App\Repositories\PresentRepository;
 use App\Repositories\RoomRepository;
 use App\Repositories\RoomUserRepository;
@@ -13,6 +15,7 @@ use App\Repositories\UserRepository;
 use Carbon\Carbon;
 use Flash;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 use Prettus\Repository\Criteria\RequestCriteria;
 use Response;
 
@@ -24,6 +27,8 @@ class RoomController extends AppBaseController
     /** @var  RoomRepository */
     private $roomRepository;
 
+    private $contentRepository;
+
     /** @var  UserPresentRepository */
     private $userPresentRepository;
 
@@ -33,13 +38,84 @@ class RoomController extends AppBaseController
     /** @var  RoomUserRepository */
     private $roomUserRepository;
 
-    public function __construct(UserPresentRepository $userPresentRepo, PresentRepository $presentRepo, RoomRepository $roomRepo, UserRepository $userRepo, RoomUserRepository $roomUserRepo)
+    public function __construct(ContentRepository $contentRepo, UserPresentRepository $userPresentRepo, PresentRepository $presentRepo, RoomRepository $roomRepo, UserRepository $userRepo, RoomUserRepository $roomUserRepo)
     {
         $this->roomRepository = $roomRepo;
         $this->userRepository = $userRepo;
         $this->presentRepository = $presentRepo;
         $this->roomUserRepository = $roomUserRepo;
         $this->userPresentRepository = $userPresentRepo;
+        $this->contentRepository = $contentRepo;
+    }
+
+    public function email($roomId, Request $request)
+    {
+        $room = $this->roomRepository->findWithoutFail($roomId);
+
+        if (empty($room)) {
+            Flash::error('Room not found');
+
+            return redirect(route('rooms.index'));
+        }
+
+        $contents = $this->contentRepository->all();
+        $contents = $contents->mapWithKeys(function ($item) {
+            return [$item->id => $item->title];
+        });
+
+        $students = $room->roomUsers;
+        $advisors = $room->roomAdvisors;
+
+        return view('rooms.email')->with('room', $room)
+            ->with('students', $students)
+            ->with('advisors', $advisors)
+            ->with('contents', $contents);
+
+    }
+
+    public function emailSend($roomId, Request $request)
+    {
+        $room = $this->roomRepository->findWithoutFail($roomId);
+
+        if (empty($room)) {
+            Flash::error('Room not found');
+
+            return redirect(route('rooms.index'));
+        }
+
+        $content = $this->contentRepository->findWithoutFail($request->input('content_id'));
+        # student notify
+        $roomUsers = $room->roomUsers;
+        $userMailCc = [];
+        $userMailTo = '';
+        foreach ($roomUsers as $key => $roomUser) {
+            $user = $roomUser->user;
+            if ($key == 0) {
+                $userMailTo = $user->email;
+            } else {
+                array_push($userMailCc, $user->email);
+            }
+        }
+        Mail::to($userMailTo)->cc($userMailCc)->queue(new NotifyShipped($content));
+
+        # advisor notify
+        $roomAdvisors = $room->roomAdvisors;
+        $advisorMailCc = [];
+        $advisorMailTo = '';
+        foreach ($roomAdvisors as $key => $roomAdvisor) {
+            $advisor = $roomAdvisor->user;
+            if ($key == 0) {
+                $advisorMailTo = $advisor->email;
+            } else {
+                array_push($advisorMailCc, $advisor->email);
+            }
+        }
+
+        Mail::to($advisorMailTo)->cc($advisorMailCc)->queue(new NotifyShipped($content));
+
+        Flash::success('Send content to room ' . $room->name . ' successfully.');
+
+        return redirect(route('rooms.index'));
     }
 
     public function groupByOrder($year)

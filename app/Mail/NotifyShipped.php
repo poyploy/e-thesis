@@ -2,7 +2,7 @@
 
 namespace App\Mail;
 
-use App\Models\Present;
+use App\Models\Content;
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
@@ -11,16 +11,16 @@ class NotifyShipped extends Mailable
 {
     use Queueable, SerializesModels;
 
-    private $present;
+    private $content;
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct(Present $present)
+    public function __construct(Content $content)
     {
         //
-        $this->present = $present;
+        $this->content = $content;
     }
 
     /**
@@ -31,8 +31,8 @@ class NotifyShipped extends Mailable
     public function build()
     {
         return $this->from('thisissonya.t@gmail.com')
-            ->subject('notify presentation')
+            ->subject($this->content->subject)
             ->view('email.notify')
-            ->with('present', $this->present);
+            ->with('content', $this->content);
     }
 }

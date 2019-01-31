@@ -43,7 +43,9 @@ Route::group(['middleware' => ['login']], function () {
     Route::get('rooms/{year}/groupByOrder', 'RoomController@groupByOrder')->name('rooms.groupByOrder');
     Route::put('rooms/{room}/saveManual', 'RoomController@saveManual')->name('rooms.saveManual');
     Route::get('rooms/{room}/randomPresentNumber', 'RoomController@randomPresentNumber')->name('rooms.randomPresentNumber');
-
+    Route::get('rooms/{room}/email', 'RoomController@email')->name('rooms.email');
+    //rooms.email.send
+    Route::post('rooms/{room}/email/send', 'RoomController@emailSend')->name('rooms.email.send');
     Route::resource('presents', 'PresentController');
     Route::get('/presents/{id}/qrcode', 'PresentController@qrcode')->name('presents.qrcode');
 
@@ -87,5 +89,4 @@ Route::group(['middleware' => ['login']], function () {
 });
 
 Route::resource('checkPresents', 'CheckPresentController');
-Route::get('/email/present/{id}', 'HomeController@sendNotifyEmail')->name('email.present.notify');
-
+Route::post('/email/room/{id}', 'HomeController@sendNotifyEmail')->name('email.room.notify');
