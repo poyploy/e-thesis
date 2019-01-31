@@ -64,10 +64,10 @@ Route::group(['middleware' => ['login']], function () {
     Route::resource('uploadFiles', 'UploadFileController');
     Route::resource('advisorsApproves', 'AdvisorsApproveController');
 
-   // Route::resource('qrcode', 'QRcodeController');
-     Route::get('/qrcode', 'QRcodeController@index')->name('qrcode.index');
-     Route::get('/qrcode/scan/', 'QRcodeController@scan')->name('qrcode.scan');
-     Route::get('/qrcode/scan/{code}', 'QRcodeController@store');
+    // Route::resource('qrcode', 'QRcodeController');
+    Route::get('/qrcode', 'QRcodeController@index')->name('qrcode.index');
+    Route::get('/qrcode/scan/', 'QRcodeController@scan')->name('qrcode.scan');
+    Route::get('/qrcode/scan/{code}', 'QRcodeController@store');
 
     Route::resource('assessments', 'AssessmentController');
     // Route::resource('assessment', 'AssessmentController');
@@ -82,7 +82,10 @@ Route::group(['middleware' => ['login']], function () {
     Route::get('/advisorFileUploads', 'AdvisorFileUploadController@index')->name('advisorFileUploads.index');
     Route::get('/advisorFileUploads/{id}', 'AdvisorFileUploadController@show')->name('advisorFileUploads.show');
     Route::get('/advisorFileUploads/showDetail/{id}/room/{room_id}', 'AdvisorFileUploadController@showDetail')->name('advisorFileUploads.showDetail');
+
+    Route::resource('contents', 'ContentController');
 });
 
-
 Route::resource('checkPresents', 'CheckPresentController');
+Route::get('/email/present/{id}', 'HomeController@sendNotifyEmail')->name('email.present.notify');
+

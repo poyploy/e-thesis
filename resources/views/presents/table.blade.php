@@ -2,11 +2,11 @@
     <thead>
         <tr>
             <th>Date</th>
-        <th>Sequence Id</th>
-        <th>Sequence Description</th>
-        <th>Room Id</th>
-        <th>Room Name</th>
-        <th>Thesis Id</th>
+            <th>Sequence Id</th>
+            <th>Sequence Description</th>
+            <th>Room Id</th>
+            <th>Room Name</th>
+            <th>Thesis Id</th>
             <th >Action</th>
         </tr>
     </thead>

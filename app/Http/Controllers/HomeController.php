@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\NotifyShipped;
+use App\Repositories\PresentRepository;
 use App\Repositories\RoleRepository;
 use App\Repositories\SettingRepository;
 use App\Repositories\UserRepository;
@@ -11,6 +13,7 @@ use Flash;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 use Prettus\Repository\Criteria\RequestCriteria;
 use Validator;
 
@@ -18,6 +21,8 @@ class HomeController extends Controller
 {
     /** @var  SettingRepository */
     private $settingRepository;
+
+    private $presentRepository;
 
     /** @var  UsersRepository */
     private $usersRepository;
@@ -31,13 +36,52 @@ class HomeController extends Controller
      *
      * @return void
      */
-    public function __construct(SettingRepository $settingRepo, UserRepository $userRepo, UserRoleRepository $userRoleRepo, RoleRepository $roleRepo)
+    public function __construct(PresentRepository $presentRepo, SettingRepository $settingRepo, UserRepository $userRepo, UserRoleRepository $userRoleRepo, RoleRepository $roleRepo)
     {
         //$this->middleware('auth');
         $this->usersRepository = $userRepo;
         $this->roleRepository = $roleRepo;
         $this->userRoleRepository = $userRoleRepo;
         $this->settingRepository = $settingRepo;
+        $this->presentRepository = $presentRepo;
+    }
+
+    public function sendNotifyEmail($presentId, Request $request)
+    {
+        $present = $this->presentRepository->findWithoutFail($presentId);
+        if (empty($present)) {
+            return redirect()->route('index');
+        }
+        # student notify 
+        $roomUsers = $present->room->roomUsers;
+        $userMailCc = [];
+        $userMailTo = '';
+        foreach ($roomUsers as $key => $roomUser) {
+            $user = $roomUser->user;
+            if ($key == 0) {
+                $userMailTo = $user->email;
+            } else {
+                array_push($userMailCc, $user->email);
+            }
+        }
+        Mail::to($userMailTo)->cc($userMailCc)->queue(new NotifyShipped($present));
+
+        # advisor notify
+        $roomAdvisors = $present->room->roomAdvisors;
+        $advisorMailCc = [];
+        $advisorMailTo = '';
+        foreach ($roomAdvisors as $key => $roomAdvisor){
+            $advisor = $roomAdvisor->user;
+            if ($key ==0){
+                $advisorMailTo = $advisor->email;
+            } else {
+                array_push($advisorMailCc, $advisor->email);
+            }
+        }
+        Mail::to($advisorMailTo)->cc($advisorMailCc)->queue(new NotifyShipped($present));
+
+
+        return response()->json(['status' => 200, 'message' => 'Notify send Successfully']);
     }
 
     /**
@@ -69,7 +113,7 @@ class HomeController extends Controller
         $configStudentYear = $this->settingRepository->findWhere(['option' => 'REGISTER_STUDENT_YEAR'])->first();
 
         return view('auth.register')->with('configStudentForm', $configStudentForm)
-        ->with('configStudentYear', $configStudentYear);
+            ->with('configStudentYear', $configStudentYear);
     }
 
     public function registerStore(Request $request)

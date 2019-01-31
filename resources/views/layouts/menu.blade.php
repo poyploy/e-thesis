@@ -9,3 +9,8 @@
 </li>
 @endif
 @endforeach
+
+<li class="{{ Request::is('contents*') ? 'active' : '' }}">
+    <a href="{!! route('contents.index') !!}"><i class="fa fa-edit"></i><span>Contents</span></a>
+</li>
+

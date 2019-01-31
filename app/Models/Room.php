@@ -66,6 +66,14 @@ class Room extends Model
         return $this->hasMany(\App\Models\RoomUser::class);
     }
 
+        /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     **/
+    public function roomAdvisors()
+    {
+        return $this->hasMany(\App\Models\UserAdvisor::class);
+    }
+
      /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      **/
