@@ -2,8 +2,8 @@
     <thead>
         <tr>
             <th>User Id</th>
-        <th>Role Id</th>
-        <th>Status</th>
+            <th>Role Id</th>
+            <th>Status</th>
             <th colspan="3">Action</th>
         </tr>
     </thead>
