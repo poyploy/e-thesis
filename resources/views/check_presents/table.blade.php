@@ -2,9 +2,9 @@
     <thead>
         <tr>
             <th>Check Status</th>
-        <th>Present Id</th>
-        <th>User Id</th>
-            <th colspan="3">Action</th>
+            <th>Present Id</th>
+            <th>User Id</th>
+            {{-- <th colspan="3">Action</th> --}}
         </tr>
     </thead>
     <tbody>

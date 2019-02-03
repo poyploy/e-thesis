@@ -3,8 +3,8 @@
 @section('content')
 @include('flash::message')
 <section class="content-header">
-    <h1>
-        Basic Information
+    <h1 style="font-family: 'Kanit', sans-serif;">
+        ข้อมูลส่วนตัว
     </h1>
 </section>
 <div class="content">
@@ -20,13 +20,15 @@
             </div>
         </div>
     </div>
+    <br>
 
     @if($role->name == "STUDENT" && $add_adviser->value == "true" )
     <section class="content-header">
-        <h1>
-            Select Advisor
+        <h1 style="font-family: 'Kanit', sans-serif;">
+            อาจารย์ที่ปรึกษา
         </h1>
     </section>
+    <br>
     <div class="box box-primary">
         <div class="box-body">
             <div class="row">
@@ -36,7 +38,7 @@
                 @endphp
                 <!-- Student Id Field -->
                 <div class="form-group col-sm-6">
-                    {!! Form::label('adviser_id', 'Advisor Id:') !!}
+                    {!! Form::label('adviser_id', 'อาจารย์ที่ปรึกษา:') !!}
                     {!! Form::select('adviser_id', $advisers , $advisor , ['class' => 'form-control select2' , 'disabled'=> $readonly]) !!}
                 </div>
 
@@ -52,36 +54,39 @@
     </div>
     @endif
 
+    <br>
+
     @if(!empty($roomInfo))
     <section class="content-header">
-        <h1>
-            Room Information
+        <h1 style="font-family: 'Kanit', sans-serif;">
+            ห้องจุลนิพนธ์
         </h1>
     </section>
+    <br>
     <div class="box box-primary">
         <div class="box-body" style="padding-left: 2%">
 
             <!-- room id -->
             <div class="form-group">
-                {!! Form::label('id', 'Room Id:') !!}
-                <p>{!! $roomInfo->id !!}</p>
+                {!! Form::label('id', 'ห้องจุลนิพนธ์:') !!}
+                <p>{!! $roomInfo->name !!}</p>
             </div>
 
             <!-- Room Description -->
-            <div class="form-group">
+            {{-- <div class="form-group">
                     {!! Form::label('description', 'Room Description:') !!}
                     <p>{!! $roomInfo->description !!}</p>
-            </div>
+            </div> --}}
             
             <!-- Room Education year -->
             <div class="form-group">
-                    {!! Form::label('year', 'Room Education year:') !!}
+                    {!! Form::label('year', 'ปีการศึกษา:') !!}
                     <p>{!! $roomInfo->year !!}</p>
             </div>
 
             <!-- Teacher -->
             <div class="form-group">
-                    {!! Form::label('Teacher:') !!}
+                    {!! Form::label('อาจารย์ประจำห้อง:') !!}
                     @foreach($userAdvisors as $ad)
                     <p>{!! $ad->user->name_TH.' '.$ad->user->surname_TH !!}</p>
                     @endforeach

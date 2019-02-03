@@ -1,4 +1,11 @@
+<link href="https://fonts.googleapis.com/css?family=Kanit" rel="stylesheet">
 
+<style>
+    body{
+        font-family: 'Kanit', sans-serif;
+        font-size: 16px;
+    }    
+</style>
 
 @foreach (session('permission') as $permission)
 

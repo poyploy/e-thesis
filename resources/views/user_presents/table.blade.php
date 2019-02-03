@@ -1,11 +1,11 @@
 <table class="table table-responsive" id="userPresents-table">
     <thead>
         <tr>
-            <th>Present Id</th>
-            <th>Present name</th>
-            <th>Present date</th>
-            <th>Room Id</th>
-            <th>Room name</th>
+            <th>รหัส</th>
+            <th>ครั้งที่นำเสนอ</th>
+            <th>วัน-เวลา</th>
+            <th>รหัสห้อง</th>
+            <th>ห้องจุลนิพนธ์</th>
             <th colspan="3">Action</th>
         </tr>
     </thead>

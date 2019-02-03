@@ -1,10 +1,10 @@
 <table class="table table-responsive" id="uploadFiles-table">
     <thead>
         <tr>
-            <th>User Id</th>
-        <th>Sequence Id</th>
-        <th>File</th>
-        <th>Student Id</th>
+            <th>รหัสผู้ใช้งาน</th>
+            <th>ครั้งที่</th>
+            <th>ไฟล์</th>
+            <th>รหัสประจำตัวนักศึกษา</th>
             <th colspan="3">Action</th>
         </tr>
     </thead>
