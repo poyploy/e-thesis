@@ -1,11 +1,11 @@
 <table class="table table-responsive" id="advisorsApproves-table">
     <thead>
         <tr>
-            <th>Student Id</th>
-            <th>Student Name</th>
-            <th>Student Surname</th>
-            <th>Student Education Year</th>
-            <th colspan="3">Action</th>
+            <th>รหัสประจำตัวนักศึกษา</th>
+            <th>ชื่อ</th>
+            <th>นามสกุล</th>
+            <th>ปีการศึกษา</th>
+            <th colspan="3">ประเมิน</th>
         </tr>
     </thead>
     <tbody>

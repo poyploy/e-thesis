@@ -2,8 +2,8 @@
 
 @section('content')
 <section class="content-header">
-    <h1>
-        Assessment
+    <h1 style="font-family: 'Kanit', sans-serif;">
+        ประเมินการนำเสนอ
     </h1>
 </section>
 <div class="content">
@@ -15,19 +15,20 @@
                 {!! Form::open(['route' => 'assessments.storeScore']) !!}
 
                 <!-- User Id Field -->
-                <div class="form-group col-sm-6">
-                    {{-- {!! Form::label('user_id', 'User Id:') !!} --}}
+                {{-- <div class="form-group col-sm-6">
+                    {!! Form::label('user_id', 'User Id:') !!}
                     {!! Form::hidden('user_id', $user->user_id, ['class' => 'form-control']) !!}
-                </div>
+                </div> --}}
 
 
                  <!-- User Id Field -->
                  <div class="form-group col-sm-6">
                  <p>student name: {{ $user->user->name_TH}} {{$user->user->surname_TH}}</p>
                 </div>
-
+                
+                <br><br>
                 <!-- Assessment Score1 Field -->
-                <div class="form-group col-sm-6">
+                <div class="form-group col-sm-6" style="margin-left:1px">
                     {!! Form::label('assessment_score1', 'Assessment Score1:') !!}
                     {!! Form::number('assessment_score1', null, ['class' => 'form-control']) !!}
                 </div>

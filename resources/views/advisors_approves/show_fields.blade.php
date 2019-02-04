@@ -1,12 +1,12 @@
 <table class="table table-responsive" id="advisorsApproves-table">
     <thead>
         <tr>
-            <th>Id</th>
-            <th>Student Name</th>
-            <th>Student Surname</th>
-            <th>Time</th>
-            <th>Remark</th>
-            <th>CreatedAt</th>
+            <th>รหัส</th>
+            <th>ชื่อ</th>
+            <th>นามสกุล</th>
+            <th>ครั้งที่เข้าพบ</th>
+            <th>คำอธิบาย</th>
+            <th>วัน/เวลา</th>
             {{-- <th colspan="3">Action</th> --}}
         </tr>
     </thead>

@@ -2,8 +2,8 @@
 
 @section('content')
 <section class="content-header">
-    <h1>
-        User Present
+    <h1 style="font-family: 'Kanit', sans-serif;">
+        ไฟล์งานนักศึกษา
     </h1>
 </section>
 <div class="content">
@@ -15,11 +15,11 @@
                 <table class="table table-responsive" id="userPresents-table">
                     <thead>
                         <tr>
-                            <th>Present Id</th>
-                            <th>Present name</th>
-                            <th>File</th>
-                            <th>CreateAt</th>
-                            <th>Action</th>
+                            <th>รหัส</th>
+                            <th>ครั้งที่นำเสนอ</th>
+                            <th>ไฟล์</th>
+                            <th>วัน/เวลา</th>
+                            <th>Download</th>
                         </tr>
                     </thead>
                     <tbody>

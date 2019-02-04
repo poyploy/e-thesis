@@ -2,8 +2,8 @@
 
 @section('content')
 <section class="content-header">
-    <h1>
-        User Present
+    <h1 style="font-family: 'Kanit', sans-serif;">
+        ประเมินการนำเสนอ
     </h1>
 </section>
 <div class="content">
@@ -17,14 +17,14 @@
                 <table class="table table-responsive" id="userPresents-table">
                     <thead>
                         <tr>
-                            <th>Present number</th>
-                            <th>Present Id</th>
-                            <th>Present name</th>
-                            <th>Room Id</th>
-                            <th>Room name</th>
-                            <th>Student id</th>
-                            <th>Student name</th>
-                            <th>Action</th>
+                            <th>ลำดับการนำเสนอ</th>
+                            <th>รหัส</th>
+                            <th>ครั้งที่นำเสนอ</th>
+                            <th>รหัสห้อง</th>
+                            <th>ห้องจุลนิพนธ์</th>
+                            <th>รหัสประจำตัวนักศึกษา</th>
+                            <th>ชื่อ-สกุล</th>
+                            <th>ประเมิน</th>
                         </tr>
                     </thead>
                     <tbody>

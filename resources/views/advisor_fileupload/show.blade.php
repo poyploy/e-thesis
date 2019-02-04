@@ -2,8 +2,8 @@
 
 @section('content')
     <section class="content-header">
-        <h1>
-            Users
+        <h1 style="font-family: 'Kanit', sans-serif;">
+            รายชื่อนักศึกษา
         </h1>
     </section>
     <div class="content">
@@ -14,10 +14,10 @@
                     <table class="table table-responsive" id="advisorUserPresents-table">
                             <thead>
                                 <tr>
-                                    <th>Room ID</th>
-                                    <th>Room Name</th>
-                                    <th>Student ID</th>
-                                    <th>Student Name</th>
+                                    <th>รหัส</th>
+                                    <th>ห้องจุลนิพนธ์</th>
+                                    <th>รหัสประจำตัวนักศึกษา</th>
+                                    <th>ชื่อ-สกุล</th>
                                     <th colspan="3">Action</th>
                                 </tr>
                             </thead>

@@ -2,8 +2,8 @@
 
 @section('content')
     <section class="content-header">
-        <h1>
-            Advisors Approve
+        <h1 style="font-family: 'Kanit', sans-serif;">
+            ประเมินการเข้าพบนักศึกษา
         </h1>
    </section>
    <div class="content">

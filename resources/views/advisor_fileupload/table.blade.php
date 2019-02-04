@@ -1,9 +1,9 @@
 <table class="table table-responsive" id="advisorUserPresents-table">
     <thead>
         <tr>
-            <th>Room Id</th>
-        <th>Room name</th>
-        <th>Education year</th>
+            <th>รหัส</th>
+            <th>ห้องจุลนิพนธ์</th>
+            <th>ปีการศึกษา</th>
             <th colspan="3">Action</th>
         </tr>
     </thead>

@@ -2,12 +2,12 @@
     <thead>
         <tr>
             <th>User Id</th>
-        <th>Assessment Score1</th>
-        <th>Assessment Score2</th>
-        <th>Assessment Score3</th>
-        <th>Present Id</th>
-        <th>Room Id</th>
-        <th>Teacher Id</th>
+            <th>Assessment Score1</th>
+            <th>Assessment Score2</th>
+            <th>Assessment Score3</th>
+            <th>Present Id</th>
+            <th>Room Id</th>
+            <th>Teacher Id</th>
             <th colspan="3">Action</th>
         </tr>
     </thead>
