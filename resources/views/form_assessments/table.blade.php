@@ -3,6 +3,7 @@
         <tr>
             <th>Title</th>
         <th>Max</th>
+        <th>Sequence Id</th>
             <th colspan="3">Action</th>
         </tr>
     </thead>
@@ -11,6 +12,7 @@
         <tr>
             <td>{!! $formAssessment->title !!}</td>
             <td>{!! $formAssessment->max !!}</td>
+            <td>{!! $formAssessment->sequence_id !!}</td>
             <td>
                 {!! Form::open(['route' => ['formAssessments.destroy', $formAssessment->id], 'method' => 'delete']) !!}
                 <div class='btn-group'>

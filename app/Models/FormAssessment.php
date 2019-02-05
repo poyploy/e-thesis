@@ -8,8 +8,9 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 /**
  * Class FormAssessment
  * @package App\Models
- * @version February 5, 2019, 2:04 pm UTC
+ * @version February 5, 2019, 2:29 pm UTC
  *
+ * @property \App\Models\Sequence sequence
  * @property \Illuminate\Database\Eloquent\Collection basicInformation
  * @property \Illuminate\Database\Eloquent\Collection check
  * @property \Illuminate\Database\Eloquent\Collection FormAssessmentSub
@@ -22,6 +23,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property \Illuminate\Database\Eloquent\Collection usersRoles
  * @property string title
  * @property integer max
+ * @property integer sequence_id
  */
 class FormAssessment extends Model
 {
@@ -39,7 +41,8 @@ class FormAssessment extends Model
 
     public $fillable = [
         'title',
-        'max'
+        'max',
+        'sequence_id'
     ];
 
     /**
@@ -50,7 +53,8 @@ class FormAssessment extends Model
     protected $casts = [
         'id' => 'integer',
         'title' => 'string',
-        'max' => 'integer'
+        'max' => 'integer',
+        'sequence_id' => 'integer'
     ];
 
     /**
@@ -61,6 +65,14 @@ class FormAssessment extends Model
     public static $rules = [
         
     ];
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     **/
+    public function sequence()
+    {
+        return $this->belongsTo(\App\Models\Sequence::class);
+    }
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
