@@ -2,15 +2,18 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Controllers\AppBaseController;
 use App\Http\Requests\CreatePresentRequest;
 use App\Http\Requests\UpdatePresentRequest;
+use App\Models\CheckPresent;
+use App\Repositories\CheckPresentRepository;
 use App\Repositories\PresentRepository;
-use App\Repositories\SequenceRepository;
 use App\Repositories\RoomRepository;
-use App\Http\Controllers\AppBaseController;
-use Illuminate\Http\Request;
+use App\Repositories\SequenceRepository;
+use App\Repositories\UserAdvisorRepository;
 use Carbon\Carbon;
 use Flash;
+use Illuminate\Http\Request;
 use Prettus\Repository\Criteria\RequestCriteria;
 use Response;
 
@@ -24,15 +27,74 @@ class PresentController extends AppBaseController
 
     private $roomRepository;
 
-    public function __construct(PresentRepository $presentRepo,SequenceRepository $sequenceRepo,RoomRepository $roomRepo)
+    private $userAdvisorRepository;
+
+    /** @var  CheckPresentRepository */
+    private $checkPresentRepository;
+
+    public function __construct(CheckPresentRepository $checkPresentRepo, UserAdvisorRepository $userAdvisorRepo, PresentRepository $presentRepo, SequenceRepository $sequenceRepo, RoomRepository $roomRepo)
     {
         $this->presentRepository = $presentRepo;
         $this->sequenceRepository = $sequenceRepo;
         $this->roomRepository = $roomRepo;
+        $this->userAdvisorRepository = $userAdvisorRepo;
+        $this->checkPresentRepository = $checkPresentRepo;
     }
 
-    public function qrcode($id,Request $request){
-        
+    /**
+     * Display a listing of the UserAdvisor.
+     *
+     * @param Request $request
+     * @return Response
+     */
+    public function advisor($id, $present, Request $request)
+    {
+        $room = $this->roomRepository->findWithoutFail($id);
+        if (!empty($room)) {
+            $request->session()->put("room", $room);
+        }
+
+        $this->userAdvisorRepository->pushCriteria(new RequestCriteria($request));
+        $userAdvisors = $this->userAdvisorRepository->findWhere(['room_id' => $room->id]);
+        foreach ($userAdvisors as $advisor) {
+            $check = $this->checkPresentRepository->findWhere(['user_id' => $advisor->user_id, 'present_id' => $present])->first();
+            if (empty($check)) {
+                $advisor->check = new CheckPresent();
+            } else {
+                $advisor->check = $check;
+            }
+        }
+        return view('presents.advisor')
+            ->with('present', $present)
+            ->with('userAdvisors', $userAdvisors)
+            ->with('room', $room);
+    }
+
+    public function paid($room, $present, $check, Request $request)
+    {
+        $check = $this->checkPresentRepository->findWhere(['id' => $check])->first();
+        if (empty($check)) {
+            Flash::error('Check not found');
+
+            return redirect(route('presents.advisor', [$room, $present]));
+        }
+
+        if ($check->pay_status == 1){
+            Flash::error('This user is already pay existing');
+
+            return redirect(route('presents.advisor', [$room, $present]));
+        }
+
+        $this->checkPresentRepository->update(['pay_status'=>1],$check->id);
+
+        Flash::success('This user is pay successfully');
+
+        return redirect(route('presents.advisor', [$room, $present]));
+    }
+
+    public function qrcode($id, Request $request)
+    {
+
         $present = $this->presentRepository->findWithoutFail($id);
 
         if (empty($present)) {
@@ -73,7 +135,6 @@ class PresentController extends AppBaseController
             $years['' . $i] = $i;
         }
 
-
         return view('presents.create')->with(['years' => $years]);
     }
 
@@ -89,16 +150,16 @@ class PresentController extends AppBaseController
         $year = $request->input('year');
 
         //query sequence data by year
-        $sequences =  $this->sequenceRepository->findWhere(['year' => $year]);
+        $sequences = $this->sequenceRepository->findWhere(['year' => $year]);
         //query room data by status and year
-        $rooms =  $this->roomRepository->findWhere(['status' => 1,'year' => $year]);
-        foreach($rooms as $room){
-            foreach($sequences as $sequence){
+        $rooms = $this->roomRepository->findWhere(['status' => 1, 'year' => $year]);
+        foreach ($rooms as $room) {
+            foreach ($sequences as $sequence) {
                 $this->presentRepository->create([
-                    'date' =>  $sequence->date_time,
+                    'date' => $sequence->date_time,
                     'sequence_id' => $sequence->id,
                     'room_id' => $room->id,
-                    "code" => $this->generateRandomString(64)
+                    "code" => $this->generateRandomString(64),
                 ]);
             }
         }
@@ -108,7 +169,8 @@ class PresentController extends AppBaseController
         return redirect(route('presents.index'));
     }
 
-    private function generateRandomString($length = 10) {
+    private function generateRandomString($length = 10)
+    {
         $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
         $charactersLength = strlen($characters);
         $randomString = '';

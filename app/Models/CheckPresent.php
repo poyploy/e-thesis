@@ -41,7 +41,8 @@ class CheckPresent extends Model
     public $fillable = [
         'check_status',
         'present_id',
-        'user_id'
+        'user_id',
+        'pay_status'
     ];
 
     /**

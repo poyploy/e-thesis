@@ -47,6 +47,9 @@
     <script src="https://cdn.datatables.net/1.10.18/js/dataTables.bootstrap.min.js"></script>
 
     @yield('scriptsHeader')
+   
+    <!-- AdminLTE App -->
+    {{-- <script src="https://adminlte.io/themes/AdminLTE/dist/js/adminlte.min.js"></script> --}}
 </head>
 
     
@@ -80,7 +83,7 @@
                         <!-- Header Navbar -->
                         <nav class="navbar navbar-static-top" role="navigation">
                             <!-- Sidebar toggle button-->
-                            <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
+                            <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
                                 <span class="sr-only">Toggle navigation</span>
                             </a>
                             <!-- Navbar Right Menu -->
@@ -186,6 +189,12 @@
 
 
                 @yield('scripts')
+                {{-- <script>
+                        function sidebartoggle(){
+                             console.log('sidebar-toggle')
+                             $('.main-sidebar').toggle();
+                         }
+                     </script> --}}
             </body>
 
 </html>

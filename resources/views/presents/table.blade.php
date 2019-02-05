@@ -22,6 +22,7 @@
             <td>
                 {!! Form::open(['route' => ['presents.destroy', $present->id], 'method' => 'delete']) !!}
                 <div class='btn-group'>
+                    <a href="{!! route('presents.advisor', [$present->room_id,$present->id]) !!}" class='btn btn-success btn-xs'><i class="glyphicon glyphicon-user"></i></a>
                     <a href="{!! route('presents.qrcode', [$present->id]) !!}" class='btn btn-info btn-xs'><i class="glyphicon glyphicon-qrcode"></i></a>
                     <a href="{!! route('presents.show', [$present->id]) !!}" class='btn btn-default btn-xs'><i class="glyphicon glyphicon-eye-open"></i></a>
                     <a href="{!! route('presents.edit', [$present->id]) !!}" class='btn btn-default btn-xs'><i class="glyphicon glyphicon-edit"></i></a>

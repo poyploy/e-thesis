@@ -48,7 +48,11 @@ Route::group(['middleware' => ['login']], function () {
     Route::post('rooms/{room}/email/send', 'RoomController@emailSend')->name('rooms.email.send');
     Route::resource('presents', 'PresentController');
     Route::get('/presents/{id}/qrcode', 'PresentController@qrcode')->name('presents.qrcode');
-
+//presents.advisor.paid
+    Route::get('/presents/rooms/{id}/present/{present}/advisor', 'PresentController@advisor')->name('presents.advisor');
+    Route::get('/presents/rooms/{id}/present/{present}/advisor/paid/{check}', 'PresentController@paid')->name('presents.advisor.paid');
+   
+   
     Route::resource('roomUsers', 'RoomUserController');
 
     Route::get('/basicInformations', 'Basic_informationController@index')->name('basicInformations.index');
