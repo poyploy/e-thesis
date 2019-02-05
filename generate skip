@@ -39,3 +39,7 @@ php artisan infyom:scaffold AdvisorUserPresent --fromTable --tableName=user_pres
 php artisan infyom:scaffold CheckPresent --fromTable --tableName=check --primary=id --relations
 
 php artisan infyom:scaffold Content --fromTable --tableName=content --primary=id --relations
+
+php artisan infyom:scaffold FormAssessment --fromTable --tableName=form_assessment --primary=id --relations
+
+php artisan infyom:scaffold FormAssessmentSub --fromTable --tableName=form_assessment_sub --primary=id --relations

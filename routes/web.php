@@ -51,8 +51,7 @@ Route::group(['middleware' => ['login']], function () {
 //presents.advisor.paid
     Route::get('/presents/rooms/{id}/present/{present}/advisor', 'PresentController@advisor')->name('presents.advisor');
     Route::get('/presents/rooms/{id}/present/{present}/advisor/paid/{check}', 'PresentController@paid')->name('presents.advisor.paid');
-   
-   
+
     Route::resource('roomUsers', 'RoomUserController');
 
     Route::get('/basicInformations', 'Basic_informationController@index')->name('basicInformations.index');
@@ -90,6 +89,9 @@ Route::group(['middleware' => ['login']], function () {
     Route::get('/advisorFileUploads/showDetail/{id}/room/{room_id}', 'AdvisorFileUploadController@showDetail')->name('advisorFileUploads.showDetail');
 
     Route::resource('contents', 'ContentController');
+    Route::resource('formAssessments', 'FormAssessmentController');
+
+    Route::resource('formAssessmentSubs', 'FormAssessmentSubController');
 });
 
 Route::resource('checkPresents', 'CheckPresentController');
