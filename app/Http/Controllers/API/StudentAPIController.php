@@ -38,11 +38,20 @@ class StudentAPIController extends AppBaseController
      */
     public function index(Request $request)
     {
-        // $this->studentRepository->pushCriteria(new RequestCriteria($request));
-        // $this->studentRepository->pushCriteria(new LimitOffsetCriteria($request));
-        // $students = $this->studentRepository->all();
+        $data = [];
+        $year = $request->input('year');
+
         $data = $this->userRole->where('role_id', 3)->get();
         $data->load('user');
+
+        if (!empty($year)) {
+            $data = $data->filter(function ($value) use ($year) {
+                if (empty($value->user) || $value->user->year == null) {
+                    return false;
+                }
+                return $value->user->year == $year;
+            });
+        }
 
         $students = [];
         foreach ($data as $item) {
