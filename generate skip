@@ -44,3 +44,5 @@ php artisan infyom:scaffold FormAssessment --fromTable --tableName=form_assessme
 
 php artisan infyom:scaffold FormAssessmentSub --fromTable --tableName=form_assessment_sub --primary=id --relations
 
+php artisan infyom:api Student --fromTable --tableName=users --primary=id --relations
+

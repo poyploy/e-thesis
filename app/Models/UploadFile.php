@@ -71,7 +71,7 @@ class UploadFile extends Model
      **/
     public function sequence()
     {
-        return $this->belongsTo(\App\Models\Sequence::class);
+        return $this->belongsTo(\App\Models\Sequence::class, 'sequence_id');
     }
 
     /**
