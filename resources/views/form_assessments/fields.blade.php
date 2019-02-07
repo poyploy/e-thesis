@@ -13,7 +13,8 @@
 <!-- Sequence Id Field -->
 <div class="form-group col-sm-6">
     {!! Form::label('sequence_id', 'Sequence Id:') !!}
-    {!! Form::number('sequence_id', null, ['class' => 'form-control']) !!}
+    {{-- {!! Form::number('sequence_id', null, ['class' => 'form-control']) !!} --}}
+    {!! Form::select('sequence_id',$sequences, null, ['class' => 'form-control select2']); !!}
 </div>
 
 <!-- Submit Field -->
@@ -21,3 +22,14 @@
     {!! Form::submit('Save', ['class' => 'btn btn-primary']) !!}
     <a href="{!! route('formAssessments.index') !!}" class="btn btn-default">Cancel</a>
 </div>
+
+
+@section('scripts')
+<script type="text/javascript">
+$(document).ready(function() {
+    $('.select2').select2({
+  placeholder: 'Select an option'
+});
+});
+</script>
+@endsection

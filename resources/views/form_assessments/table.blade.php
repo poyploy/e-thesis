@@ -16,6 +16,7 @@
             <td>
                 {!! Form::open(['route' => ['formAssessments.destroy', $formAssessment->id], 'method' => 'delete']) !!}
                 <div class='btn-group'>
+                        <a href="{!! route('formAssessments.detail', [$formAssessment->id]) !!}" class='btn btn-info btn-xs'><i class="glyphicon glyphicon-th-list"></i></a>
                     <a href="{!! route('formAssessments.show', [$formAssessment->id]) !!}" class='btn btn-default btn-xs'><i class="glyphicon glyphicon-eye-open"></i></a>
                     <a href="{!! route('formAssessments.edit', [$formAssessment->id]) !!}" class='btn btn-default btn-xs'><i class="glyphicon glyphicon-edit"></i></a>
                     {!! Form::button('<i class="glyphicon glyphicon-trash"></i>', ['type' => 'submit', 'class' => 'btn btn-danger btn-xs', 'onclick' => "return confirm('Are you sure?')"]) !!}
