@@ -79,6 +79,6 @@ class FormAssessment extends Model
      **/
     public function formAssessmentSubs()
     {
-        return $this->hasMany(\App\Models\FormAssessmentSub::class);
+        return $this->hasMany(\App\Models\FormAssessmentSub::class,'form_id');
     }
 }

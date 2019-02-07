@@ -46,3 +46,6 @@ php artisan infyom:scaffold FormAssessmentSub --fromTable --tableName=form_asses
 
 php artisan infyom:api Student --fromTable --tableName=users --primary=id --relations
 
+
+
+CALL add_adviser_approve(2, 79);
