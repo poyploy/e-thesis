@@ -2,7 +2,7 @@
 
 @section('content')
     <section class="content-header">
-        <h1 class="pull-left">Form Assessment Subs</h1>
+        <h1 class="pull-left" style="font-family: 'Kanit', sans-serif;">รายละเอียดย่อย</h1>
         <h1 class="pull-right">
            <a class="btn btn-primary pull-right" style="margin-top: -10px;margin-bottom: 5px" href="{!! route('formAssessments.detail.create',[$formAssessment->id]) !!}">Add New</a>
         </h1>
@@ -18,9 +18,9 @@
                 <table class="table table-responsive" id="formAssessmentSubs-table">
                     <thead>
                         <tr>
-                            <th>Form Id</th>
-                        <th>Title</th>
-                        <th>Max</th>
+                            <th>ครั้งที่</th>
+                            <th>รายละเอียดในการตรวจ</th>
+                            <th>คะแนนเต็ม</th>
                             <th colspan="3">Action</th>
                         </tr>
                     </thead>

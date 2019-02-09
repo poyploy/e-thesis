@@ -2,12 +2,12 @@
     <thead>
         <tr>
             <th>Advisor Id</th>
-            <th>Advisor Name</th>
-            <th>Advisor Email</th>
-        <th>Room Id</th>
-        <th>Room Name</th>
-        <th>Room Year</th>
-        <th class="text-center">Room Leader</th>
+            <th>ชื่ออาจารย์</th>
+            <th>อีเมล์</th>
+            {{-- <th>Room Id</th> --}}
+            <th>กลุ่มห้องจุลนิพนธ์</th>
+            <th>ปีการศึกษา</th>
+            {{-- <th class="text-center">Room Leader</th> --}}
             <th>Action</th>
         </tr>
     </thead>
@@ -17,10 +17,10 @@
             <td>{!! $userAdvisor->user_id !!}</td>
             <td>{!! $userAdvisor->user->name_TH !!}</td>
             <td>{!! $userAdvisor->user->email !!}</td>
-            <td>{!! $userAdvisor->room_id !!}</td>
+            {{-- <td>{!! $userAdvisor->room_id !!}</td> --}}
             <td>{!! $userAdvisor->room->name !!}</td>
             <td>{!! $userAdvisor->room->year !!}</td>
-            <td class="text-center">{!! $userAdvisor->leader == 1 ? "<span class='label label-success'>Yes</span>" : "<span class='label label-info'>No</span>" !!}</td>
+            {{-- <td class="text-center">{!! $userAdvisor->leader == 1 ? "<span class='label label-success'>Yes</span>" : "<span class='label label-info'>No</span>" !!}</td> --}}
             <td>
                 {!! Form::open(['route' => ['userAdvisors.destroy', $userAdvisor->id], 'method' => 'delete']) !!}
                 <div class='btn-group'>

@@ -43,7 +43,7 @@
 <div class="form-group">
         {!! Form::label('', 'Student List:') !!}
         @foreach($room->roomUsers as $user_room)
-        <p>{!! $user_room->user->id !!} {!! $user_room->user->name_TH !!}</p>
+        <p>{!! $user_room->user->id !!} {!! $user_room->user->name_TH !!} {!! $user_room->user->surname_TH !!}</p>
         @endforeach
     </div>
 

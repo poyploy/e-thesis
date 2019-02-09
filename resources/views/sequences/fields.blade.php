@@ -6,7 +6,7 @@
 </div>
 @else
 <div class="form-group col-sm-6">
-    {!! Form::label('year', 'Year:') !!}
+    {!! Form::label('year', 'ปีการศึกษา :') !!}
     {!! Form::select('year', $years, $sequence->year , ['class' => 'form-control select2']) !!}
 </div>
 @endif
@@ -21,7 +21,7 @@
 </div>
 @else
 <div class="form-group col-sm-6">
-    {!! Form::label('uploadfile_status', 'Year:') !!}
+    {!! Form::label('uploadfile_status', 'ตั้งค่าสถานะ :') !!}
     {!! Form::select('uploadfile_status', [
     '0' => 'close',
     '1'=>'open'
@@ -30,13 +30,13 @@
 @endif
 <!-- Year Field -->
 <div class="form-group col-sm-6">
-    {!! Form::label('description', 'Description:') !!}
+    {!! Form::label('description', 'ครั้งที่นำเสนอ เทอม/ครั้ง :') !!}
     {!! Form::text('description', null , ['class' => 'form-control']) !!}
 </div>
 
 <!-- Date Time Field -->
 <div class="form-group col-sm-6">
-    {!! Form::label('date_time', 'Date Time:') !!}
+    {!! Form::label('date_time', 'วัน-เวลา :') !!}
     {!! Form::text('date_time', null, ['class' => 'form-control date-picker']) !!}
 </div>
 

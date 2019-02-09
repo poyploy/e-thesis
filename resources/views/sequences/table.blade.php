@@ -1,18 +1,18 @@
 <table class="table table-responsive" id="sequences-table">
     <thead>
         <tr>
-                <th>Id</th>
-            <th>Year</th>
-            <th>Description</th>
-        <th>Date Time</th>
-        <th>Upload File</th>
+            {{-- <th>Id</th> --}}
+            <th>ปีการศึกษา</th>
+            <th>ครั้งที่นำเสนอ เทอม/ครั้ง</th>
+            <th>วัน-เวลา</th>
+            <th>สถานะการอัปโหลด</th>
             <th>Action</th>
         </tr>
     </thead>
     <tbody>
     @foreach($sequences as $sequence)
         <tr>
-                <td>{!! $sequence->id !!}</td>
+            {{-- <td>{!! $sequence->id !!}</td> --}}
             <td>{!! $sequence->year !!}</td>
             <td>{!! $sequence->description !!}</td>
             <td>{!! $sequence->date_time !!}</td>

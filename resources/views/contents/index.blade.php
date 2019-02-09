@@ -2,9 +2,9 @@
 
 @section('content')
     <section class="content-header">
-        <h1 class="pull-left">Contents</h1>
+        <h1 class="pull-left" style="font-family: 'Kanit', sans-serif;">เนื้อหาทั้งหมด</h1>
         <h1 class="pull-right">
-           <a class="btn btn-primary pull-right" style="margin-top: -10px;margin-bottom: 5px" href="{!! route('contents.create') !!}">Add New</a>
+           <a class="btn btn-primary pull-right" style="margin-top: -10px;margin-bottom: 5px" href="{!! route('contents.create') !!}">เพิ่มเนื้อหา</a>
         </h1>
     </section>
     <div class="content">

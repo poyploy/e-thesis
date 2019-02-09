@@ -24,11 +24,11 @@
 <table class="table table-responsive" id="rooms-table">
     <thead>
         <tr>
-            <th>Name</th>
-            <th>Num</th>
-            <th width="10%">Max Student</th>
-            <th  width="10%">Year</th>
-            <th>Status</th>
+            <th>ห้องจุลนิพนธ์</th>
+            {{-- <th>Num</th> --}}
+            <th>จำนวนนักศึกษา</th>
+            <th>ปีการศึกษา</th>
+            <th>สถานะ</th>
             {{-- <th>UserPresents</th> --}}
             <th>Action</th>
         </tr>
@@ -37,7 +37,7 @@
         @foreach($rooms as $room)
         <tr>
             <td>{!! $room->name !!}</td>
-            <td>{!! $room->num !!}</td>
+            {{-- <td>{!! $room->num !!}</td> --}}
             <td>{!! $room->max_student !!}</td>
             <td>{!! $room->year !!}</td>
             <td>{!! $room->status === 1 ? 'ACTIVE' : 'INACTIVE' !!}</td>

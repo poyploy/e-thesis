@@ -1,18 +1,18 @@
 <table class="table table-responsive" id="formAssessments-table">
     <thead>
         <tr>
-            <th>Title</th>
-        <th>Max</th>
-        <th>Sequence Id</th>
+            <th>ครั้งที่ 1</th>
+            <th>หัวข้อในการตรวจ</th>
+            <th>คะแนนเต็ม</th>
             <th colspan="3">Action</th>
         </tr>
     </thead>
     <tbody>
     @foreach($formAssessments as $formAssessment)
         <tr>
+            <td>{!! $formAssessment->sequence_id !!}</td>
             <td>{!! $formAssessment->title !!}</td>
             <td>{!! $formAssessment->max !!}</td>
-            <td>{!! $formAssessment->sequence_id !!}</td>
             <td>
                 {!! Form::open(['route' => ['formAssessments.destroy', $formAssessment->id], 'method' => 'delete']) !!}
                 <div class='btn-group'>

@@ -2,8 +2,8 @@
 
 @section('content')
     <section class="content-header">
-        <h1>
-            Form Assessment Sub
+        <h1 style="font-family: 'Kanit', sans-serif;">
+            รายละเอียดย่อย
         </h1>
    </section>
    <div class="content">
@@ -18,13 +18,13 @@
     
     <!-- Title Field -->
     <div class="form-group col-sm-6">
-        {!! Form::label('title', 'Title:') !!}
+        {!! Form::label('title', 'รายละเอียดในการตรวจ :') !!}
         {!! Form::text('title', null, ['class' => 'form-control']) !!}
     </div>
     
     <!-- Max Field -->
     <div class="form-group col-sm-6">
-        {!! Form::label('max', 'Max:') !!}
+        {!! Form::label('max', 'คะแนนเต็ม :') !!}
         {!! Form::number('max', null, ['class' => 'form-control']) !!}
     </div>
     
