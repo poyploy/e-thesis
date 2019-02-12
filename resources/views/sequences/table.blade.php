@@ -1,3 +1,4 @@
+<div style="overflow-x:auto;">
 <table class="table table-responsive" id="sequences-table">
     <thead>
         <tr>
@@ -30,6 +31,8 @@
     @endforeach
     </tbody>
 </table>
+</div>
+
 
 
 @section('scripts')

@@ -1,4 +1,5 @@
-<table class="table table-responsive" id="settings-table">
+<div style="overflow-x:auto;">
+    <table class="table table-responsive" id="settings-table">
     <thead>
         <tr>
             <th>Option</th>
@@ -24,3 +25,4 @@
     @endforeach
     </tbody>
 </table>
+</div>

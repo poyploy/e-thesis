@@ -1,8 +1,10 @@
+<br><br>
 <table class="table table-responsive" id="userAdvisors-table">
     <thead>
         <tr>
-            <th>Advisor Id</th>
-            <th>ชื่ออาจารย์</th>
+            <th style="width:5%">Advisor Id</th>
+            <th style="width:10%">ชื่อ</th>
+            <th style="width:15%">นามสกุล</th>
             <th>อีเมล์</th>
             {{-- <th>Room Id</th> --}}
             <th>กลุ่มห้องจุลนิพนธ์</th>
@@ -16,6 +18,7 @@
         <tr>
             <td>{!! $userAdvisor->user_id !!}</td>
             <td>{!! $userAdvisor->user->name_TH !!}</td>
+            <td>{!! $userAdvisor->user->surname_TH !!}</td>
             <td>{!! $userAdvisor->user->email !!}</td>
             {{-- <td>{!! $userAdvisor->room_id !!}</td> --}}
             <td>{!! $userAdvisor->room->name !!}</td>
@@ -34,7 +37,6 @@
     @endforeach
     </tbody>
 </table>
-
 
 
 @section('scripts')
