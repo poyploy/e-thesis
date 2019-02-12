@@ -1,10 +1,10 @@
 <table class="table table-responsive" id="contents-table">
     <thead>
         <tr>
-            <th>Title</th>
-        <th>Subject</th>
-        <th>Body</th>
-        <th>Status</th>
+            <th>หัวข้อ</th>
+            <th>เรื่อง</th>
+            <th>รายละเอียด</th>
+            <th>Status</th>
             <th colspan="3">Action</th>
         </tr>
     </thead>

@@ -1,12 +1,12 @@
 <table class="table table-responsive" id="presents-table">
     <thead>
         <tr>
-            <th>Date</th>
-            <th>Sequence Id</th>
-            <th>Sequence Description</th>
-            <th>Room Id</th>
-            <th>Room Name</th>
-            <th>Thesis Id</th>
+            <th>วัน-เวลา</th>
+            {{-- <th>Sequence Id</th> --}}
+            {{-- <th>Room Id</th> --}}
+            <th>ครั้งที่นำเสนอ เทอม/ครั้ง</th>
+            <th>ห้องจุลนิพนธ์</th>
+            {{-- <th>Thesis Id</th> --}}
             <th >Action</th>
         </tr>
     </thead>
@@ -14,11 +14,11 @@
     @foreach($presents as $present)
         <tr>
             <td>{!! $present->date !!}</td>
-            <td>{!! $present->sequence_id !!}</td>
+            {{-- <td>{!! $present->sequence_id !!}</td> --}}
+            {{-- <td>{!! $present->room_id !!}</td> --}}
             <td>{!! $present->sequence->description !!}</td>
-            <td>{!! $present->room_id !!}</td>
             <td>{!! $present->room->name !!}</td>
-            <td>{!! $present->thesis_id !!}</td>
+            {{-- <td>{!! $present->thesis_id !!}</td> --}}
             <td>
                 {!! Form::open(['route' => ['presents.destroy', $present->id], 'method' => 'delete']) !!}
                 <div class='btn-group'>

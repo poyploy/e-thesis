@@ -14,6 +14,41 @@
             <div class="row">
                 {!! Form::open(['route' => 'assessments.storeScore']) !!}
 
+                @if(!empty($form))
+                <div class="col-sm-12">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <td>#</td>
+                                <td>title</td>
+                                <td>max score</td>
+                                <td>value</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($form as $key => $item)
+                            <tr>
+                                <td>{{ $key+1 }}</td>
+                                <td>
+                                    {{$item->title}}
+                                    @if($item->formAssessmentSubs->count()> 0)
+                                        @foreach($item->formAssessmentSubs as $sub)
+                                            <p style="margin-left:20px;"> - {{ $sub->title }} ({{ $sub->max}})</p>
+                                        @endforeach
+                                    @endif
+                                </td>
+                                <td>{{$item->max}}</td>
+                                <td>
+                                <input type="hidden" name="form_keys[]" value="{{$item->id}}">
+                                    {!! Form::number('form_value['.$item->id.']', null, ['class' => 'form-control','max' => $item->max]) !!}
+                                </td>
+                            </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
+                @endif
+
                 <!-- User Id Field -->
                 {{-- <div class="form-group col-sm-6">
                     {!! Form::label('user_id', 'User Id:') !!}
@@ -21,38 +56,21 @@
                 </div> --}}
 
 
-                 <!-- User Id Field -->
-                 <div class="form-group col-sm-6">
-                 <p>student name: {{ $user->user->name_TH}} {{$user->user->surname_TH}}</p>
-                </div>
-                
-                <br><br>
-                <!-- Assessment Score1 Field -->
-                <div class="form-group col-sm-6" style="margin-left:1px">
-                    {!! Form::label('assessment_score1', 'Assessment Score1:') !!}
-                    {!! Form::number('assessment_score1', null, ['class' => 'form-control']) !!}
+                <!-- User Id Field -->
+                <div class="form-group col-sm-6">
+                    <p>student name: {{ $user->user->name_TH}} {{$user->user->surname_TH}}</p>
                 </div>
 
-                <!-- Assessment Score2 Field -->
-                <div class="form-group col-sm-6">
-                    {!! Form::label('assessment_score2', 'Assessment Score2:') !!}
-                    {!! Form::number('assessment_score2', null, ['class' => 'form-control']) !!}
-                </div>
 
-                <!-- Assessment Score3 Field -->
+                <!-- Present Id Field -->
                 <div class="form-group col-sm-6">
-                    {!! Form::label('assessment_score3', 'Assessment Score3:') !!}
-                    {!! Form::number('assessment_score3', null, ['class' => 'form-control']) !!}
+                    {!! Form::hidden('user_id', $user->user_id, ['class' => 'form-control']) !!}
+                    {!! Form::hidden('present_id', $present->id, ['class' => 'form-control']) !!}
+                    {!! Form::hidden('sequence_id', $present->sequence_id, ['class' => 'form-control']) !!}
                 </div>
 
                 <!-- Present Id Field -->
                 <div class="form-group col-sm-6">
-                    {{-- {!! Form::label('present_id', 'Present Id:') !!} --}}
-                    {!! Form::hidden('present_id', $present->id, ['class' => 'form-control']) !!}
-                </div>
-
-                  <!-- Present Id Field -->
-                  <div class="form-group col-sm-6">
                     {!! Form::label('present_id', 'Present :') !!}
                     <p>Present term {{ $present->sequence->term }} </p>
                     <p>Present date {{ $present->sequence->date_time }} </p>

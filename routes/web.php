@@ -91,6 +91,16 @@ Route::group(['middleware' => ['login']], function () {
     Route::resource('contents', 'ContentController');
     Route::resource('formAssessments', 'FormAssessmentController');
 
+    Route::get('formAssessments/{id}/detail', 'FormAssessmentController@detail')->name('formAssessments.detail');
+    
+    Route::get('formAssessments/{id}/detail/create', 'FormAssessmentController@detailCreate')->name('formAssessments.detail.create');
+    //formAssessments.detail.createStore
+    Route::post('formAssessments/{id}/detail/create', 'FormAssessmentController@detailCreateStore')->name('formAssessments.detail.createStore');
+
+    Route::get('formAssessments/{id}/detail/{detail}/update', 'FormAssessmentController@detailUpdate')->name('formAssessments.detail.update');
+    //formAssessments.detail.createStore
+    Route::post('formAssessments/{id}/detail/{detail}/update', 'FormAssessmentController@detailUpdateStore')->name('formAssessments.detail.updateStore');
+
     Route::resource('formAssessmentSubs', 'FormAssessmentSubController');
 });
 

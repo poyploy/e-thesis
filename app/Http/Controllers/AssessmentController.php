@@ -7,6 +7,7 @@ use App\Http\Requests\CreateAssessmentRequest;
 use App\Http\Requests\UpdateAssessmentRequest;
 use App\Repositories\AssessmentRepository;
 use App\Repositories\Basic_informationRepository;
+use App\Repositories\FormAssessmentRepository;
 use App\Repositories\PresentRepository;
 use Flash;
 use Illuminate\Http\Request;
@@ -16,6 +17,10 @@ use Response;
 
 class AssessmentController extends AppBaseController
 {
+
+    /** @var  FormAssessmentRepository */
+    private $formAssessmentRepository;
+
     /** @var  PresentRepository */
     private $presentRepository;
 
@@ -25,11 +30,12 @@ class AssessmentController extends AppBaseController
     /** @var  AssessmentRepository */
     private $assessmentRepository;
 
-    public function __construct(PresentRepository $presentRepo, Basic_informationRepository $basicInformationRepo, AssessmentRepository $assessmentRepo)
+    public function __construct(FormAssessmentRepository $formAssessmentRepo, PresentRepository $presentRepo, Basic_informationRepository $basicInformationRepo, AssessmentRepository $assessmentRepo)
     {
         $this->assessmentRepository = $assessmentRepo;
         $this->basicInformationRepository = $basicInformationRepo;
         $this->presentRepository = $presentRepo;
+        $this->formAssessmentRepository = $formAssessmentRepo;
     }
 
     /**
@@ -63,10 +69,18 @@ class AssessmentController extends AppBaseController
         }
 
         $input['teacher_id'] = $auth->id;
-        $assessment = $this->assessmentRepository->create($input);
+        $values = $input['form_value'];
+        $formKeys = $input['form_keys'];
+        foreach ($formKeys as $key => $formId) {
+            $value = $values[$formId];
+            $input['assessment_score1'] = $value;
+            $input['sequence_id'] = $present->sequence_id;
+            $input['form_id'] = $formId;
+            $this->assessmentRepository->create($input);
+        }
 
         Flash::success('Assessment saved successfully.');
-        return redirect()->route('advisorUserPresents.showDetail',[ $present->id, $present->room_id]);
+        return redirect()->route('advisorUserPresents.showDetail', [$present->id, $present->room_id]);
 
     }
 
@@ -94,9 +108,12 @@ class AssessmentController extends AppBaseController
 
         $present = $this->presentRepository->findWithoutFail($presentId);
 
+        $form = $this->formAssessmentRepository->findWhere(['sequence_id' => $present->sequence_id]);
+
         $user = $this->basicInformationRepository->findWhere(['user_id' => $userId])->first();
 
         return view('assessments.score')
+            ->with('form', $form)
             ->with('present', $present)
             ->with('user', $user);
     }

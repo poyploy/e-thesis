@@ -2,8 +2,8 @@
 
 @section('content')
     <section class="content-header">
-        <h1>
-            Present
+        <h1 style="font-family: 'Kanit', sans-serif;">
+            รายละเอียด
         </h1>
     </section>
     <div class="content">

@@ -47,8 +47,8 @@ class Assessment extends Model
     public $fillable = [
         'user_id',
         'assessment_score1',
-        'assessment_score2',
-        'assessment_score3',
+        'form_id',
+        'sequence_id',
         'present_id',
         'room_id',
         'teacher_id'
@@ -63,8 +63,8 @@ class Assessment extends Model
         'id' => 'integer',
         'user_id' => 'integer',
         'assessment_score1' => 'integer',
-        'assessment_score2' => 'integer',
-        'assessment_score3' => 'integer',
+        'form_id' => 'integer',
+        'sequence_id' => 'integer',
         'present_id' => 'integer',
         'room_id' => 'integer',
         'teacher_id' => 'integer'
