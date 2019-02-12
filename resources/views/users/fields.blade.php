@@ -16,11 +16,15 @@
     {!! Form::date('email_verified_at', null, ['class' => 'form-control']) !!}
 </div>
 
-<!-- Password Field -->
+@if($userRole->role_id == 2)
 <div class="form-group col-sm-6">
-    {!! Form::label('password', 'Password:') !!}
-    {!! Form::password('password', ['class' => 'form-control']) !!}
+    {!! Form::label('advisor', 'Advisor Type') !!}
+    {!! Form::select('advisor_type', [
+        '0' => 'Permanent',
+        '1' => 'Temp'
+], $user->advisor_type , ['class' => 'form-control']) !!}
 </div>
+@endif
 
 <!-- Remember Token Field -->
 <div class="form-group col-sm-6">
