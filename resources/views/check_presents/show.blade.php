@@ -11,7 +11,7 @@
             <div class="box-body">
                 <div class="row" style="padding-left: 20px">
                     @include('check_presents.show_fields')
-                    <a href="{!! route('checkPresents.index') !!}" class="btn btn-default">Back</a>
+                    <a href="{!! route('qrcode.index') !!}" class="btn btn-default">Back</a>
                 </div>
             </div>
         </div>

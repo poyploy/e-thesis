@@ -48,6 +48,7 @@ class User extends Authenticatable
         'remember_token',
         'updated_at',
         'student_id',
+        'advisor_type',
     ];
 
     /**

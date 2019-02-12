@@ -40,6 +40,13 @@
     <p>{!! $user->created_at !!}</p>
 </div>
 
+@if($userRole->role_id == 2)
+<div class="form-group">
+    {!! Form::label('advisor_type', 'Advisor type:') !!}
+    <p>{!! $user->advisor_type == 0 ? 'Permanent' : 'Temp' !!}</p>
+</div>
+@endif
+
 <!-- Updated At Field -->
 <div class="form-group">
     {!! Form::label('updated_at', 'Updated At:') !!}
