@@ -1,4 +1,5 @@
-<table class="table table-responsive" id="users-table">
+<div style="overflow-x:auto;">
+    <table class="table table-responsive" id="users-table">
     <thead>
         <tr><th>Id</th>
             <th width="20%">ชื่อ</th>
@@ -29,6 +30,8 @@
     @endforeach
     </tbody>
 </table>
+</div>
+
 
 
 @section('scripts')
