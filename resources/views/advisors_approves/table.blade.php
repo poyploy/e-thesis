@@ -1,8 +1,8 @@
 <table class="table table-responsive" id="advisorsApproves-table">
     <thead>
         <tr>
-            <th>รหัสประจำตัวนักศึกษา</th>
-            <th>ชื่อ</th>
+            <th style="width:20%">รหัสประจำตัวนักศึกษา</th>
+            <th style="width:15%">ชื่อ</th>
             <th>นามสกุล</th>
             <th>ปีการศึกษา</th>
             <th colspan="3">ประเมิน</th>

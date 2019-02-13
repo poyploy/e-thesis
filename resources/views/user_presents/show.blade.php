@@ -16,9 +16,9 @@
                     <thead>
                         <tr>
                             <th>ลำดับการนำเสนอ</th>
-                            <th>รหัส</th>
+                            {{-- <th>รหัส</th> --}}
                             <th>การนำเสนอ เทอม-ครั้งที่</th>
-                            <th>รหัสห้อง</th>
+                            {{-- <th>รหัสห้อง</th> --}}
                             <th>ห้องจุลนิพนธ์</th>
                             <th>รหัสประจำตัวนักศึกษา</th>
                             <th>รายชื่อนักศึกษา</th>
@@ -28,9 +28,9 @@
                         @foreach($userPresents as $userPresent)
                         <tr>
                             <td>{!! $userPresent->no !!}</td>
-                            <td>{!! $userPresent->present_id !!}</td>
+                            {{-- <td>{!! $userPresent->present_id !!}</td> --}}
                             <td>{{ $userPresent->present->sequence->description}}</td>
-                            <td>{!! $userPresent->room_id !!}</td>
+                            {{-- <td>{!! $userPresent->room_id !!}</td> --}}
                             <td>{!! $userPresent->room->name !!}</td>
                             <td>{!! $userPresent->user->student_id !!}</td>
                             <td>{!! $userPresent->user->name_TH.' '.$userPresent->user->surname_TH !!}</td>

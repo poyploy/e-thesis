@@ -18,10 +18,11 @@
         >
     </h1>
 </section>
+<br>
 <div class="content">
         <div class="box box-primary">
                 <div class="row">
-                    <div class="col-sm-12">
+                    <br><div class="col-sm-12" style="margin-left:2%">
                     <form action="{{ route('qrcode.index') }}" method="GET">
 
                         <div class="form-group">
@@ -50,7 +51,7 @@
                             id="callout-btn-group-tooltips"
                         >
                             <h4>
-                                Check count
+                                จำนวนครั้งที่เช็คชื่อ
                             </h4>
                             <p>
                                 {{ number_format($checkPresentCount) }}
