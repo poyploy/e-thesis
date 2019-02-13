@@ -76,7 +76,8 @@ class RoomController extends AppBaseController
     public function emailSend($roomId, Request $request)
     {
         $room = $this->roomRepository->findWithoutFail($roomId);
-
+        $sendToStudent = (boolean) $request->input('send_to_student');
+        $sendToAdvisor = (boolean) $request->input('send_to_advisor');
         if (empty($room)) {
             Flash::error('Room not found');
 
@@ -84,34 +85,40 @@ class RoomController extends AppBaseController
         }
 
         $content = $this->contentRepository->findWithoutFail($request->input('content_id'));
-        # student notify
-        $roomUsers = $room->roomUsers;
-        $userMailCc = [];
-        $userMailTo = '';
-        foreach ($roomUsers as $key => $roomUser) {
-            $user = $roomUser->user;
-            if ($key == 0) {
-                $userMailTo = $user->email;
-            } else {
-                array_push($userMailCc, $user->email);
-            }
-        }
-        Mail::to($userMailTo)->cc($userMailCc)->queue(new NotifyShipped($content));
 
-        # advisor notify
-        $roomAdvisors = $room->roomAdvisors;
-        $advisorMailCc = [];
-        $advisorMailTo = '';
-        foreach ($roomAdvisors as $key => $roomAdvisor) {
-            $advisor = $roomAdvisor->user;
-            if ($key == 0) {
-                $advisorMailTo = $advisor->email;
-            } else {
-                array_push($advisorMailCc, $advisor->email);
+        if ($sendToStudent) {
+            # student notify
+            $roomUsers = $room->roomUsers;
+            $userMailCc = [];
+            $userMailTo = '';
+            foreach ($roomUsers as $key => $roomUser) {
+                $user = $roomUser->user;
+                if ($key == 0) {
+                    $userMailTo = $user->email;
+                } else {
+                    array_push($userMailCc, $user->email);
+                }
             }
+            Mail::to($userMailTo)->cc($userMailCc)->queue(new NotifyShipped($content));
         }
 
-        Mail::to($advisorMailTo)->cc($advisorMailCc)->queue(new NotifyShipped($content));
+        if ($sendToAdvisor) {
+            # advisor notify
+            $roomAdvisors = $room->roomAdvisors;
+            $advisorMailCc = [];
+            $advisorMailTo = '';
+            foreach ($roomAdvisors as $key => $roomAdvisor) {
+                $advisor = $roomAdvisor->user;
+                if ($key == 0) {
+                    $advisorMailTo = $advisor->email;
+                } else {
+                    array_push($advisorMailCc, $advisor->email);
+                }
+            }
+
+            Mail::to($advisorMailTo)->cc($advisorMailCc)->queue(new NotifyShipped($content));
+
+        }
 
         Flash::success('Send content to room ' . $room->name . ' successfully.');
 
