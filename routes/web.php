@@ -43,6 +43,7 @@ Route::group(['middleware' => ['login']], function () {
     Route::get('rooms/{year}/groupByOrder', 'RoomController@groupByOrder')->name('rooms.groupByOrder');
     Route::put('rooms/{room}/saveManual', 'RoomController@saveManual')->name('rooms.saveManual');
     Route::get('rooms/{room}/randomPresentNumber', 'RoomController@randomPresentNumber')->name('rooms.randomPresentNumber');
+    Route::get('rooms/{room}/randomPresentOrder', 'RoomController@randomPresentOrder')->name('rooms.randomPresentOrder');
     Route::get('rooms/{room}/email', 'RoomController@email')->name('rooms.email');
     //rooms.email.send
     Route::post('rooms/{room}/email/send', 'RoomController@emailSend')->name('rooms.email.send');
