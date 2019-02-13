@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Repositories\Basic_informationRepository;
 use App\Repositories\CheckPresentRepository;
 use App\Repositories\PresentRepository;
 use App\Repositories\SettingRepository;
+use Carbon\Carbon;
 use Flash;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -12,6 +14,10 @@ use Prettus\Repository\Criteria\RequestCriteria;
 
 class QRcodeController extends Controller
 {
+
+    /** @var  Basic_informationRepository */
+    private $basicInformationRepository;
+
     /** @var  SettingRepository */
     private $settingRepository;
 
@@ -21,21 +27,56 @@ class QRcodeController extends Controller
     /** @var  CheckPresentRepository */
     private $checkPresentRepository;
 
-    public function __construct(SettingRepository $settingRepo, PresentRepository $presentRepo, CheckPresentRepository $checkPresentRepo)
+    public function __construct(Basic_informationRepository $basicInformationRepo, SettingRepository $settingRepo, PresentRepository $presentRepo, CheckPresentRepository $checkPresentRepo)
     {
         $this->settingRepository = $settingRepo;
         $this->presentRepository = $presentRepo;
         $this->checkPresentRepository = $checkPresentRepo;
+        $this->basicInformationRepository = $basicInformationRepo;
     }
     //
     public function index(Request $request)
     {
+        $total = 0;
+        $checkPresentCount = 0;
+        $checkPresentPayCount = 0;
+        $student = 0;
         $auth = Auth::user();
+        $years = (int) Carbon::now()->addYears(1)->format('Y');
+
+        $year = $request->input('year');
+        if (empty($year)) {
+            $year = 0;
+            $this->checkPresentRepository->pushCriteria(new RequestCriteria($request));
+            $checkPresents = $this->checkPresentRepository->findWhere(['user_id' => $auth->id]);
+
+            return view('qrcode.index')
+                ->with('checkPresentCount', $checkPresentCount)
+                ->with('student', $student)
+                ->with('checkPresentPayCount', $checkPresentPayCount)
+                ->with('total', $total)
+                ->with('years', $years)
+                ->with('year', $year)
+                ->with('checkPresents', $checkPresents);
+        }
+
         $this->checkPresentRepository->pushCriteria(new RequestCriteria($request));
         $checkPresents = $this->checkPresentRepository->findWhere(['user_id' => $auth->id]);
+        $checkPresents = $checkPresents->filter(function ($cp) use ($year) {
+            return $cp->present->sequence->year == $year;
+        });
         # Count Report
-        $checkPresentCount = $this->checkPresentRepository->findWhere(['user_id' => $auth->id])->count('id');
-        $checkPresentPayCount = $this->checkPresentRepository->findWhere(['user_id' => $auth->id, 'pay_status' => 1])->count('id');
+        $checkPresentData = $this->checkPresentRepository->findWhere(['user_id' => $auth->id]);
+        $checkPresentData = $checkPresentData->filter(function ($cp) use ($year) {
+            return $cp->present->sequence->year == $year;
+        });
+        $checkPresentCount =  $checkPresentData->count('id');
+        # Count Report pay
+        $checkPresentPayData = $this->checkPresentRepository->findWhere(['user_id' => $auth->id, 'pay_status' => 1]);
+        $checkPresentPayData = $checkPresentPayData->filter(function ($cp) use ($year) {
+            return $cp->present->sequence->year == $year;
+        });
+        $checkPresentPayCount =  $checkPresentPayData->count('id');
 
         $rate = 0;
         switch ($auth->advisor_type) {
@@ -49,10 +90,20 @@ class QRcodeController extends Controller
 
         $total = $checkPresentPayCount * $rate;
 
+        $basicInfos = $this->basicInformationRepository->findWhere(['adviser_id' => $auth->id]);
+        foreach ($basicInfos as $key => $basicInfo) {
+            # code...
+            if ($basicInfo->user->year == $year) {
+                $student++;
+            }
+        }
         return view('qrcode.index')
+            ->with('student', $student)
             ->with('checkPresentCount', $checkPresentCount)
             ->with('checkPresentPayCount', $checkPresentPayCount)
             ->with('total', $total)
+            ->with('years', $years)
+            ->with('year', $year)
             ->with('checkPresents', $checkPresents);
     }
 
