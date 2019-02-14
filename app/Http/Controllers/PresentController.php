@@ -217,7 +217,14 @@ class PresentController extends AppBaseController
             return redirect(route('presents.index'));
         }
 
-        return view('presents.edit')->with('present', $present);
+        $Year = Carbon::now()->format('Y');
+        $Year = (int) $Year;
+        $years = ['' => ''];
+        for ($i = $Year; $i < $Year + 10; $i++) {
+            $years['' . $i] = $i;
+        }
+
+        return view('presents.edit')->with(['years' => $years])->with('present', $present);
     }
 
     /**
