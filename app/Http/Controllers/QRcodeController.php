@@ -14,7 +14,6 @@ use Prettus\Repository\Criteria\RequestCriteria;
 
 class QRcodeController extends Controller
 {
-
     /** @var  Basic_informationRepository */
     private $basicInformationRepository;
 
@@ -34,6 +33,17 @@ class QRcodeController extends Controller
         $this->checkPresentRepository = $checkPresentRepo;
         $this->basicInformationRepository = $basicInformationRepo;
     }
+
+    public function indexStudent(Request $request)
+    {
+        $auth = Auth::user();
+        $this->checkPresentRepository->pushCriteria(new RequestCriteria($request));
+        $checkPresents = $this->checkPresentRepository->findWhere(['user_id' => $auth->id]);
+
+        return view('qrcode.index_student')
+            ->with('checkPresents', $checkPresents);
+    }
+
     //
     public function index(Request $request)
     {
@@ -42,8 +52,12 @@ class QRcodeController extends Controller
         $checkPresentPayCount = 0;
         $student = 0;
         $auth = Auth::user();
-        $years = (int) Carbon::now()->addYears(1)->format('Y');
+        # check role student
+        if($auth->usersRoles->first()->role_id == '3'){
+            return $this->indexStudent($request);
+        }
 
+        $years = (int) Carbon::now()->addYears(1)->format('Y');
         $year = $request->input('year');
         if (empty($year)) {
             $year = 0;
@@ -70,13 +84,13 @@ class QRcodeController extends Controller
         $checkPresentData = $checkPresentData->filter(function ($cp) use ($year) {
             return $cp->present->sequence->year == $year;
         });
-        $checkPresentCount =  $checkPresentData->count('id');
+        $checkPresentCount = $checkPresentData->count('id');
         # Count Report pay
         $checkPresentPayData = $this->checkPresentRepository->findWhere(['user_id' => $auth->id, 'pay_status' => 1]);
         $checkPresentPayData = $checkPresentPayData->filter(function ($cp) use ($year) {
             return $cp->present->sequence->year == $year;
         });
-        $checkPresentPayCount =  $checkPresentPayData->count('id');
+        $checkPresentPayCount = $checkPresentPayData->count('id');
 
         $rate = 0;
         switch ($auth->advisor_type) {
