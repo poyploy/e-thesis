@@ -39,6 +39,7 @@ Route::group(['middleware' => ['login']], function () {
     Route::resource('sequences', 'SequenceController');
 
     Route::get('rooms/{room}/manual', 'RoomController@manual')->name('rooms.manual');
+    Route::delete('rooms/{room}/user/{user}','RoomController@detroyUser')->name('rooms.destroy.user');
     Route::get('rooms/{year}/groupByRandom', 'RoomController@groupByRandom')->name('rooms.groupByRandom');
     Route::get('rooms/{year}/groupByOrder', 'RoomController@groupByOrder')->name('rooms.groupByOrder');
     Route::put('rooms/{room}/saveManual', 'RoomController@saveManual')->name('rooms.saveManual');

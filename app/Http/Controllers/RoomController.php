@@ -326,7 +326,34 @@ class RoomController extends AppBaseController
 
         $users = $this->getStudentUnJoinByYear($year);
 
-        return view('rooms.manual')->with('users', $users)->with('room', $room);
+        $userRooms = $room->roomUsers;
+
+        // dd($userRooms);
+
+        return view('rooms.manual')
+            ->with('users', $users)
+            ->with('userRooms', $userRooms)
+            ->with('room', $room);
+    }
+
+    /**
+     * Show the form for creating a new Room.
+     *
+     * @return Response
+     */
+    public function detroyUser($roomId, $userId, Request $request)
+    {
+        $room = $this->roomRepository->findWithoutFail($roomId);
+        if (empty($room)) {
+            Flash::error('Room not found');
+
+            return redirect(route('rooms.index'));
+        }
+
+        $roomUser = $this->roomUserRepository->findWhere(['room_id' => $roomId, 'user_id' => $userId])->first();
+        $this->roomUserRepository->delete($roomUser->id);
+        //rooms.manual
+        return redirect()->route('rooms.manual', [$roomId]);
     }
 
     /**
