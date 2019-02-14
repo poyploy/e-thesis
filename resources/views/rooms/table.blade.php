@@ -49,9 +49,9 @@
                             <a href="{!! route('rooms.randomPresentNumber', [$room->id , 'year' => $filter_year?$filter_year : '']) !!}" class='btn btn-success btn-xs' title="random present"><i class="glyphicon glyphicon-align-justify"></i></a>
                             <a href="{!! route('rooms.randomPresentOrder', [$room->id , 'year' => $filter_year?$filter_year : '']) !!}" class='btn btn-info btn-xs' title="random present order"><i class="glyphicon glyphicon-align-justify"></i></a>
                         @endif
-                        {{-- @if(count($room->roomUsers) < 1) --}}
-                            <a href="{!! route('rooms.manual', [$room->id]) !!}" class='btn btn-default btn-xs'><i --}}
-                            class="glyphicon glyphicon-user"></i></a>
+                        {{-- @if(count($room->roomUsers) < 1)  --}}
+                        <a href="{!! route('rooms.manual', [$room->id]) !!}" class='btn btn-info btn-xs' style="background-color:hotpink"><i
+                            class="glyphicon glyphicon-pushpin"></i></a>
                         {{-- @endif --}}
                         <a href="{!! route('rooms.email', [$room->id]) !!}" class='btn btn-success btn-xs'><i class="glyphicon glyphicon-envelope"></i></a>
                         <a href="{!! route('userAdvisors.main', [$room->id]) !!}" class='btn btn-info btn-xs'><i class="glyphicon glyphicon-user"></i></a>
