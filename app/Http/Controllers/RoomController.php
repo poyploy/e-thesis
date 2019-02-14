@@ -371,7 +371,8 @@ class RoomController extends AppBaseController
                 'room_id' => $room_id,
             ]);
         }
-        return redirect()->route('roomUsers.index');
+
+        return redirect()->route('rooms.manual', [$room_id]);
     }
 
     /**
