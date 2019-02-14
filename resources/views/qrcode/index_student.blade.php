@@ -29,7 +29,7 @@
     <div class="clearfix"></div>
     <div class="box box-primary">
         <div class="box-body">
-            @include('check_presents.table')
+            @include('check_presents.table_student')
         </div>
     </div>
     <div class="text-center"></div>

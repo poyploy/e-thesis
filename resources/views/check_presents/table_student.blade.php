@@ -4,7 +4,6 @@
             <th>Check Status</th>
             <th>Present Id</th>
             <th>Present Name</th>
-            <th>Pay status</th>
             <th>action</th>
         </tr>
     </thead>
@@ -14,14 +13,6 @@
             <td>{!! $checkPresent->check_status !!}</td>
             <td>{!! $checkPresent->present_id !!}</td>
             <td>{!! $checkPresent->present->sequence->description !!}</td>
-            <td>
-                @if($checkPresent->pay_status)
-                <span class="label label-success">Yes</span>
-                @else
-                <span class="label label-default">No</span>
-
-                @endif
-            </td>
             <td>
                 {!! Form::open(['route' => ['checkPresents.destroy',
                 $checkPresent->id], 'method' => 'delete']) !!}
