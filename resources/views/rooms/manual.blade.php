@@ -2,8 +2,8 @@
 
 @section('content')
 <section class="content-header">
-    <h1>
-        Room
+    <h1 style="font-family: 'Kanit', sans-serif;">
+        การเปลี่ยนกลุ่มห้องจุลนิพนธ์ (นักศึกษา)
     </h1>
 </section>
 
@@ -25,16 +25,17 @@
 
     <div class="box box-primary">
         <div class="box-body">
-            <h3>Student in room</h3>
+            <h3 style="font-family: 'Kanit', sans-serif;">รายชื่อนักศึกษา</h3>
             <div class="row">
                 <table class="table table-responsive" id="users-room-table">
                     <thead>
                         <tr>
                             <th>Id</th>
-                            <th>Name</th>
-                            <th>Email</th>
-                            <th>Year</th>
-                            <th>#<th>
+                            <th>ชื่อ</th>
+                            <th>นามสกุล</th>
+                            <th>อีเมล์</th>
+                            <th>ปีการศึกษา</th>
+                            <th>ลบ<th>
                         </tr>
                     </thead>
                     <tbody>
@@ -42,6 +43,7 @@
                         <tr>
                             <td>{!! $item->user->id !!}</td>
                             <td>{!! $item->user->name_TH !!}</td>
+                            <td>{!! $item->user->surname_TH !!}</td>
                             <td>{!! $item->user->email !!}</td>
                             <td>{!! $item->user->year !!}</td>
                             <td>

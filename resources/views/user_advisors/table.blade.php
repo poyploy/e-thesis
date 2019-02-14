@@ -1,4 +1,4 @@
-<br><br>
+
 <table class="table table-responsive" id="userAdvisors-table">
     <thead>
         <tr>

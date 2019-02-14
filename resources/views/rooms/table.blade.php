@@ -24,7 +24,7 @@
 <table class="table table-responsive" id="rooms-table">
     <thead>
         <tr>
-            <th>ห้องจุลนิพนธ์</th>
+            <th>กลุ่มห้องจุลนิพนธ์</th>
             {{-- <th>Num</th> --}}
             <th>จำนวนนักศึกษา</th>
             <th>ปีการศึกษา</th>

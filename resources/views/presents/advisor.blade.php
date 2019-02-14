@@ -30,7 +30,8 @@
                         <thead>
                             <tr>
                                 <th>Advisor Id</th>
-                                <th>ชื่อ-สกุล</th>
+                                <th>ชื่อ</th>
+                                <th>นามสกุล</th>
                                 <th>อีเมล์</th>
                                 {{-- <th>Room Id</th> --}}
                                 <th>ห้องจุลนิพนธ์</th>
@@ -45,6 +46,7 @@
                             <tr>
                                 <td>{!! $userAdvisor->user_id !!}</td>
                                 <td>{!! $userAdvisor->user->name_TH !!}</td>
+                                <td>{!! $userAdvisor->user->surname_TH !!}</td>
                                 <td>{!! $userAdvisor->user->email !!}</td>
                                 {{-- <td>{!! $userAdvisor->room_id !!}</td> --}}
                                 <td>{!! $userAdvisor->room->name !!}</td>

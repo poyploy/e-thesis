@@ -27,8 +27,8 @@
 
                 <div class="form-group col-sm-12">
                     <div class="col-sm-6">
-                        <h4 style="font-family: 'Kanit', sans-serif; padding-left: 30px"> รายชื่อนักศึกษา </h4>   
-                        <div class="row col-10" style="padding-left: 30px">
+                        <h4 style="font-family: 'Kanit', sans-serif"> รายชื่อนักศึกษา </h4>   
+                        <div class="row col-10">
                             @foreach( $students as $item)
                             <div class="col-md-3">
                                 {{$item->user->name_TH}}

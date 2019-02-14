@@ -2,7 +2,7 @@
 
 @section('content')
     <section class="content-header">
-        <h1>
+        <h1 style="font-family: 'Kanit', sans-serif;">
             ส่งการแจ้งเตือน
         </h1>
    </section>

@@ -1,6 +1,6 @@
 <!-- Name Field -->
 <div class="form-group col-sm-12">
-    {!! Form::label('year', 'Year:') !!} {{$room->year}}
+    {!! Form::label('year', 'ปีการศึกษา :') !!} {{$room->year}}
 </div>
 
 
@@ -13,9 +13,9 @@
             <tr>
                 <th width="6%">Action</th>
                 <th>Id</th>
-                <th>Name</th>
-                <th>Email</th>
-                <th>Year</th>
+                <th>ชื่อ</th>
+                <th>นามสกุล</th>
+                <th>ปีการศึกษา</th>
             </tr>
         </thead>
         <tbody>
