@@ -50,7 +50,7 @@
                             class="bs-callout bs-callout-info"
                             id="callout-btn-group-tooltips"
                         >
-                            <h4>
+                            <h4 style="font-family: 'Kanit', sans-serif;">
                                 จำนวนครั้งที่เช็คชื่อ
                             </h4>
                             <p>
@@ -63,8 +63,8 @@
                             class="bs-callout bs-callout-info"
                             id="callout-btn-group-tooltips"
                         >
-                            <h4>
-                                Paid count
+                            <h4 style="font-family: 'Kanit', sans-serif;">
+                                สถานะการจ่ายเงิน
                             </h4>
                             <p>
                                 {{ number_format($checkPresentPayCount) }}
@@ -76,8 +76,8 @@
                             class="bs-callout bs-callout-info"
                             id="callout-btn-group-tooltips"
                         >
-                            <h4>
-                                Total amount
+                            <h4 style="font-family: 'Kanit', sans-serif;">
+                                ค่าตรวจ
                             </h4>
                             <p>
                                 {{ number_format($total) }}
@@ -89,8 +89,8 @@
                             class="bs-callout bs-callout-info"
                             id="callout-btn-group-tooltips"
                         >
-                            <h4>
-                                Total Advisor amount
+                            <h4 style="font-family: 'Kanit', sans-serif;">
+                                ค่าที่ปรึกษา
                             </h4>
                             <p>
                                 {{ number_format(($checkPresentCount*500)*$student) }}

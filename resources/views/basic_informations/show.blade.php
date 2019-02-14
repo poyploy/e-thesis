@@ -59,7 +59,7 @@
     @if(!empty($roomInfo))
     <section class="content-header">
         <h1 style="font-family: 'Kanit', sans-serif;">
-            ห้องจุลนิพนธ์
+            กลุ่มห้องจุลนิพนธ์
         </h1>
     </section>
     <br>
@@ -68,7 +68,7 @@
 
             <!-- room id -->
             <div class="form-group">
-                {!! Form::label('id', 'ห้องจุลนิพนธ์:') !!}
+                {!! Form::label('id', 'กลุ่มห้องจุลนิพนธ์:') !!}
                 <p>{!! $roomInfo->name !!}</p>
             </div>
 
