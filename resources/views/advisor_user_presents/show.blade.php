@@ -14,9 +14,9 @@
                     <table class="table table-responsive" id="advisorUserPresents-table">
                             <thead>
                                 <tr>
-                                    <th>รหัส</th>
+                                    {{-- <th>รหัส</th> --}}
                                     <th>วัน-เวลา</th>
-                                    <th>รหัสห้อง</th>
+                                    {{-- <th>รหัสห้อง</th> --}}
                                     <th>ห้องจุลนิพนธ์</th>
                                     <th colspan="3">Action</th>
                                 </tr>
@@ -24,9 +24,9 @@
                             <tbody>
                             @foreach($presents as $present)
                                 <tr>
-                                    <td>{!! $present->id !!}</td>
+                                    {{-- <td>{!! $present->id !!}</td> --}}
                                     <td>{!! $present->date !!}</td>
-                                    <td>{!! $present->id !!}</td>
+                                    {{-- <td>{!! $present->id !!}</td> --}}
                                     <td>{!! $present->room->name !!}</td>
                                     <td>
                                         <div class='btn-group'>

@@ -25,7 +25,7 @@
                     {!! Form::text('name', $room->name, ['class' => 'form-control' ,'readonly' => true]) !!}
                 </div>
 
-                <div class="form-group row">
+                <div class="form-group col-sm-12">
                     <div class="col-sm-6">
                         <h4 style="font-family: 'Kanit', sans-serif; padding-left: 30px"> รายชื่อนักศึกษา </h4>   
                         <div class="row col-10" style="padding-left: 30px">
@@ -63,6 +63,16 @@
                         {{-- <p>{{ $item->user->name_TH.' '.$item->user->surname_TH }} &nbsp; {{ $item->user->email }}
                         </p> --}}
                     </div>
+                </div>
+
+                <div class="form-group col-sm-6">
+                        {!! Form::label('send_to_student', 'ส่งถึงนักศึกษา :') !!}
+                        {!! Form::checkbox('send_to_student', 'true', true) !!}
+                </div>
+
+                <div class="form-group col-sm-6">
+                        {!! Form::label('send_to_advisor', 'ส่งถึงอาจารย์ :') !!}
+                        {!! Form::checkbox('send_to_advisor', 'true', true) !!}
                 </div>
 
                 <div class="form-group col-sm-6">

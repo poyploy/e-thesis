@@ -1,10 +1,10 @@
 <table class="table table-responsive" id="userPresents-table">
     <thead>
         <tr>
-            <th>รหัส</th>
+            {{-- <th>รหัส</th> --}}
             <th>ครั้งที่นำเสนอ</th>
             <th>วัน-เวลา</th>
-            <th>รหัสห้อง</th>
+            {{-- <th>รหัสห้อง</th> --}}
             <th>ห้องจุลนิพนธ์</th>
             <th colspan="3">Action</th>
         </tr>
@@ -12,10 +12,10 @@
     <tbody>
     @foreach($userPresents as $userPresent)
         <tr>
-            <td>{!! $userPresent->present_id !!}</td>
+            {{-- <td>{!! $userPresent->present_id !!}</td> --}}
             <td>{{  $userPresent->present->sequence->description}}</td>
             <td>{!! $userPresent->present->date !!}</td>
-            <td>{!! $userPresent->room_id !!}</td>
+            {{-- <td>{!! $userPresent->room_id !!}</td> --}}
             <td>{!! $userPresent->room->name !!}</td>
             <td>
                 {!! Form::open(['route' => ['userPresents.destroy', $userPresent->id], 'method' => 'delete']) !!}

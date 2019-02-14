@@ -14,7 +14,7 @@
                     <table class="table table-responsive" id="advisorUserPresents-table">
                             <thead>
                                 <tr>
-                                    <th>รหัส</th>
+                                    {{-- <th>รหัส</th> --}}
                                     <th>ห้องจุลนิพนธ์</th>
                                     <th>รหัสประจำตัวนักศึกษา</th>
                                     <th>ชื่อ-สกุล</th>
@@ -24,7 +24,7 @@
                             <tbody>
                             @foreach($roomUsers as $roomUser)
                                 <tr>
-                                    <td>{!! $roomUser->id !!}</td>
+                                    {{-- <td>{!! $roomUser->id !!}</td> --}}
                                     <td>{!! $roomUser->room->name !!}</td>
                                     <td>{!! $roomUser->user->student_id !!}</td>
                                     <td>{!! $roomUser->user->name_TH.' '.  $roomUser->user->surname_TH!!}</td>  

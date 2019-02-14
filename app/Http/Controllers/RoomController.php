@@ -76,7 +76,8 @@ class RoomController extends AppBaseController
     public function emailSend($roomId, Request $request)
     {
         $room = $this->roomRepository->findWithoutFail($roomId);
-
+        $sendToStudent = (boolean) $request->input('send_to_student');
+        $sendToAdvisor = (boolean) $request->input('send_to_advisor');
         if (empty($room)) {
             Flash::error('Room not found');
 
@@ -84,34 +85,40 @@ class RoomController extends AppBaseController
         }
 
         $content = $this->contentRepository->findWithoutFail($request->input('content_id'));
-        # student notify
-        $roomUsers = $room->roomUsers;
-        $userMailCc = [];
-        $userMailTo = '';
-        foreach ($roomUsers as $key => $roomUser) {
-            $user = $roomUser->user;
-            if ($key == 0) {
-                $userMailTo = $user->email;
-            } else {
-                array_push($userMailCc, $user->email);
-            }
-        }
-        Mail::to($userMailTo)->cc($userMailCc)->queue(new NotifyShipped($content));
 
-        # advisor notify
-        $roomAdvisors = $room->roomAdvisors;
-        $advisorMailCc = [];
-        $advisorMailTo = '';
-        foreach ($roomAdvisors as $key => $roomAdvisor) {
-            $advisor = $roomAdvisor->user;
-            if ($key == 0) {
-                $advisorMailTo = $advisor->email;
-            } else {
-                array_push($advisorMailCc, $advisor->email);
+        if ($sendToStudent) {
+            # student notify
+            $roomUsers = $room->roomUsers;
+            $userMailCc = [];
+            $userMailTo = '';
+            foreach ($roomUsers as $key => $roomUser) {
+                $user = $roomUser->user;
+                if ($key == 0) {
+                    $userMailTo = $user->email;
+                } else {
+                    array_push($userMailCc, $user->email);
+                }
             }
+            Mail::to($userMailTo)->cc($userMailCc)->queue(new NotifyShipped($content));
         }
 
-        Mail::to($advisorMailTo)->cc($advisorMailCc)->queue(new NotifyShipped($content));
+        if ($sendToAdvisor) {
+            # advisor notify
+            $roomAdvisors = $room->roomAdvisors;
+            $advisorMailCc = [];
+            $advisorMailTo = '';
+            foreach ($roomAdvisors as $key => $roomAdvisor) {
+                $advisor = $roomAdvisor->user;
+                if ($key == 0) {
+                    $advisorMailTo = $advisor->email;
+                } else {
+                    array_push($advisorMailCc, $advisor->email);
+                }
+            }
+
+            Mail::to($advisorMailTo)->cc($advisorMailCc)->queue(new NotifyShipped($content));
+
+        }
 
         Flash::success('Send content to room ' . $room->name . ' successfully.');
 
@@ -172,6 +179,42 @@ class RoomController extends AppBaseController
             }
         }
         return redirect()->route('rooms.index');
+    }
+
+    public function randomPresentOrder($roomId, Request $request)
+    {
+        $year = $request->input('year');
+        $userInRoom = $this->roomUserRepository->findWhere(['room_id' => $roomId]);
+        if (count($userInRoom) < 1) {
+            Flash::error('Cannot Random Present Number because room is empty.');
+
+            return redirect(route('rooms.index'));
+        }
+        $userInRoom = $userInRoom->toArray();
+        $presents = $this->presentRepository->findWhere(['room_id' => $roomId]);
+        foreach ($presents as $key => $present) {
+            $userFirst = $userInRoom[0];
+            // remove with index
+            array_splice($userInRoom, 0, 1);
+            array_push($userInRoom, $userFirst);
+
+            foreach ($userInRoom as $key => $item) {
+                $this->userPresentRepository->create([
+                    'present_id' => $present->id,
+                    'user_id' => $item['user_id'],
+                    'room_id' => $item['room_id'],
+                    'no' => $key + 1,
+                ]);
+            }
+
+        }
+
+        Flash::success('Random Present Number Successfully.');
+        if ($year != '') {
+            return redirect(route('rooms.index', ['year' => $year]));
+        }
+
+        return redirect(route('rooms.index'));
     }
 
     public function randomPresentNumber($roomId, Request $request)

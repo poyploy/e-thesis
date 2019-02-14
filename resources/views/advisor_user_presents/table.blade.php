@@ -1,7 +1,7 @@
 <table class="table table-responsive" id="advisorUserPresents-table">
     <thead>
         <tr>
-            <th>รหัส</th>
+            {{-- <th>รหัส</th> --}}
             <th>ห้องจุลนิพนธ์</th>
             <th>ปีการศึกษา</th>
             <th colspan="3">Action</th>
@@ -10,7 +10,7 @@
     <tbody>
     @foreach($roomAds as $roomAd)
         <tr>
-            <td>{!! $roomAd->room_id !!}</td>
+            {{-- <td>{!! $roomAd->room_id !!}</td> --}}
             <td>{!! $roomAd->room->name !!}</td>
             <td>{!! $roomAd->room->year !!}</td>
             <td>

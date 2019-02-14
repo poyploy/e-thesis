@@ -15,7 +15,7 @@
                 <table class="table table-responsive" id="userPresents-table">
                     <thead>
                         <tr>
-                            <th>รหัส</th>
+                            {{-- <th>รหัส</th> --}}
                             <th>ครั้งที่นำเสนอ</th>
                             <th>ไฟล์</th>
                             <th>วัน/เวลา</th>
@@ -25,7 +25,7 @@
                     <tbody>
                         @foreach($files as $file)
                         <tr>
-                            <td>{!! $file->sequence_id !!}</td>
+                            {{-- <td>{!! $file->sequence_id !!}</td> --}}
                             <td>{!! $file->sequence->description !!}</td>
                             <td>{{ $file->file }}</td>
                             <td>{!! $file->created_at !!}</td>

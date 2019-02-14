@@ -1,8 +1,8 @@
 <table class="table table-responsive" id="uploadFiles-table">
     <thead>
         <tr>
-            <th>รหัสผู้ใช้งาน</th>
-            <th>ครั้งที่</th>
+            {{-- <th>รหัสผู้ใช้งาน</th> --}}
+            <th>ครั้งที่นำเสนอ</th>
             <th>ไฟล์</th>
             <th>รหัสประจำตัวนักศึกษา</th>
             <th colspan="3">Action</th>
@@ -11,8 +11,8 @@
     <tbody>
     @foreach($uploadFiles as $uploadFile)
         <tr>
-            <td>{!! $uploadFile->user_id !!}</td>
-            <td>{!! $uploadFile->sequence_id !!}</td>
+            {{-- <td>{!! $uploadFile->user_id !!}</td> --}}
+            <td>{!! $uploadFile->sequence->description !!}</td>
             <td><a target="_blank" href="{{ asset('storage'.$uploadFile->file) }}" >{!! $uploadFile->file !!}</a></td>
             <td>{!! $uploadFile->student_id !!}</td>
             <td>
