@@ -5,6 +5,7 @@
             <th>ครั้งที่นำเสนอ</th>
             <th>ไฟล์</th>
             <th>รหัสประจำตัวนักศึกษา</th>
+            <th>วัน-เวลา</th>
             <th colspan="3">Action</th>
         </tr>
     </thead>
@@ -15,6 +16,7 @@
             <td>{!! $uploadFile->sequence->description !!}</td>
             <td><a target="_blank" href="{{ asset('storage'.$uploadFile->file) }}" >{!! $uploadFile->file !!}</a></td>
             <td>{!! $uploadFile->student_id !!}</td>
+            <td>{!! $uploadFile->created_at !!}</td>
             <td>
                 {!! Form::open(['route' => ['uploadFiles.destroy', $uploadFile->id], 'method' => 'delete']) !!}
                 <div class='btn-group'>

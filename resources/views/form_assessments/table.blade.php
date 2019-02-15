@@ -1,7 +1,7 @@
 <table class="table table-responsive" id="formAssessments-table">
     <thead>
         <tr>
-            <th>ครั้งที่ 1</th>
+            <th>ครั้งที่นำเสนอ</th>
             <th>หัวข้อในการตรวจ</th>
             <th>คะแนนเต็ม</th>
             <th colspan="3">Action</th>

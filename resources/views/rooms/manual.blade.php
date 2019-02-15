@@ -26,6 +26,7 @@
     <div class="box box-primary">
         <div class="box-body">
             <h3 style="font-family: 'Kanit', sans-serif;">รายชื่อนักศึกษา</h3>
+                {!! Form::label('room', 'กลุ่มห้องจุลนิพนธ์ :') !!} {{$room->name}}<br>
             <div class="row">
                 <table class="table table-responsive" id="users-room-table">
                     <thead>

@@ -2,7 +2,7 @@
 
 @section('content')
 <section class="content-header">
-    <h1 class="pull-left" style="font-family: 'Kanit', sans-serif;">รายชื่ออาจารย์</h1>
+    <h1 class="pull-left" style="font-family: 'Kanit', sans-serif;">ข้อมูลตรวจสอบสถานะเช็คชื่อและการจ่ายเงิน (อาจารย์)</h1>
     <h1 class="pull-right">
         <a class="btn btn-primary pull-right" style="margin-top: -10px;margin-bottom: 5px" href="{!! route('userAdvisors.create') !!}">Add
             New</a>
@@ -20,7 +20,7 @@
     <div class="box box-primary">
         @if(!empty($room))
         <section class="content-header">
-            <h4 class="pull-left" style="font-family: 'Kanit', sans-serif;">ห้องจุลนิพนธ์ : <b>{{ $room->name }}</b></h5>
+            <h4 class="pull-left" style="font-family: 'Kanit', sans-serif;">กลุ่มห้องจุลนิพนธ์ : <b>{{ $room->name }}</b></h5>
         </section>
         @endif
         <br>
@@ -38,7 +38,7 @@
                                 <th>ปีการศึกษา</th>
                             <th class="text-center">สถานะเช็คชื่อ</th>
                             <th class="text-center">สถานะการจ่ายเงิน</th>
-                                <th>Action</th>
+                                <th>สรุปยอดเงิน</th>
                             </tr>
                         </thead>
                         <tbody>

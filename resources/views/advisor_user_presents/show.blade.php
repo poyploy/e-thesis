@@ -3,7 +3,7 @@
 @section('content')
     <section class="content-header">
         <h1 style="font-family: 'Kanit', sans-serif;">
-            รายละเอียดการนำเสนอ
+            รายละเอียดการนำเสนอทั้งหมด
         </h1>
     </section>
     <div class="content">

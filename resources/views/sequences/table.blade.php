@@ -16,7 +16,7 @@
             {{-- <td>{!! $sequence->id !!}</td> --}}
             <td>{!! $sequence->year !!}</td>
             <td>{!! $sequence->description !!}</td>
-            <td>{!! $sequence->date_time !!}</td>
+            <td>{!! $sequence->updated_at !!}</td>
             <td>{!! $sequence->uploadfile_status == 0 ? "close":"open"  !!}</td>
             <td>
                 {!! Form::open(['route' => ['sequences.destroy', $sequence->id], 'method' => 'delete']) !!}

@@ -72,10 +72,10 @@
              
                 <!-- Present Id Field -->
                 <div class="form-group col-sm-6">
-                    {!! Form::label('present_id', 'Present :') !!}
-                    <p>Present term {{ $present->sequence->term }} </p>
-                    <p>Present date {{ $present->sequence->date_time }} </p>
-                    <p>Present name {{ $present->sequence->description }} </p>
+                    {!! Form::label('#') !!}
+                    <p>เทอมที่นำเสนอ : {{ $present->sequence->term }} </p>
+                    <p>วัน-เวลา : {{ $present->sequence->date_time }} </p>
+                    <p>ครั้งที่นำเสนอ : {{ $present->sequence->description }} </p>
                 </div>
 
                 <!-- Submit Field -->
