@@ -20,9 +20,9 @@
                         <thead>
                             <tr>
                                 <td>#</td>
-                                <td>title</td>
-                                <td>max score</td>
-                                <td>value</td>
+                                <td>หัวข้อในการตรวจ</td>
+                                <td>คะแนนเต็ม</td>
+                                <td>ให้คะแนน</td>
                             </tr>
                         </thead>
                         <tbody>
@@ -58,10 +58,10 @@
 
                 <!-- User Id Field -->
                 <div class="form-group col-sm-6">
-                    <p>student name: {{ $user->user->name_TH}} {{$user->user->surname_TH}}</p>
+                    <br><p><b>ชื่อ-นามสกุล: {{ $user->user->name_TH}} {{$user->user->surname_TH}}</p>
                 </div>
 
-
+               
                 <!-- Present Id Field -->
                 <div class="form-group col-sm-6">
                     {!! Form::hidden('user_id', $user->user_id, ['class' => 'form-control']) !!}
@@ -69,6 +69,7 @@
                     {!! Form::hidden('sequence_id', $present->sequence_id, ['class' => 'form-control']) !!}
                 </div>
 
+             
                 <!-- Present Id Field -->
                 <div class="form-group col-sm-6">
                     {!! Form::label('present_id', 'Present :') !!}
