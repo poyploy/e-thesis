@@ -3,7 +3,7 @@
     <thead>
         <tr>
             <th style="width:5%">Advisor Id</th>
-            <th style="width:10%">ชื่อ</th>
+            <th style="width:15%">ชื่อ</th>
             <th style="width:15%">นามสกุล</th>
             <th>อีเมล์</th>
             {{-- <th>Room Id</th> --}}

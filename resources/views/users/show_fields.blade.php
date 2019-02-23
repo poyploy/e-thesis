@@ -6,33 +6,39 @@
 
 <!-- Name Field -->
 <div class="form-group">
-    {!! Form::label('name_TH', 'Name:') !!}
+    {!! Form::label('name_TH', 'ชื่อ:') !!}
     <p>{!! $user->name_TH !!}</p>
+</div>
+
+<!-- Surname Field -->
+<div class="form-group">
+    {!! Form::label('surname_TH', 'นามสกุล:') !!}
+    <p>{!! $user->surname_TH !!}</p>
 </div>
 
 <!-- Email Field -->
 <div class="form-group">
-    {!! Form::label('email', 'Email:') !!}
+    {!! Form::label('email', 'อีเมล์:') !!}
     <p>{!! $user->email !!}</p>
 </div>
 
 <!-- Email Verified At Field -->
 <div class="form-group">
-    {!! Form::label('email_verified_at', 'Email Verified At:') !!}
+    {!! Form::label('email_verified_at', 'วัน-เวลา:') !!}
     <p>{!! $user->email_verified_at !!}</p>
 </div>
 
 <!-- Password Field -->
-<div class="form-group">
+{{-- <div class="form-group">
     {!! Form::label('password', 'Password:') !!}
     <p>{!! $user->password !!}</p>
-</div>
+</div> --}}
 
 <!-- Remember Token Field -->
-<div class="form-group">
+{{-- <div class="form-group">
     {!! Form::label('remember_token', 'Remember Token:') !!}
     <p>{!! $user->remember_token !!}</p>
-</div>
+</div> --}}
 
 <!-- Created At Field -->
 <div class="form-group">

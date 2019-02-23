@@ -23,6 +23,8 @@
         {!! Form::label('count', 'ครั้งที่เข้าพบ :') !!}
         {!! Form::radio('count',1, true) !!} ครั้งที่ 1
         {!! Form::radio('count',2, false) !!} ครั้งที่ 2
+        {!! Form::radio('count',3, false) !!} ครั้งที่ 3
+        {!! Form::radio('count',4, false) !!} ครั้งที่ 4
     </div>
 
 

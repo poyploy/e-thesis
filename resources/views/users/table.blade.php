@@ -2,6 +2,7 @@
     <table class="table table-responsive" id="users-table">
     <thead>
         <tr><th>Id</th>
+            <th>รหัสประจำตัวนักศึกษา</th>
             <th width="20%">ชื่อ</th>
             <th width="20%">นามสกุล</th>
             <th width="20%">อีเมล์</th>
@@ -11,7 +12,8 @@
     </thead>
     <tbody>
     @foreach($users as $user)
-        <tr>  <td>{!! $user->id !!}</td>
+        <tr><td>{!! $user->id !!}</td>
+            <td>{!! $user->student_id !!}</td>
             <td>{!! $user->name_TH !!}</td>
             <td>{!! $user->surname_TH !!}</td>
             <td>{!! $user->email !!}</td>

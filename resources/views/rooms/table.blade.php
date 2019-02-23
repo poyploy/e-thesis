@@ -28,7 +28,7 @@
             {{-- <th>Num</th> --}}
             <th>จำนวนนักศึกษา</th>
             <th>ปีการศึกษา</th>
-            <th>สถานะ</th>
+            <th>สถานะห้อง</th>
             {{-- <th>UserPresents</th> --}}
             <th>Action</th>
         </tr>

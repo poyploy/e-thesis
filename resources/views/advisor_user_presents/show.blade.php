@@ -15,6 +15,7 @@
                             <thead>
                                 <tr>
                                     {{-- <th>รหัส</th> --}}
+                                    <th>ครั้งที่นำเสนอ เทอม/ครั้งที่</th>
                                     <th>วัน-เวลา</th>
                                     {{-- <th>รหัสห้อง</th> --}}
                                     <th>ห้องจุลนิพนธ์</th>
@@ -25,6 +26,7 @@
                             @foreach($presents as $present)
                                 <tr>
                                     {{-- <td>{!! $present->id !!}</td> --}}
+                                    <td>{{ $present->sequence->description}}</td>
                                     <td>{!! $present->date !!}</td>
                                     {{-- <td>{!! $present->id !!}</td> --}}
                                     <td>{!! $present->room->name !!}</td>

@@ -3,7 +3,7 @@
 @section('content')
     <section class="content-header">
         <h1 style="font-family: 'Kanit', sans-serif;">
-            ส่งการแจ้งเตือน
+            แก้ไขกลุ่มห้องจุลนิพนธ์
         </h1>
    </section>
    <div class="content">

@@ -6,14 +6,26 @@
 
 <!-- User Id Field -->
 <div class="form-group">
-    {!! Form::label('user_id', 'User Id:') !!}
+    {!! Form::label('user_id', 'Advisor Id:') !!}
     <p>{!! $userAdvisor->user_id !!}</p>
+</div>
+
+<!-- Name Field -->
+<div class="form-group">
+    {!! Form::label('name_TH', 'ชื่อ:') !!}
+    <p>{!! $userAdvisor->user->name_TH !!}</p>
+</div>
+
+<!-- Surname Field -->
+<div class="form-group">
+    {!! Form::label('surname_TH', 'นามสกุล:') !!}
+    <p>{!! $userAdvisor->user->surname_TH !!}</p>
 </div>
 
 <!-- Room Id Field -->
 <div class="form-group">
-    {!! Form::label('room_id', 'Room Id:') !!}
-    <p>{!! $userAdvisor->room_id !!}</p>
+    {!! Form::label('room_id', 'กลุ่มห้องจุลนิพนธ์:') !!}
+    <p>{!! $userAdvisor->room->name !!}</p>
 </div>
 
 <!-- Created At Field -->

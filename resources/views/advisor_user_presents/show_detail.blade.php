@@ -3,7 +3,7 @@
 @section('content')
 <section class="content-header">
     <h1 style="font-family: 'Kanit', sans-serif;">
-        ประเมินการนำเสนอ
+        ประเมินการนำเสนอ 
     </h1>
 </section>
 <div class="content">
@@ -19,9 +19,9 @@
                         <tr>
                             <th>ลำดับการนำเสนอ</th>
                             {{-- <th>รหัส</th> --}}
-                            <th>ครั้งที่นำเสนอ</th>
+                            <th>ครั้งที่นำเสนอ เทอม/ครั้งที่</th>
                             {{-- <th>รหัสห้อง</th> --}}
-                            <th>ห้องจุลนิพนธ์</th>
+                            {{-- <th>ห้องจุลนิพนธ์</th> --}}
                             <th>รหัสประจำตัวนักศึกษา</th>
                             <th>ชื่อ-สกุล</th>
                             <th>ประเมิน</th>
@@ -34,7 +34,7 @@
                             {{-- <td>{!! $userPresent->present_id !!}</td> --}}
                             <td>{{ $userPresent->present->sequence->description}}</td>
                             {{-- <td>{!! $userPresent->room_id !!}</td> --}}
-                            <td>{!! $userPresent->room->name !!}</td>
+                            {{-- <td>{!! $userPresent->room->name !!}</td> --}}
                             <td>{!! $userPresent->user->student_id !!}</td>
                             <td>{!! $userPresent->user->name_TH.' '.$userPresent->user->surname_TH !!}</td>
                             <td>

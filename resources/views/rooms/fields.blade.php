@@ -1,18 +1,18 @@
 <!-- Name Field -->
 <div class="form-group col-sm-6">
-    {!! Form::label('name', 'Name:') !!}
+    {!! Form::label('name', 'กลุ่มห้องจุลนิพนธ์:') !!}
     {!! Form::text('name', null, ['class' => 'form-control']) !!}
 </div>
 
 <!-- Year Field -->
 @if(empty($sequence))
 <div class="form-group col-sm-6">
-    {!! Form::label('year', 'Year:') !!}
+    {!! Form::label('year', 'ปีการศึกษา:') !!}
     {!! Form::select('year', $years, null , ['class' => 'form-control select2']) !!}
 </div>
 @else
 <div class="form-group col-sm-6">
-        {!! Form::label('year', 'Year:') !!}
+        {!! Form::label('year', 'ปีการศึกษา:') !!}
         {!! Form::select('year', $years, $room->year , ['class' => 'form-control select2']) !!}
     </div>
 @endif
@@ -26,19 +26,19 @@
 @if(empty($room))
 <!-- Num Field -->
 <div class="form-group col-sm-6">
-        {!! Form::label('status', 'Num:') !!}
+        {!! Form::label('status', 'สถานะห้อง:') !!}
         {!! Form::select('status',[0=>'INACTIVE', 1 =>'ACTIVE'], null, ['class' => 'form-control']) !!}
     </div>
 @else
 <div class="form-group col-sm-6">
-        {!! Form::label('status', 'Num:') !!}
+        {!! Form::label('status', 'สถานะห้อง:') !!}
         {!! Form::select('status',[0=>'INACTIVE', 1 =>'ACTIVE'], $room->status, ['class' => 'form-control']) !!}
     </div>
 @endif
 
 <!-- Max Student Field -->
 <div class="form-group col-sm-6">
-    {!! Form::label('max_student', 'Max Student:') !!}
+    {!! Form::label('max_student', 'จำนวนนักศึกษา:') !!}
     {!! Form::number('max_student', null, ['class' => 'form-control']) !!}
 </div>
 

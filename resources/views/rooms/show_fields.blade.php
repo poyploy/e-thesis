@@ -6,19 +6,19 @@
 
 <!-- Name Field -->
 <div class="form-group">
-    {!! Form::label('name', 'Name:') !!}
+    {!! Form::label('name', 'กลุ่มห้องจุลนิพนธ์:') !!}
     <p>{!! $room->name !!}</p>
 </div>
 
 <!-- Num Field -->
-<div class="form-group">
+{{-- <div class="form-group">
     {!! Form::label('num', 'Num:') !!}
     <p>{!! $room->num !!}</p>
-</div>
+</div> --}}
 
 <!-- Max Student Field -->
 <div class="form-group">
-    {!! Form::label('max_student', 'Max Student:') !!}
+    {!! Form::label('max_student', 'จำนวนนักศึกษา:') !!}
     <p>{!! $room->max_student !!}</p>
 </div>
 
@@ -41,7 +41,7 @@
 </div>
 @if(count($room->roomUsers)>0)
 <div class="form-group">
-        {!! Form::label('', 'Student List:') !!}
+        {!! Form::label('', 'รายชื่อนักศึกษา:') !!}
         @foreach($room->roomUsers as $user_room)
         <p>{!! $user_room->user->id !!} {!! $user_room->user->name_TH !!} {!! $user_room->user->surname_TH !!}</p>
         @endforeach
