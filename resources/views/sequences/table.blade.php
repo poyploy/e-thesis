@@ -6,7 +6,9 @@
             <th>ปีการศึกษา</th>
             <th>ครั้งที่นำเสนอ เทอม/ครั้ง</th>
             <th>วัน-เวลา</th>
-            <th>สถานะการอัปโหลด</th>
+            {{-- <th>สถานะการอัปโหลด</th> --}}
+            <th>วันที่เปิดการอัปโหลดไฟล์</th>
+            <th>วันสิ้นสุดการอัปโหลดไฟล์</th>
             <th>Action</th>
         </tr>
     </thead>
@@ -17,7 +19,9 @@
             <td>{!! $sequence->year !!}</td>
             <td>{!! $sequence->description !!}</td>
             <td>{!! $sequence->updated_at !!}</td>
-            <td>{!! $sequence->uploadfile_status == 0 ? "close":"open"  !!}</td>
+            <td>{!! $sequence->start_at !!}</td>
+            <td>{!! $sequence->end_at !!}</td>
+            {{-- <td>{!! $sequence->uploadfile_status == 0 ? "close":"open"  !!}</td> --}}
             <td>
                 {!! Form::open(['route' => ['sequences.destroy', $sequence->id], 'method' => 'delete']) !!}
                 <div class='btn-group'>

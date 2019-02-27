@@ -102,7 +102,15 @@ class Basic_informationController extends AppBaseController
             $roomUser = $this->roomUserRepository->findWhere(['user_id' => $auth->id])->first();
             $roomInfo = $roomUser->room;
             $userAdvisors = $this->userAdvisorRepository->findWhere(['room_id' => $roomInfo->id]);
+            
+            $advisers = $userAdvisors->mapWithKeys(function ($item) {
+                $name_TH = $item->user->name_TH;
+                $surname_TH = $item->user->surname_TH;
+                $id = $item->user->id;
+                return [$id => $name_TH.' '.$surname_TH ];
+            });
             // dd( $userAdvisors);
+
             return view('basic_informations.show')
                 ->with('roomInfo', $roomInfo)
                 ->with('userAdvisors', $userAdvisors)

@@ -79,17 +79,50 @@ class PresentController extends AppBaseController
             return redirect(route('presents.advisor', [$room, $present]));
         }
 
-        if ($check->pay_status == 1){
+        if ($check->pay_status == 1) {
             Flash::error('This user is already pay existing');
 
             return redirect(route('presents.advisor', [$room, $present]));
         }
 
-        $this->checkPresentRepository->update(['pay_status'=>1],$check->id);
+        // $this->checkPresentRepository->update(['pay_status'=>1],$check->id);
+
+        // Flash::success('This user is pay successfully');
+
+        // return redirect(route('presents.advisor', [$room, $present]));
+        return view('presents.upload_slip')
+            ->with('user', $check->user)
+            ->with('check', $check->id)
+            ->with('present', $check->present);
+    }
+
+    public function storePaid($check, Request $request)
+    {
+        $check = $this->checkPresentRepository->findWhere(['id' => $check])->first();
+        if (empty($check)) {
+            Flash::error('Check not found');
+
+            return redirect(route('presents.index'));
+        }
+
+        if ($check->pay_status == 1) {
+            Flash::error('This user is already pay existing');
+
+            return redirect(route('presents.advisor', [$check->present->room_id, $check->present_id]));
+        }
+
+        // save file
+        $path = $request->file('slip')->store('public/slip');
+        $fileLocation = str_replace("public", "", $path);
+
+        $this->checkPresentRepository->update(['pay_status' => 1, 'slip' => $fileLocation], $check->id);
 
         Flash::success('This user is pay successfully');
 
-        return redirect(route('presents.advisor', [$room, $present]));
+        return redirect(route('presents.advisor', [$check->present->room_id, $check->present_id]));
+        // return view('presents.upload_slip')
+        //     ->with('user', $check->user)
+        //     ->with('present', $check->present);
     }
 
     public function qrcode($id, Request $request)

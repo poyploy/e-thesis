@@ -53,6 +53,7 @@ Route::group(['middleware' => ['login']], function () {
 //presents.advisor.paid
     Route::get('/presents/rooms/{id}/present/{present}/advisor', 'PresentController@advisor')->name('presents.advisor');
     Route::get('/presents/rooms/{id}/present/{present}/advisor/paid/{check}', 'PresentController@paid')->name('presents.advisor.paid');
+    Route::post('/presents/paid/{id}/update', 'PresentController@storePaid')->name('presents.advisor.storePaid');
 
     Route::resource('roomUsers', 'RoomUserController');
 
@@ -79,8 +80,9 @@ Route::group(['middleware' => ['login']], function () {
     Route::resource('assessments', 'AssessmentController');
     // Route::resource('assessment', 'AssessmentController');
     Route::get('/assessments/users/{users}/presents/{present}', 'AssessmentController@score')->name('assessments.score');
+    Route::get('/assessments/users/{users}/presents/{present}/edit', 'AssessmentController@scoreEdit')->name('assessments.scoreEdit');
     Route::post('/assessments/users/storeScore', 'AssessmentController@storeScore')->name('assessments.storeScore');
-
+    Route::post('/assessments/users/updateScore', 'AssessmentController@updateScore')->name('assessments.updateScore');
     Route::resource('userPresents', 'UserPresentController');
 
     Route::resource('advisorUserPresents', 'AdvisorUserPresentController');

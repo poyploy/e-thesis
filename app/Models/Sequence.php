@@ -35,7 +35,9 @@ class Sequence extends Model
         'year',
         'date_time',
         'description',
-        'uploadfile_status'
+        'uploadfile_status',
+        'start_at',
+        'end_at'
     ];
 
     /**

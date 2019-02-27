@@ -40,6 +40,21 @@
     {!! Form::text('date_time', null, ['class' => 'form-control date-picker']) !!}
 </div>
 
+
+<!-- Date Time Field -->
+<div class="form-group col-sm-6">
+    {!! Form::label('start_at', 'วันที่เริ่มอัปโหลดไฟล์ :') !!}
+    {!! Form::text('start_at', null, ['class' => 'form-control date-picker']) !!}
+</div>
+
+
+
+<!-- Date Time Field -->
+<div class="form-group col-sm-6">
+    {!! Form::label('end_at', 'วันสุดท้ายที่อัปโหลดไฟล์ :') !!}
+    {!! Form::text('end_at', null, ['class' => 'form-control date-picker']) !!}
+</div>
+
 <!-- Submit Field -->
 <div class="form-group col-sm-12">
     {!! Form::submit('Save', ['class' => 'btn btn-primary']) !!}

@@ -8,6 +8,7 @@ use App\Http\Requests\UpdateUploadFileRequest;
 use App\Repositories\SequenceRepository;
 use App\Repositories\UploadFileRepository;
 use Flash;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Prettus\Repository\Criteria\RequestCriteria;
@@ -51,7 +52,12 @@ class UploadFileController extends AppBaseController
      */
     public function create()
     {
-        $sequences = $this->sequenceRepository->findWhere(['uploadfile_status' => '1']);
+       $now =  Carbon::now()->toDateTimeString();
+        $sequences = $this->sequenceRepository->findWhere([
+            // ['uploadfile_status' ,'=' ,'1'],
+            ['end_at' ,'>=' ,$now],
+            ['start_at' ,'<=' ,$now],
+        ]);
 
         $sequences = $sequences->mapWithKeys(function ($item) {
             return [$item['id'] => $item['description']];

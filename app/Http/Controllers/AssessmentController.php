@@ -90,6 +90,40 @@ class AssessmentController extends AppBaseController
      * @param Request $request
      * @return Response
      */
+    public function updateScore(Request $request)
+    {
+        $input = $request->all();
+        $present = $this->presentRepository->findWithoutFail($input['present_id']);
+        if (empty($present)) {
+            Flash::error('Present not found.');
+            return back();
+        }
+        $auth = Auth::user();
+
+        $input['room_id'] = $present->room_id;
+        $input['teacher_id'] = $auth->id;
+        $values = $input['form_value'];
+        $formKeys = $input['form_keys'];
+
+        foreach ($formKeys as $key => $formId) {
+            $value = $values[$formId];
+            $input['assessment_score1'] = $value;
+            $input['sequence_id'] = $present->sequence_id;
+            $input['form_id'] = $formId;
+            $this->assessmentRepository->update($input, $key);
+        }
+
+        Flash::success('Assessment saved successfully.');
+        return redirect()->route('advisorUserPresents.showDetail', [$present->id, $present->room_id]);
+
+    }
+
+    /**
+     * Display a listing of the Assessment.
+     *
+     * @param Request $request
+     * @return Response
+     */
     public function score($userId, $presentId, Request $request)
     {
         $auth = Auth::user();
@@ -114,6 +148,40 @@ class AssessmentController extends AppBaseController
 
         return view('assessments.score')
             ->with('form', $form)
+            ->with('present', $present)
+            ->with('user', $user);
+    }
+
+    /**
+     * Display a listing of the Assessment.
+     *
+     * @param Request $request
+     * @return Response
+     */
+    public function scoreEdit($userId, $presentId, Request $request)
+    {
+        $auth = Auth::user();
+
+        $assessments = $this->assessmentRepository
+            ->findWhere([
+                'user_id' => $userId,
+                'present_id' => $presentId,
+                'teacher_id' => $auth->id,
+            ]);
+
+        $assessments = $assessments->groupBy('form_id');
+
+        $present = $this->presentRepository->findWithoutFail($presentId);
+
+        $form = $this->formAssessmentRepository->findWhere(['sequence_id' => $present->sequence_id]);
+
+        $user = $this->basicInformationRepository->findWhere(['user_id' => $userId])->first();
+
+
+        // dd($assessments[1]->first()->assessment_score1);
+        return view('assessments.score')
+            ->with('form', $form)
+            ->with('assessments', $assessments)
             ->with('present', $present)
             ->with('user', $user);
     }

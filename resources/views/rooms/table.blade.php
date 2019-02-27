@@ -26,6 +26,7 @@
         <tr>
             <th>กลุ่มห้องจุลนิพนธ์</th>
             {{-- <th>Num</th> --}}
+            <th>จำนวนเต็มนักศึกษา</th>
             <th>จำนวนนักศึกษา</th>
             <th>ปีการศึกษา</th>
             <th>สถานะห้อง</th>
@@ -39,6 +40,7 @@
             <td>{!! $room->name !!}</td>
             {{-- <td>{!! $room->num !!}</td> --}}
             <td>{!! $room->max_student !!}</td>
+            <td>{!! $room->roomUsers->count() !!}</td>
             <td>{!! $room->year !!}</td>
             <td>{!! $room->status === 1 ? 'ACTIVE' : 'INACTIVE' !!}</td>
         {{-- <td>{{ $room->userPresent->count() }}</td> --}}

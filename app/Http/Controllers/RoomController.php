@@ -399,7 +399,7 @@ class RoomController extends AppBaseController
         for ($i = $Year; $i < $Year + 10; $i++) {
             $years['' . $i] = $i;
         }
-        // dd($rooms);
+        // dd($rooms->first()->roomUsers->count());
         return view('rooms.index')
             ->with('rooms', $rooms)
             ->with('years', $years)

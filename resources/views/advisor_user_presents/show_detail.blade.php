@@ -42,8 +42,8 @@
                                 <a href=" {{ route('assessments.score', [$userPresent->user_id, $userPresent->present_id])  }}"
                                     class='btn btn-success btn-xs'><i class="glyphicon glyphicon-ok"></i></a>
                                 @elseif($userPresent->assessment && $userPresent->assessmented)  
-                                <a href="#"
-                                        class='btn btn-default btn-xs disabled'><i class="glyphicon glyphicon-ok"></i></a>  
+                                <a href=" {{ route('assessments.scoreEdit', [$userPresent->user_id, $userPresent->present_id])  }}"
+                                        class='btn btn-warning btn-xs'><i class="glyphicon glyphicon-pencil"></i></a> 
                                 @endif
 
                             </td>

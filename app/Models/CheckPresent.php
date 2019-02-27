@@ -42,7 +42,8 @@ class CheckPresent extends Model
         'check_status',
         'present_id',
         'user_id',
-        'pay_status'
+        'pay_status',
+        'slip'
     ];
 
     /**

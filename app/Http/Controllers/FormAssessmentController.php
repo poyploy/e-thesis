@@ -42,7 +42,8 @@ class FormAssessmentController extends AppBaseController
     {
         $this->formAssessmentRepository->pushCriteria(new RequestCriteria($request));
         $formAssessments = $this->formAssessmentRepository->all();
-
+        $formAssessments = $formAssessments->groupBy('sequence_id');
+        // dd($formAssessments->groupBy('sequence_id'));
         return view('form_assessments.index')
             ->with('formAssessments', $formAssessments);
     }

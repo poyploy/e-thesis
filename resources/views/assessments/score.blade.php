@@ -12,7 +12,7 @@
 
         <div class="box-body">
             <div class="row">
-                {!! Form::open(['route' => 'assessments.storeScore']) !!}
+                {!! Form::open(['route' => 'assessments.updateScore']) !!}
 
                 @if(!empty($form))
                 <div class="col-sm-12">
@@ -26,7 +26,13 @@
                             </tr>
                         </thead>
                         <tbody>
+                            @php
+                                $totalpoint = 0;
+                            @endphp
                             @foreach ($form as $key => $item)
+                            @php
+                                 $totalpoint += $item->max;
+                            @endphp
                             <tr>
                                 <td>{{ $key+1 }}</td>
                                 <td>
@@ -39,16 +45,55 @@
                                 </td>
                                 <td>{{$item->max}}</td>
                                 <td>
-                                <input type="hidden" name="form_keys[]" value="{{$item->id}}">
+                                    
+                                @if (!empty($assessments))
+                                    <input type="hidden" name="form_keys[{{  $assessments[$item->id]->first()->id }}]" value="{{$item->id}}">
+                                    {!! Form::number('form_value['.$item->id.']', $assessments[$item->id]->first()->assessment_score1, ['class' => 'form-control','max' => $item->max]) !!}
+                                @else
+                                    <input type="hidden" name="form_keys[]" value="{{$item->id}}">
                                     {!! Form::number('form_value['.$item->id.']', null, ['class' => 'form-control','max' => $item->max]) !!}
+                                @endif
+                                
+                            
                                 </td>
                             </tr>
                             @endforeach
+                            <tr>
+                                <td></td>
+                                <td></td>
+                                <td><b>{{ $totalpoint }}</b></td>
+                                <td><b><span id="total_point"></span></b></td>
+                               
+                            </tr>
                         </tbody>
                     </table>
                 </div>
                 @endif
 
+                <script>
+                    total = 0 
+                    $("input[name*='form_value']").change(function(){
+                        getPoint();
+                    })
+
+                    @if (!empty($assessments)) 
+                        getPoint();
+                    @endif
+
+                    function getPoint() {
+                        total = 0 
+                        $("input[name*='form_keys']").each(function(item){
+                            var ele = $("input[name*='form_keys']")[item]
+                            var formId = $(ele).val()
+                            //   console.log(b)
+                            var point = $("input[name='form_value["+(formId)+"]']").val()
+                            if(point === "") point = 0
+                            total  += Number.parseInt(point)
+                        })
+                        // console.log('total_point' , total)
+                        $('#total_point').text(total)
+                    }
+                </script>
                 <!-- User Id Field -->
                 {{-- <div class="form-group col-sm-6">
                     {!! Form::label('user_id', 'User Id:') !!}
