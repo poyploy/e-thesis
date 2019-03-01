@@ -44,7 +44,7 @@
 
     <div class="clearfix"></div>
     <div class="box box-primary">
-        <div class="row">
+        <div class="row" style="font-family: 'Kanit', sans-serif;">
                 <div class="col-sm-3">
                         <div
                             class="bs-callout bs-callout-info"

@@ -1,12 +1,12 @@
 <!-- Title Field -->
 <div class="form-group col-sm-6">
-    {!! Form::label('title', 'Title:') !!}
+    {!! Form::label('title', 'หัวข้อ :') !!}
     {!! Form::text('title', null, ['class' => 'form-control']) !!}
 </div>
 
 <!-- Max Field -->
 <div class="form-group col-sm-6">
-    {!! Form::label('max', 'Max:') !!}
+    {!! Form::label('max', 'คะแนนเต็ม :') !!}
     {!! Form::number('max', null, ['class' => 'form-control']) !!}
 </div>
 

@@ -4,8 +4,8 @@
 <section class="content-header">
     <h1 class="pull-left" style="font-family: 'Kanit', sans-serif;">ข้อมูลตรวจสอบสถานะเช็คชื่อและการจ่ายเงิน (อาจารย์)</h1>
     <h1 class="pull-right">
-        <a class="btn btn-primary pull-right" style="margin-top: -10px;margin-bottom: 5px" href="{!! route('userAdvisors.create') !!}">Add
-            New</a>
+        {{-- <a class="btn btn-primary pull-right" style="margin-top: -10px;margin-bottom: 5px" href="{!! route('userAdvisors.create') !!}">Add
+            New</a> --}}
     </h1>
 </section>
 
@@ -36,9 +36,9 @@
                                 {{-- <th>Room Id</th> --}}
                                 <th>ห้องจุลนิพนธ์</th>
                                 <th>ปีการศึกษา</th>
-                            <th class="text-center">สถานะเช็คชื่อ</th>
-                            <th class="text-center">สถานะการจ่ายเงิน</th>
-                                <th>สรุปยอดเงิน</th>
+                                <th class="text-center">สถานะเช็คชื่อ</th>
+                                <th class="text-center">สถานะการชำระเงิน</th>
+                                <th>ชำระเงิน</th>
                             </tr>
                         </thead>
                         <tbody>

@@ -2,8 +2,8 @@
 
 @section('content')
     <section class="content-header">
-        <h1>
-            Form Assessment
+        <h1 style="font-family: 'Kanit', sans-serif;">
+            สร้างแบบฟอร์มการประเมิน
         </h1>
     </section>
     <div class="content">
