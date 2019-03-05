@@ -26,6 +26,7 @@ Route::post('/login', 'HomeController@store')->name('login');
 Route::get('/logout', 'HomeController@destroy')->name('logout');
 
 Route::get('/home', 'HomeController@index');
+Route::get('/pdf/advisor/{advisor}/year/{year}', 'PdfController@index')->name('pdf.index');
 
 Route::group(['middleware' => ['login']], function () {
     //

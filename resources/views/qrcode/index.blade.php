@@ -23,8 +23,7 @@
         <div class="box box-primary">
                 <div class="row">
                     <br><div class="col-sm-12" style="margin-left:2%">
-                    <form action="{{ route('qrcode.index') }}" method="GET">
-
+                    <form action="{{ route('qrcode.index') }}" method="GET" class="form-inline">
                         <div class="form-group">
                             <label for="">ปีการศึกษา</label>
                             <select name="year" id="">
@@ -34,6 +33,11 @@
                             </select>
                             <button>submit</button>
                         </div>
+                        @if (!empty($year))
+                        <div class="form-group" >
+                            <a class="btn" target="_blank" href="{{ route('pdf.index', [$auth->id, $year]) }}"><i class="glyphicon glyphicon-floppy-disk"></i></a>
+                        </div>
+                        @endif
                     </form>
                     </div>
                 </div>
