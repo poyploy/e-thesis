@@ -85,8 +85,8 @@ class PdfController extends Controller
         // dd($data);
         $pdf = PDF::loadView('pdf.index', $data);
         // return @$pdf->stream();
-        return $pdf->download('invoice.pdf');
-        // return view('pdf.index', $data);
+        // return $pdf->download('invoice.pdf');
+        return view('pdf.index', $data);
     }
 
     

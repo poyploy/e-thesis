@@ -47,20 +47,23 @@
 
 <body>
     <div class="titlepage" style="text-align: center; width:100%; ">
-    <h3>Advisor Report @ {{ $year + 543 }}</h3>
+    <h2>REPORT MONEY OF TEACHER </h2>
+    <h3>AT SILPAKORN UNIVERSITY {{ $year + 543 }}</h3>
     </div>
     <table width="100%">
         <tr height="150px">
             <td width="50%" style="line-height: 0.5em;">
-                <p>name:  ICT su #d#</p>
-                <p>address 12/52 </p>
-                <p>tel 086-000-0000</p>
-                <p>taxId 0000000000000000</p>
+                <p>Part: Silpakorn University,City Campus 
+                    <br><br><br>(Muang Thong Thani)</p>
+                <p>Address: 80 Popular Road,Banmai,
+                    <br><br><br>Pakkret,Nonthaburi 11120</p>
+                <p>Tel: 091-765-9890</p>
+                <p>Tax: 0-03259-4033</p>
 
             </td>
             <td align="right" style=" line-height: 0.5em;">
-                <p>ชื่ออาจารย์ {{ $auth->name_TH }} {{ $auth->surname_TH }}</p>
-                <p>อีเมล์ {{ $auth->email }}</p>
+                <p>ชื่อ-นามสกุล: {{ $auth->name_TH }} {{ $auth->surname_TH }}</p>
+                <p>อีเมล์: {{ $auth->email }}</p>
             </td>
         </tr>
     </table>
@@ -70,11 +73,13 @@
         <table width="100%">
             <thead>
                 <tr>
+                    -----------------------------------------------------------------------------------------------
+                <tr>
                     <td>
-                        ID
+                        Arrange
                     </td>
                     <td>
-                        Name
+                        Sequence Present (Term/Sequnce)
                     </td>
                     <td>
                         Count
@@ -82,25 +87,41 @@
                     <td>
                         Total
                     </td>
+                    
+                </tr>
                 </tr>
             </thead>
             <tbody>
                @foreach ($checkPresents as $item)
-               <tr>
+               <tr> 
                     <td>
-                        @
+                        #
                     </td>
                     <td>
-                        Name surname
+                        {!! $item->present->sequence->description !!}
                     </td>
                     <td>
                         Count
                     </td>
                     <td>
-                        500
+                        {!! $total !!}
                     </td>
                 </tr>
                @endforeach
+               <tr> 
+                    <td>
+                        #
+                    </td>
+                    <td>
+                        {!! $item->present->sequence->description !!}
+                    </td>
+                    <td>
+                        Count
+                    </td>
+                    <td>
+                        {!! $total !!}
+                    </td>
+                </tr>
                <tr>
                    <td colspan="3" align="right">grand total</td>
                     <td>{{ number_format($total) }}</td>

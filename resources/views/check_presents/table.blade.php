@@ -43,7 +43,7 @@
             margin: auto;
             display: block;
             width: 80%;
-            max-width: 700px;
+            max-width: 500px;
         }
 
         /* Caption of Modal Image */
@@ -143,10 +143,14 @@
             </td>
             {{-- {{dd($checkPresent->slip)}} --}}
             <td><img id="myImg" src="{{ asset('/storage/'.$checkPresent->slip) }}" alt="" width="50"></td>
-
+            
             <div id="myModal" class="modal">
-                <span class="close">dd</span>
+                
+                {{-- <span class="close"></span> --}}
                 <img class="modal-content" id="img01">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
                 <div id="caption"></div>
             </div>
             <td>
