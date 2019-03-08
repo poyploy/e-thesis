@@ -42,10 +42,35 @@
         div.titlepage {
             page: blank;
         }
+
+        .watermark {
+            height: 95%;
+            width: 90%;
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            right: 0;
+            left: 0;
+            background-repeat: repeat-y;
+            z-index: 9999;
+            opacity: 0.1;
+        }
+        .img-circle{
+            width: 70%;
+            height: auto;
+            padding-top: 30%;
+            padding-left: 20%; 
+            
+        }
+
     </style>
 </head>
 
 <body>
+    <div class="watermark" >
+        <img src="http://www.mum22.com/img/%E0%B8%A8%E0%B8%B4%E0%B8%A5%E0%B8%9B%E0%B8%B2%E0%B8%81%E0%B8%A3.png" class="img-circle"
+        alt="User Image"/>
+    </div>
     <div class="titlepage" style="text-align: center; width:100%; ">
     <h2>REPORT MONEY OF TEACHER </h2>
     <h3>AT SILPAKORN UNIVERSITY {{ $year + 543 }}</h3>
@@ -62,8 +87,8 @@
 
             </td>
             <td align="right" style=" line-height: 0.5em;">
-                <p>ชื่อ-นามสกุล: {{ $auth->name_TH }} {{ $auth->surname_TH }}</p>
-                <p>อีเมล์: {{ $auth->email }}</p>
+                <p>Name-Surname : {{ $auth->name_EN }} {{ $auth->surname_EN }}</p>
+                <p>E-mail : {{ $auth->email }}</p>
             </td>
         </tr>
     </table>
@@ -74,74 +99,79 @@
             <thead>
                 <tr>
                     -----------------------------------------------------------------------------------------------
+                    <td><b>
+                        Cost Advisor (student*500)
+                    </td>
                 <tr>
                     <td>
-                        Arrange
+                        Count Check Present : {{ number_format($checkPresentCount) }}
                     </td>
-                    <td>
-                        Sequence Present (Term/Sequnce)
-                    </td>
-                    <td>
-                        Count
-                    </td>
-                    <td>
-                        Total
-                    </td>
-                    
                 </tr>
                 </tr>
             </thead>
-            <tbody>
-               @foreach ($checkPresents as $item)
-               <tr> 
-                    <td>
-                        #
-                    </td>
-                    <td>
-                        {!! $item->present->sequence->description !!}
-                    </td>
-                    <td>
-                        Count
-                    </td>
-                    <td>
-                        {!! $total !!}
-                    </td>
-                </tr>
-               @endforeach
-               <tr> 
-                    <td>
-                        #
-                    </td>
-                    <td>
-                        {!! $item->present->sequence->description !!}
-                    </td>
-                    <td>
-                        Count
-                    </td>
-                    <td>
-                        {!! $total !!}
-                    </td>
-                </tr>
-               <tr>
-                   <td colspan="3" align="right">grand total</td>
-                    <td>{{ number_format($total) }}</td>
-                </tr>
-            </tbody>
+
+            {{-- <tr>
+                    <td>Count Check Present : </td>
+                    <td>{{ number_format($checkPresentCount) }}</td>
+            </tr> --}}
+
+            <br>
+            <table width="100%">
+                <thead>
+                        <td><b>
+                                Cost Check Present
+                        </td>
+                    <tr>
+                        -----------------------------------------------------------------------------------------------
+                    <tr>
+                        <td>
+                            Arrange
+                        </td>
+                        <td>
+                            Sequence Present (Term/Sequnce)
+                        </td>
+                        <td>
+                            Total
+                        </td>
+                        
+                    </tr>
+                    </tr>
+                </thead>
+                <tbody>
+                   @foreach ($checkPresents as $item)
+                   <tr> 
+                        <td>
+                            #
+                        </td>
+                        <td>
+                            {!! $item->present->sequence->description !!}
+                        </td>
+                        <td>
+                            {!! $total !!}
+                        </td>
+                    </tr>
+                   @endforeach
+                   <tr>
+                       <td colspan="3" align="right"> Grand total</td>
+                        <td>{{ number_format($total) }}</td>
+                    </tr>
+                </tbody>
             
-        </table>
+            </table>
 
     </div>
+    </table>
 
     <!-- <div class="chapter"></div> -->
     <br>
     <br>
     <table>
         <tr>
-            <td>count Present : </td>
+            <td>Count Check Present : </td>
             <td>{{ number_format($checkPresentCount) }}</td>
         </tr>
         <tr>
-            <td>count payment Present : </td>
+            <td>Count Payment Present : </td>
             <td>{{ number_format($checkPresentPayCount) }}</td>
         </tr>
     </table>

@@ -19,7 +19,7 @@
 <!-- Max Student Field -->
 <div class="form-group">
     {!! Form::label('max_student', 'จำนวนนักศึกษา:') !!}
-    <p>{!! $room->max_student !!}</p>
+    <p>{!! $room->roomUsers->count() !!}</p>
 </div>
 
 <!-- Created At Field -->
