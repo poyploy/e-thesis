@@ -55,7 +55,7 @@
                         <a href="{!! route('rooms.manual', [$room->id]) !!}" class='btn btn-info btn-xs' style="background-color:hotpink"><i
                             class="glyphicon glyphicon-wrench"></i></a>
                         {{-- @endif --}}
-                        <a href="{!! route('rooms.email', [$room->id]) !!}" class='btn btn-success btn-xs'><i class="glyphicon glyphicon-envelope"></i></a>
+                        {{-- <a href="{!! route('rooms.email', [$room->id]) !!}" class='btn btn-success btn-xs'><i class="glyphicon glyphicon-envelope"></i></a> --}}
                         <a href="{!! route('userAdvisors.main', [$room->id]) !!}" class='btn btn-info btn-xs'><i class="glyphicon glyphicon-user"></i></a>
                         <a href="{!! route('rooms.show', [$room->id]) !!}" class='btn btn-default btn-xs'><i class="glyphicon glyphicon-eye-open"></i></a>
                         <a href="{!! route('rooms.edit', [$room->id]) !!}" class='btn btn-default btn-xs'><i class="glyphicon glyphicon-edit"></i></a>

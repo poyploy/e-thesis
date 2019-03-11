@@ -214,8 +214,12 @@ class FormAssessmentController extends AppBaseController
 
             return redirect(route('formAssessments.index'));
         }
+        $sequences = $this->sequenceRepository->all();
+        $sequences = $sequences->mapWithKeys(function ($item) {
+            return [$item['id'] => $item['year'] . ' ' . $item['term'] . ' ' . $item['description']];
+        });
 
-        return view('form_assessments.edit')->with('formAssessment', $formAssessment);
+        return view('form_assessments.edit')->with('sequences', $sequences)->with('formAssessment', $formAssessment);
     }
 
     /**

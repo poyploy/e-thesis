@@ -76,15 +76,44 @@ class RoomController extends AppBaseController
     public function emailSend($roomId, Request $request)
     {
         $room = $this->roomRepository->findWithoutFail($roomId);
-        $sendToStudent = (boolean) $request->input('send_to_student');
-        $sendToAdvisor = (boolean) $request->input('send_to_advisor');
         if (empty($room)) {
             Flash::error('Room not found');
 
             return redirect(route('rooms.index'));
         }
 
-        $content = $this->contentRepository->findWithoutFail($request->input('content_id'));
+        $sendToStudent = (boolean) $request->input('send_to_student');
+        $sendToAdvisor = (boolean) $request->input('send_to_advisor');
+
+        $this->sendContent($room, $request->input('content_id'), $sendToStudent, $sendToAdvisor);
+
+        Flash::success('Send content to room ' . $room->name . ' successfully.');
+
+        return redirect(route('rooms.index'));
+    }
+
+    public function emailSendByContent($roomId, $contentId, Request $request)
+    {
+        $room = $this->roomRepository->findWithoutFail($roomId);
+        if (empty($room)) {
+            Flash::error('Room not found');
+
+            return redirect(route('rooms.index'));
+        }
+
+        $sendToStudent = (boolean) $request->input('send_to_student');
+        $sendToAdvisor = (boolean) $request->input('send_to_advisor');
+
+        $this->sendContent($room, $contentId, $sendToStudent, $sendToAdvisor);
+
+        Flash::success('Send content to room ' . $room->name . ' successfully.');
+
+        return redirect(route('contents.index'));
+    }
+
+    private function sendContent($room, $content_id, $sendToStudent = true, $sendToAdvisor = true)
+    {
+        $content = $this->contentRepository->findWithoutFail($content_id);
 
         if ($sendToStudent) {
             # student notify
@@ -119,10 +148,6 @@ class RoomController extends AppBaseController
             Mail::to($advisorMailTo)->cc($advisorMailCc)->queue(new NotifyShipped($content));
 
         }
-
-        Flash::success('Send content to room ' . $room->name . ' successfully.');
-
-        return redirect(route('rooms.index'));
     }
 
     public function groupByOrder($year)

@@ -104,7 +104,7 @@
                     </td>
                 <tr>
                     <td>
-                        Count Check Present : {{ number_format($checkPresentCount) }}
+                        Count Check Present : {{ number_format(($checkPresentCount*500)*$student) }}
                     </td>
                 </tr>
                 </tr>

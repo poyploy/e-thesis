@@ -49,6 +49,9 @@ Route::group(['middleware' => ['login']], function () {
     Route::get('rooms/{room}/email', 'RoomController@email')->name('rooms.email');
     //rooms.email.send
     Route::post('rooms/{room}/email/send', 'RoomController@emailSend')->name('rooms.email.send');
+
+    Route::get('rooms/{room}/content/{content}/send', 'RoomController@emailSendByContent')->name('rooms.email.sendbyContent');
+
     Route::resource('presents', 'PresentController');
     Route::get('/presents/{id}/qrcode', 'PresentController@qrcode')->name('presents.qrcode');
 //presents.advisor.paid
@@ -94,6 +97,8 @@ Route::group(['middleware' => ['login']], function () {
     Route::get('/advisorFileUploads/showDetail/{id}/room/{room_id}', 'AdvisorFileUploadController@showDetail')->name('advisorFileUploads.showDetail');
 
     Route::resource('contents', 'ContentController');
+    Route::get('/contents/{id}/send', 'ContentController@send')->name('contents.send');
+    Route::post('/contents/{id}/send/submit', 'ContentController@sendSubmit')->name('contents.send.submit');
     Route::resource('formAssessments', 'FormAssessmentController');
 
     Route::get('formAssessments/{id}/detail', 'FormAssessmentController@detail')->name('formAssessments.detail');

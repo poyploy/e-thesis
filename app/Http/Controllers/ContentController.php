@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Controllers\AppBaseController;
 use App\Http\Requests\CreateContentRequest;
 use App\Http\Requests\UpdateContentRequest;
 use App\Repositories\ContentRepository;
-use App\Http\Controllers\AppBaseController;
-use Illuminate\Http\Request;
+use App\Repositories\RoomRepository;
 use Flash;
+use Illuminate\Http\Request;
 use Prettus\Repository\Criteria\RequestCriteria;
 use Response;
 
@@ -16,9 +17,13 @@ class ContentController extends AppBaseController
     /** @var  ContentRepository */
     private $contentRepository;
 
-    public function __construct(ContentRepository $contentRepo)
+    /** @var  RoomRepository */
+    private $roomRepository;
+
+    public function __construct(RoomRepository $roomRepo, ContentRepository $contentRepo)
     {
         $this->contentRepository = $contentRepo;
+        $this->roomRepository = $roomRepo;
     }
 
     /**
@@ -102,6 +107,44 @@ class ContentController extends AppBaseController
         }
 
         return view('contents.edit')->with('content', $content);
+    }
+
+    public function send($id)
+    {
+        $content = $this->contentRepository->findWithoutFail($id);
+
+        if (empty($content)) {
+            Flash::error('Content not found');
+
+            return redirect(route('contents.index'));
+        }
+        $rooms = $this->roomRepository->with(['roomUsers', 'userPresent'])->all();
+        $rooms = $rooms->mapWithKeys(function ($item) {
+            return [$item->id => $item->year . ' - ' . $item->name];
+        });
+
+        
+
+        return view('contents.send')->with('content', $content)
+            ->with('rooms', $rooms);
+            
+    }
+
+    public function sendSubmit($id, Request $request)
+    {
+        $room_id = $request->input('room_id');
+
+        $send_to_student = $request->input('send_to_student');
+        $send_to_advisor = $request->input('send_to_advisor');
+
+        $url = route('rooms.email.sendbyContent', [
+            $room_id,
+            $id,
+            'send_to_student' => $send_to_student,
+            'send_to_advisor' => $send_to_advisor,
+        ]);
+
+        return redirect($url);
     }
 
     /**

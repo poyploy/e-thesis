@@ -81,12 +81,12 @@ class PdfController extends Controller
         }
 
         // PDF::setOptions(['defaultFont' => 'Tahoma', 'fontDir' => storage_path('fonts/')]);
-        $data = compact('auth', 'checkPresents', 'checkPresentCount', 'checkPresentPayCount', 'total', 'year');
+        $data = compact('student', 'auth', 'checkPresents', 'checkPresentCount', 'checkPresentPayCount', 'total', 'year');
         // dd($data);
         $pdf = PDF::loadView('pdf.index', $data);
         // return @$pdf->stream();
-        return $pdf->download('invoice.pdf');
-        // return view('pdf.index', $data);
+        // return $pdf->download('invoice.pdf');
+        return view('pdf.index', $data);
     }
 
     
