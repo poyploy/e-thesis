@@ -72,15 +72,15 @@
         alt="User Image"/>
     </div>
     <div class="titlepage" style="text-align: center; width:100%; ">
-    <h2>REPORT MONEY OF TEACHER </h2>
-    <h3>AT SILPAKORN UNIVERSITY {{ $year + 543 }}</h3>
+    <h2>SUMMARY OF FINANCIAL REPORT </h2>
+    <h3>SILPAKORN UNIVERSITY {{ $year }}</h3>
     </div>
     <table width="100%">
         <tr height="150px">
             <td width="50%" style="line-height: 0.5em;">
-                <p>Part: Silpakorn University,City Campus 
+                <p>Address: Silpakorn University,City Campus 
                     <br><br><br>(Muang Thong Thani)</p>
-                <p>Address: 80 Popular Road,Banmai,
+                <p>80 Popular Road,Banmai,
                     <br><br><br>Pakkret,Nonthaburi 11120</p>
                 <p>Tel: 091-765-9890</p>
                 <p>Tax: 0-03259-4033</p>
@@ -100,11 +100,11 @@
                 <tr>
                     -----------------------------------------------------------------------------------------------
                     <td><b>
-                        Cost Advisor (student*500)
+                        Examination For Advisor(student*500)
                     </td>
                 <tr>
                     <td>
-                        Count Check Present : {{ number_format(($checkPresentCount*500)*$student) }}
+                        Count Check Present : {{ number_format(($checkPresentCount*500)*$student)}}.-
                     </td>
                 </tr>
                 </tr>
@@ -119,7 +119,7 @@
             <table width="100%">
                 <thead>
                         <td><b>
-                                Cost Check Present
+                            Examination Committee
                         </td>
                     <tr>
                         -----------------------------------------------------------------------------------------------
@@ -152,11 +152,13 @@
                     </tr>
                    @endforeach
                    <tr>
-                       <td colspan="3" align="right"> Grand total</td>
-                        <td>{{ number_format($total) }}</td>
+                        <td colspan="3" align="right"> Grand total</td>
+                        <td>{{ number_format($total)}}.-</td>
                     </tr>
                 </tbody>
-            
+                        
+                        <td colspan="3" align="right"><br><b>Total :</td>
+                        <td><br><b>{{ number_format((($checkPresentCount*500)*$student)+$total) }}.-</td>
             </table>
 
     </div>
