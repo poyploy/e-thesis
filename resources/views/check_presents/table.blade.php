@@ -88,7 +88,8 @@
         }
 
         /* The Close Button */
-        .close {
+        
+        /* .close {
             position: absolute;
             top: 15px;
             right: 35px;
@@ -103,12 +104,20 @@
             color: #bbb;
             text-decoration: none;
             cursor: pointer;
+        } */
+        .close {
+            text-decoration:none;
+            float:right;
+            font-size:24px;
+            font-weight:bold;
+            color:white;
         }
 
         /* 100% Image Width on Smaller Screens */
         @media only screen and (max-width: 700px) {
             .modal-content {
                 width: 100%;
+                display:inline-block;
             }
         }
     </style>
@@ -142,7 +151,11 @@
                 @endif
             </td>
             {{-- {{dd($checkPresent->slip)}} --}}
-            <td><img id="myImg" src="{{ asset('/storage/'.$checkPresent->slip) }}" alt="" width="50"></td>
+            <td><img id="myImg" src="{{ asset('/storage/'.$checkPresent->slip) }}" alt="" width="50">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </td>
             
             <div id="myModal" class="modal">
                 
@@ -206,5 +219,11 @@
         span.onclick = function() { 
           modal.style.display = "none";
         }
-        </script>
+    </script>
+    <script>
+        function onClick(element) {
+            document.getElementById("img01").src = element.src;
+            document.getElementById("modal01").style.display = "block";
+}
+    </script>
 @endsection

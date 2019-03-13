@@ -82,15 +82,18 @@ Route::group(['middleware' => ['login']], function () {
     Route::get('/qrcode/scan/{code}', 'QRcodeController@store');
 
     Route::resource('assessments', 'AssessmentController');
-    // Route::resource('assessment', 'AssessmentController');
     Route::get('/assessments/users/{users}/presents/{present}', 'AssessmentController@score')->name('assessments.score');
+    Route::get('/assessments/users/{users}/presents/{present}/avg', 'AssessmentController@scoreAvg')->name('assessments.score.avg');
     Route::get('/assessments/users/{users}/presents/{present}/edit', 'AssessmentController@scoreEdit')->name('assessments.scoreEdit');
     Route::post('/assessments/users/storeScore', 'AssessmentController@storeScore')->name('assessments.storeScore');
-    Route::post('/assessments/users/updateScore', 'AssessmentController@updateScore')->name('assessments.updateScore');
+    Route::post('/assessments/users/update/score', 'AssessmentController@updateStudentScore')->name('assessments.update.score');
+    
+    
     Route::resource('userPresents', 'UserPresentController');
 
     Route::resource('advisorUserPresents', 'AdvisorUserPresentController');
     Route::get('/advisorUserPresents/showDetail/{id}/room/{room_id}', 'AdvisorUserPresentController@showDetail')->name('advisorUserPresents.showDetail');
+    Route::get('/advisorUserPresents/showDetail/{id}/roomscoreavg/{room_id}', 'AdvisorUserPresentController@scoreavg')->name('advisorUserPresents.scoreavg');
 
     Route::get('/advisorFileUploads', 'AdvisorFileUploadController@index')->name('advisorFileUploads.index');
     Route::get('/advisorFileUploads/{id}', 'AdvisorFileUploadController@show')->name('advisorFileUploads.show');

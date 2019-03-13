@@ -31,12 +31,12 @@
                 <table class="table table-responsive" id="users-room-table">
                     <thead>
                         <tr>
-                            <th>Id</th>
+                            <th >Id</th>
                             <th>ชื่อ</th>
                             <th>นามสกุล</th>
                             <th>อีเมล์</th>
                             <th>ปีการศึกษา</th>
-                            <th>ลบ<th>
+                            <th>ย้ายออก<th>
                         </tr>
                     </thead>
                     <tbody>
@@ -49,7 +49,7 @@
                             <td>{!! $item->user->year !!}</td>
                             <td>
                                 {!! Form::open(['route' => ['rooms.destroy.user', $room->id, $item->user->id], 'method' => 'delete']) !!} 
-                                {!! Form::button('<i class="glyphicon glyphicon-trash"></i>', ['type' => 'submit', 'class' => 'btn btn-danger btn-xs', 'onclick' => "return confirm('Are you sure?')"]) !!}
+                                {!! Form::button('<i class="glyphicon glyphicon-remove"></i>', ['type' => 'submit', 'class' => 'btn btn-danger btn-xs', 'onclick' => "return confirm('Are you sure?')"]) !!}
                                 {!! Form::close() !!} 
                             </td>        
                         </tr>

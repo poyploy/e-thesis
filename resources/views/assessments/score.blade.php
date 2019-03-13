@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.min.js"></script>
 <section class="content-header">
     <h1 style="font-family: 'Kanit', sans-serif;">
         ประเมินการนำเสนอ
@@ -12,7 +13,7 @@
 
         <div class="box-body">
             <div class="row">
-                {!! Form::open(['route' => 'assessments.updateScore']) !!}
+                {!! Form::open(['route' => 'assessments.update.score', 'id' => 'myform']) !!}
 
                 @if(!empty($form))
                 <div class="col-sm-12">
@@ -48,7 +49,7 @@
                                     
                                 @if (!empty($assessments))
                                     <input type="hidden" name="form_keys[{{  $assessments[$item->id]->first()->id }}]" value="{{$item->id}}">
-                                    {!! Form::number('form_value['.$item->id.']', $assessments[$item->id]->first()->assessment_score1, ['class' => 'form-control','max' => $item->max]) !!}
+                                    {!! Form::number('form_value['.$item->id.']', $assessments[$item->id]->first()->assessment_score1, ['class' => 'form-control','max' => $item->max, 'required' => true]) !!}
                                 @else
                                     <input type="hidden" name="form_keys[]" value="{{$item->id}}">
                                     {!! Form::number('form_value['.$item->id.']', null, ['class' => 'form-control','max' => $item->max]) !!}
@@ -135,4 +136,16 @@
         </div>
     </div>
 </div>
+{{-- <script>
+ $("#myform").validate({
+   rules: {
+     // no quoting necessary
+     name: "required",
+     // quoting necessary!
+     "user[email]": "email",
+     // dots need quoting, too!
+     "user.address.street": "required"
+   }
+ });
+</script> --}}
 @endsection

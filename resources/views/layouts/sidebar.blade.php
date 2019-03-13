@@ -1,6 +1,6 @@
 
 
-<aside class="main-sidebar" id="sidebar-wrapper" style="background-color:#060706;">
+<aside class="main-sidebar" id="sidebar-wrapper" style="background-color:#060706;  font-family: 'Kanit', sans-serif;" >
 
     <!-- sidebar: style can be found in sidebar.less -->
     <section class="sidebar">

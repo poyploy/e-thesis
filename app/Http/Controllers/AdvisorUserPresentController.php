@@ -92,6 +92,15 @@ class AdvisorUserPresentController extends AppBaseController
             ->with('roomId', $roomId);
     }
 
+    public function scoreavg($id, $roomId){
+        $average = $this->advisorUserPresentRepository->findWithoutFail($id);
+        // $average = $this->->findWithoutFail($id);
+        // dd($average);
+        return view('advisor_user_presents.scoreavg')
+        ->with('average', $average);
+
+    }
+
     /**
      * Display a listing of the AdvisorUserPresent.
      *

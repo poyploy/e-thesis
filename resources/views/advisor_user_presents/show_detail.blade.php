@@ -25,6 +25,7 @@
                             <th>รหัสประจำตัวนักศึกษา</th>
                             <th>ชื่อ-สกุล</th>
                             <th>ประเมิน</th>
+                            <th>สรุปคะแนน</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -37,6 +38,8 @@
                             {{-- <td>{!! $userPresent->room->name !!}</td> --}}
                             <td>{!! $userPresent->user->student_id !!}</td>
                             <td>{!! $userPresent->user->name_TH.' '.$userPresent->user->surname_TH !!}</td>
+                           
+
                             <td>
                                 @if($userPresent->assessment && !$userPresent->assessmented)
                                 <a href=" {{ route('assessments.score', [$userPresent->user_id, $userPresent->present_id])  }}"
@@ -45,8 +48,13 @@
                                 <a href=" {{ route('assessments.scoreEdit', [$userPresent->user_id, $userPresent->present_id])  }}"
                                         class='btn btn-warning btn-xs'><i class="glyphicon glyphicon-pencil"></i></a> 
                                 @endif
-
+        
                             </td>
+                                    <td>
+                                            <a href=" {{ route('advisorUserPresents.scoreavg', [$userPresent->user_id, $userPresent->present_id])  }}"
+                                                    class='btn btn-warning btn-xs'><i class="glyphicon glyphicon-pencil"></i></a>
+                                    </td>
+
                         </tr>
                         @endforeach
                     </tbody>

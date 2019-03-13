@@ -33,7 +33,7 @@ class LoginMiddleware
             ])->sortBy('order');
 
             session(['permission' => $permissions]);
-
+                // dd('next');
             return $next($request);
         } else {
           

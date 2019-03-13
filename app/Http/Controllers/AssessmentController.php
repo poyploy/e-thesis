@@ -36,6 +36,8 @@ class AssessmentController extends AppBaseController
         $this->basicInformationRepository = $basicInformationRepo;
         $this->presentRepository = $presentRepo;
         $this->formAssessmentRepository = $formAssessmentRepo;
+
+        // dd('__construct');
     }
 
     /**
@@ -90,32 +92,80 @@ class AssessmentController extends AppBaseController
      * @param Request $request
      * @return Response
      */
-    public function updateScore(Request $request)
+    public function updateStudentScore(Request $request)
     {
+        //  dd("presentRepository start of function");
         $input = $request->all();
+      
         $present = $this->presentRepository->findWithoutFail($input['present_id']);
+       
         if (empty($present)) {
-            Flash::error('Present not found.');
-            return back();
+            dd("presentRepository end of function");
+            // Flash::error('Present not found.');
+            // return back();
         }
+       
         $auth = Auth::user();
 
         $input['room_id'] = $present->room_id;
         $input['teacher_id'] = $auth->id;
         $values = $input['form_value'];
         $formKeys = $input['form_keys'];
-
+       
         foreach ($formKeys as $key => $formId) {
             $value = $values[$formId];
+            
             $input['assessment_score1'] = $value;
             $input['sequence_id'] = $present->sequence_id;
             $input['form_id'] = $formId;
-            $this->assessmentRepository->update($input, $key);
-        }
+            $assess = $this->assessmentRepository->findWhere([
+                'sequence_id' => $present->sequence_id , 
+                'form_id' => $formId,
+                'user_id' =>  $input['user_id'],
+                'teacher_id' => $input['teacher_id'],
+                'present_id' => $input['present_id'],
+            ])->first();
+                // dd($assess);
+            if(!empty($assess)){
+                $this->assessmentRepository->update($input, $assess->id);
+            }else{
+                $this->assessmentRepository->create($input);
+            }
 
+        }
+        // dd("presenformKeys   tRepository start of function");
         Flash::success('Assessment saved successfully.');
+        // dd("end of function");
         return redirect()->route('advisorUserPresents.showDetail', [$present->id, $present->room_id]);
 
+    }
+    
+    /**
+     * Display a listing of the Assessment.
+     *
+     * @param Request $request
+     * @return Response
+     */
+    public function scoreAvg($userId, $presentId, Request $request)
+    {
+        $auth = Auth::user();
+
+        $assessments = $this->assessmentRepository
+            ->findWhere([
+                'user_id' => $userId,
+                'present_id' => $presentId,
+            ]);
+
+        $groupteacher = $assessments->groupBy('teacher_id');
+
+        $summary = \DB::table('assessment')->selectRaw(' user_id , form_id, avg(assessment_score1) as avg_score')
+        ->whereRaw('user_id = ? and present_id = ?', [$userId, $presentId])->groupBy('form_id' , 'user_id')->get();
+       // TODO : comment
+        dd($groupteacher , $summary);
+        
+        return view('assessments.score_avg')
+            ->with('groupteacher', $groupteacher)
+            ->with('summary', $summary);
     }
 
     /**
