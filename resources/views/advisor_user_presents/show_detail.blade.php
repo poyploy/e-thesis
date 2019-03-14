@@ -48,13 +48,11 @@
                                 <a href=" {{ route('assessments.scoreEdit', [$userPresent->user_id, $userPresent->present_id])  }}"
                                         class='btn btn-warning btn-xs'><i class="glyphicon glyphicon-pencil"></i></a> 
                                 @endif
-        
                             </td>
-                                    <td>
-                                            <a href=" {{ route('advisorUserPresents.scoreavg', [$userPresent->user_id, $userPresent->present_id])  }}"
-                                                    class='btn btn-warning btn-xs'><i class="glyphicon glyphicon-pencil"></i></a>
-                                    </td>
-
+                                <td>
+                                    <a href=" {{ route('assessments.score.avg', [$userPresent->user_id, $userPresent->present_id])  }}"
+                                        class='btn btn-info btn-xs'><i class="glyphicon glyphicon-stats"></i></a>
+                                </td>
                         </tr>
                         @endforeach
                     </tbody>

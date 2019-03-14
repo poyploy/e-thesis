@@ -88,12 +88,12 @@ Route::group(['middleware' => ['login']], function () {
     Route::post('/assessments/users/storeScore', 'AssessmentController@storeScore')->name('assessments.storeScore');
     Route::post('/assessments/users/update/score', 'AssessmentController@updateStudentScore')->name('assessments.update.score');
     
-    
+
     Route::resource('userPresents', 'UserPresentController');
 
     Route::resource('advisorUserPresents', 'AdvisorUserPresentController');
     Route::get('/advisorUserPresents/showDetail/{id}/room/{room_id}', 'AdvisorUserPresentController@showDetail')->name('advisorUserPresents.showDetail');
-    Route::get('/advisorUserPresents/showDetail/{id}/roomscoreavg/{room_id}', 'AdvisorUserPresentController@scoreavg')->name('advisorUserPresents.scoreavg');
+    // Route::get('/advisorUserPresents/showDetail/{id}/roomscoreavg/{room_id}', 'AdvisorUserPresentController@scoreavg')->name('advisorUserPresents.scoreavg');
 
     Route::get('/advisorFileUploads', 'AdvisorFileUploadController@index')->name('advisorFileUploads.index');
     Route::get('/advisorFileUploads/{id}', 'AdvisorFileUploadController@show')->name('advisorFileUploads.show');

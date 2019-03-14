@@ -9,6 +9,7 @@ use App\Repositories\AssessmentRepository;
 use App\Repositories\Basic_informationRepository;
 use App\Repositories\FormAssessmentRepository;
 use App\Repositories\PresentRepository;
+use App\Repositories\UserRepository;
 use Flash;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -18,6 +19,9 @@ use Response;
 class AssessmentController extends AppBaseController
 {
 
+    /** @var  UserRepository */
+    private $userRepository;
+   
     /** @var  FormAssessmentRepository */
     private $formAssessmentRepository;
 
@@ -30,12 +34,13 @@ class AssessmentController extends AppBaseController
     /** @var  AssessmentRepository */
     private $assessmentRepository;
 
-    public function __construct(FormAssessmentRepository $formAssessmentRepo, PresentRepository $presentRepo, Basic_informationRepository $basicInformationRepo, AssessmentRepository $assessmentRepo)
+    public function __construct(UserRepository $userRepo,FormAssessmentRepository $formAssessmentRepo, PresentRepository $presentRepo, Basic_informationRepository $basicInformationRepo, AssessmentRepository $assessmentRepo)
     {
         $this->assessmentRepository = $assessmentRepo;
         $this->basicInformationRepository = $basicInformationRepo;
         $this->presentRepository = $presentRepo;
         $this->formAssessmentRepository = $formAssessmentRepo;
+        $this->userRepository = $userRepo;
 
         // dd('__construct');
     }
@@ -161,10 +166,21 @@ class AssessmentController extends AppBaseController
         $summary = \DB::table('assessment')->selectRaw(' user_id , form_id, avg(assessment_score1) as avg_score')
         ->whereRaw('user_id = ? and present_id = ?', [$userId, $presentId])->groupBy('form_id' , 'user_id')->get();
        // TODO : comment
-        dd($groupteacher , $summary);
-        
-        return view('assessments.score_avg')
+        // dd($groupteacher , $summary);
+
+        foreach ($groupteacher as $key => $teacher) {
+            foreach ($teacher as $key => $value) {
+                $value->user = $this->userRepository->findWithoutFail($value->user_id);
+                $value->teacher = $this->userRepository->findWithoutFail($value->teacher_id);
+            }
+        }
+       $user = $this->userRepository->findWithoutFail($userId);
+       $teacher = $this->userRepository->findWithoutFail($userId);
+    //    dd($user);
+        return view('advisor_user_presents.scoreavg')
             ->with('groupteacher', $groupteacher)
+            ->with('user', $user)
+            ->with('teacher', $teacher)
             ->with('summary', $summary);
     }
 
