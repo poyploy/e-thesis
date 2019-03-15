@@ -87,12 +87,12 @@
                     <td style="color:DodgerBlue;">สรุปคะแนนเฉลี่ยโดยรวม</td>
                     <tr>
                         <th>หัวข้อในการตรวจ</th>
-                        <th>คะแนน</th>
+                        <th>คะแนนเฉลี่ย</th>
                     </tr>
                 </thead>
                 <tbody>
                     @php
-                    $total = 0.00;
+                    $totalsum = 0.00;
                     @endphp
 
                     @foreach($summary as $sum)
@@ -114,12 +114,12 @@
                     </tr>
 
                     @php
-                    $total += $sum->avg_score;
+                    $totalsum += $sum->avg_score;
                     @endphp
 
                     @endforeach
                     <tr>
-                        <td colspan="2" class="text-right"><b>คะแนนเฉลี่ยรวมทั้งหมด</b> : {{$total}}</td>
+                        <td colspan="2" class="text-right"><b>คะแนนเฉลี่ยรวมทั้งหมด</b> : {{$totalsum}}</td>
                     </tr>
                 </tbody>
             </table>
