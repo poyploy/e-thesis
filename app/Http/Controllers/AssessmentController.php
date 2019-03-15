@@ -176,12 +176,14 @@ class AssessmentController extends AppBaseController
         }
        $user = $this->userRepository->findWithoutFail($userId);
        $teacher = $this->userRepository->findWithoutFail($userId);
+    //    $title = $this->formAssessmentRepository->findWithoutFail($id);
     //    dd($user);
         return view('advisor_user_presents.scoreavg')
             ->with('groupteacher', $groupteacher)
             ->with('user', $user)
             ->with('teacher', $teacher)
             ->with('summary', $summary);
+            // ->with('title', $title);
     }
 
     /**
