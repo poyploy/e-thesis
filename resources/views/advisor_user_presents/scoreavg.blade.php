@@ -37,6 +37,10 @@
                         @endphp
 
                         @foreach ($teacher as $key => $item)
+                {{-- {{dd($auth->id)}} --}}
+                        @if ($item->teacher_id == $auth->id)
+                            
+                        
                         <tr>
                             <td>
                                 @if($item->form_id == 1)
@@ -52,7 +56,7 @@
                             <td>{!! $item->assessment_score1 !!} </td>
                             <td></td>
                         </tr>
-    
+                        @endif
                         @php
                         // $totalpoint += $item->max;
                         $totalpoint += $item->assessment_score1;
@@ -63,6 +67,7 @@
                         $nameT = $item->teacher->name_TH;
                         $surT = $item->teacher->surname_TH;
                         @endphp
+                       
                         @endforeach
 
                         @php
@@ -94,7 +99,7 @@
                     @php
                     $totalsum = 0.00;
                     @endphp
-
+                    {{-- {{dd($sum)}} --}}
                     @foreach($summary as $sum)
                     <tr>
                         <td>

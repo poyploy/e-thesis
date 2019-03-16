@@ -72,7 +72,7 @@
 
                 <!-- Submit Field -->
                 <div class="form-group col-sm-12">
-                    {!! Form::submit('Sand', ['class' => 'btn btn-primary']) !!}
+                    {!! Form::submit('Send', ['class' => 'btn btn-primary']) !!}
                     <a href="{!! route('contents.index') !!}" class="btn btn-default">Cancel</a>
                 </div>
 

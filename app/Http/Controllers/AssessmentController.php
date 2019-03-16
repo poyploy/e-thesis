@@ -174,6 +174,7 @@ class AssessmentController extends AppBaseController
                 $value->teacher = $this->userRepository->findWithoutFail($value->teacher_id);
             }
         }
+        // dd($groupteacher);
        $user = $this->userRepository->findWithoutFail($userId);
        $teacher = $this->userRepository->findWithoutFail($userId);
     //    $title = $this->formAssessmentRepository->findWithoutFail($id);
@@ -182,6 +183,7 @@ class AssessmentController extends AppBaseController
             ->with('groupteacher', $groupteacher)
             ->with('user', $user)
             ->with('teacher', $teacher)
+            ->with('auth',$auth)
             ->with('summary', $summary);
             // ->with('title', $title);
     }
