@@ -54,7 +54,7 @@
                             <td>{!! $item->assessment_score1 !!} </td>
                         </tr>
                         @endif
-                        @endforeach
+                        
                         @php
                         // $totalpoint += $item->max;
                         $totalpoint += $item->assessment_score1;
@@ -66,7 +66,7 @@
                         $nameT = $item->teacher->name_TH;
                         $surT = $item->teacher->surname_TH;
                         @endphp
-                        
+                        @endforeach
 
                         @php
                         $sumpoint = $totalpoint;
