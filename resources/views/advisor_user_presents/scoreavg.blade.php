@@ -75,8 +75,9 @@
                         @endphp
 
                         <tr>
-                            <td colspan="2" class="text-right"><b>คะแนนรวม</b> : {{$totalpoint}} <br><br> <b>ชื่อ-สกุล
-                                :</b> {{$nameT}} {{$surT}}</td>
+                            <td colspan="2" class="text-right"><b>คะแนนรวม</b> : {{$totalpoint}} <br><br>
+                                 <b>ชื่อ-สกุล
+                                :</b> {{$auth->name_TH}} {{$auth->surname_TH}}</td>
                         </tr>
                         @endforeach
                     </tbody>
